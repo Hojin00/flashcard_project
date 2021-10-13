@@ -10,6 +10,6 @@ import Foundation
 struct Deck {
     var flashcards: [FlashCard]
     var title: String
-    var Category: String
+    var category: String
     var reminderDate: Date?
 }
