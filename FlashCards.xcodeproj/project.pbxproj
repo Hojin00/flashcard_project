@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B40C7A2227176F7600B818C9 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A2127176F7600B818C9 /* Placeholder.swift */; };
-		B40C7A2427176F8100B818C9 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A2327176F8100B818C9 /* Placeholder.swift */; };
 		B40C7A2627176FCF00B818C9 /* FlashCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A2527176FCF00B818C9 /* FlashCardModel.swift */; };
 		B40C7A28271774EB00B818C9 /* DeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A27271774EB00B818C9 /* DeckModel.swift */; };
 		B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C983271768D500066FE2 /* FlashCardsApp.swift */; };
@@ -176,9 +174,7 @@
 				B40C7A28271774EB00B818C9 /* DeckModel.swift in Sources */,
 				B40C7A2627176FCF00B818C9 /* FlashCardModel.swift in Sources */,
 				B499C986271768D500066FE2 /* ContentView.swift in Sources */,
-				B40C7A2427176F8100B818C9 /* Placeholder.swift in Sources */,
 				B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */,
-				B40C7A2227176F7600B818C9 /* Placeholder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
