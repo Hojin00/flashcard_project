@@ -32,6 +32,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B40756A327176A3C00B29D34 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B40756A427176A4800B29D34 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B40756A527176A5C00B29D34 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		B499C977271768D500066FE2 = {
 			isa = PBXGroup;
 			children = (
@@ -51,6 +72,9 @@
 		B499C982271768D500066FE2 /* FlashCards */ = {
 			isa = PBXGroup;
 			children = (
+				B40756A327176A3C00B29D34 /* Model */,
+				B40756A427176A4800B29D34 /* View */,
+				B40756A527176A5C00B29D34 /* Controller */,
 				B499C983271768D500066FE2 /* FlashCardsApp.swift */,
 				B499C985271768D500066FE2 /* ContentView.swift */,
 				B499C987271768D600066FE2 /* Assets.xcassets */,
