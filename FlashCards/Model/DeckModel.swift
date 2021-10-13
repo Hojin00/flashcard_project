@@ -1,12 +1,11 @@
 //
-//  Deck.swift
+//  DeckModel.swift
 //  FlashCards
 //
 //  Created by Lucca Molon on 13/10/21.
 //
 
 import Foundation
-
 
 struct Deck {
     var flashcards: [FlashCard]
