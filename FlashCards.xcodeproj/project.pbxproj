@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B40756A727176AAD00B29D34 /* FlashCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40756A627176AAD00B29D34 /* FlashCardModel.swift */; };
 		B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C983271768D500066FE2 /* FlashCardsApp.swift */; };
 		B499C986271768D500066FE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C985271768D500066FE2 /* ContentView.swift */; };
 		B499C988271768D600066FE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C987271768D600066FE2 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B40756A627176AAD00B29D34 /* FlashCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardModel.swift; sourceTree = "<group>"; };
 		B499C980271768D500066FE2 /* FlashCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B499C983271768D500066FE2 /* FlashCardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardsApp.swift; sourceTree = "<group>"; };
 		B499C985271768D500066FE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -35,6 +37,7 @@
 		B40756A327176A3C00B29D34 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B40756A627176AAD00B29D34 /* FlashCardModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B40756A727176AAD00B29D34 /* FlashCardModel.swift in Sources */,
 				B499C986271768D500066FE2 /* ContentView.swift in Sources */,
 				B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */,
 			);
