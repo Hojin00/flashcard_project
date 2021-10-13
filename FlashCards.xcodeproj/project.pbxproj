@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B40C7A2027176F6D00B818C9 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A1F27176F6D00B818C9 /* Placeholder.swift */; };
+		B40C7A2227176F7600B818C9 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A2127176F7600B818C9 /* Placeholder.swift */; };
+		B40C7A2427176F8100B818C9 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A2327176F8100B818C9 /* Placeholder.swift */; };
 		B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C983271768D500066FE2 /* FlashCardsApp.swift */; };
 		B499C986271768D500066FE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C985271768D500066FE2 /* ContentView.swift */; };
 		B499C988271768D600066FE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C987271768D600066FE2 /* Assets.xcassets */; };
@@ -14,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B40C7A1F27176F6D00B818C9 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
+		B40C7A2127176F7600B818C9 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
+		B40C7A2327176F8100B818C9 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 		B499C980271768D500066FE2 /* FlashCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B499C983271768D500066FE2 /* FlashCardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardsApp.swift; sourceTree = "<group>"; };
 		B499C985271768D500066FE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -35,6 +41,7 @@
 		B40756A327176A3C00B29D34 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B40C7A1F27176F6D00B818C9 /* Placeholder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -42,6 +49,7 @@
 		B40756A427176A4800B29D34 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B40C7A2127176F7600B818C9 /* Placeholder.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -49,6 +57,7 @@
 		B40756A527176A5C00B29D34 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B40C7A2327176F8100B818C9 /* Placeholder.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -162,7 +171,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B499C986271768D500066FE2 /* ContentView.swift in Sources */,
+				B40C7A2427176F8100B818C9 /* Placeholder.swift in Sources */,
 				B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */,
+				B40C7A2027176F6D00B818C9 /* Placeholder.swift in Sources */,
+				B40C7A2227176F7600B818C9 /* Placeholder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
