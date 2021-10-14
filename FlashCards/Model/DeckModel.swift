@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Deck {
+struct Deck: Hashable {
     var flashcards: [FlashCard]
     var title: String
     var Category: String

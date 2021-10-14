@@ -2,44 +2,32 @@
 //  SearchView.swift
 //  FlashCards
 //
-//  Created by Willian Magnum Albeche on 13/10/21.
+//  Created by Willian Magnum Albeche on 14/10/21.
 //
 
-import Foundation
 import SwiftUI
 
-struct SearchBar: View {
-    @Binding var text: String
- 
-    @State private var isEditing = false
- 
+struct SearchView: View {
+    private var flashCardsArray = [FlashCard.init(id: 1, frontSideText: "Arroz", frontSideImage: nil, backSideText: nil, backSideImage: nil, category: "Comida"),FlashCard.init(id: 2, frontSideText: "feijao", frontSideImage: nil, backSideText: nil, backSideImage: nil, category: "COMIDA"),FlashCard.init(id: 3, frontSideText: "Batata", frontSideImage: nil, backSideText: nil, backSideImage: nil, category: "Comida")]
+    
+    @State private var searchText: String = ""
     var body: some View {
-        HStack {
- 
-            TextField("Search ...", text: $text)
-                .padding(7)
-                .padding(.horizontal, 25)
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
-                .padding(.horizontal, 10)
-                .onTapGesture {
-                    self.isEditing = true
-                }
- 
-            if isEditing {
-                Button(action: {
-                    self.isEditing = false
-                    self.text = ""
- 
-                }) {
-                    Text("Cancel")
-                }
-                .padding(.trailing, 10)
-                .transition(.move(edge: .trailing))
-                .animation(.default)
+        VStack {
+            
+            SearchBar(text: $searchText)
+                .padding(.top, -30)
+            
+            ForEach(flashCardsArray.filter({ searchText.isEmpty ? true : $0.frontSideText!.localizedCaseInsensitiveContains(searchText)}), id: \.self) { item in
+                Text(item.frontSideText!)
             }
+            Spacer()
+            
         }
     }
 }
 
-
+struct SearchView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchView()
+    }
+}
