@@ -15,7 +15,7 @@ struct NotificationManager {
     let notificationCenter = UNUserNotificationCenter.current()
     let options: UNAuthorizationOptions = [.alert, .sound, .badge]
     
-    func Authorization() {
+    func authorization() {
         notificationCenter.requestAuthorization(options: options) {
             (allow, error) in
             if !allow {
@@ -24,31 +24,24 @@ struct NotificationManager {
         }
     }
     
-    func Content(title: String, body: String) -> UNMutableNotificationContent{
+    func content(title: String, body: String) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
         content.sound = UNNotificationSound.default
         content.badge = 1
-        
         return content
     }
     
-    func Schedule(hour: Int, minute: Int) -> UNCalendarNotificationTrigger{
-        let nextTriggerDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())!
-        var dateComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: nextTriggerDate)
-        
-        dateComponents.hour = hour
-        dateComponents.minute = minute
-        dateComponents.second = 0
+    func schedule(hour: Int, minute: Int) -> UNCalendarNotificationTrigger {
+        let nextTriggerDate = Calendar.current.date(byAdding: .minute, value: 1, to: Date())!
+        let dateComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: nextTriggerDate)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        
         return trigger
     }
     
-    func Send(identifier: String, title: String, body: String, hour: Int, minute: Int) {
-        let request = UNNotificationRequest(identifier: identifier, content: Content(title: title, body: body), trigger: Schedule(hour: hour, minute: minute))
-        
+    func send(identifier: String, title: String, body: String, hour: Int, minute: Int) {
+        let request = UNNotificationRequest(identifier: identifier, content: content(title: title, body: body), trigger: schedule(hour: hour, minute: minute))
         notificationCenter.add(request, withCompletionHandler: nil)
     }
     
@@ -57,5 +50,3 @@ struct NotificationManager {
         notificationCenter.removeAllDeliveredNotifications()
     }
 }
-
-

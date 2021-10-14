@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B40C7A2627176FCF00B818C9 /* FlashCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A2527176FCF00B818C9 /* FlashCardModel.swift */; };
 		B40C7A28271774EB00B818C9 /* DeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A27271774EB00B818C9 /* DeckModel.swift */; };
+		B446F3E22718BA4600BF4214 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B446F3E12718BA4600BF4214 /* NotificationManager.swift */; };
 		B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C983271768D500066FE2 /* FlashCardsApp.swift */; };
 		B499C986271768D500066FE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C985271768D500066FE2 /* ContentView.swift */; };
 		B499C988271768D600066FE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C987271768D600066FE2 /* Assets.xcassets */; };
@@ -17,9 +18,10 @@
 
 /* Begin PBXFileReference section */
 		B40C7A2127176F7600B818C9 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
-		B40C7A2327176F8100B818C9 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 		B40C7A2527176FCF00B818C9 /* FlashCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashCardModel.swift; sourceTree = "<group>"; };
 		B40C7A27271774EB00B818C9 /* DeckModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckModel.swift; sourceTree = "<group>"; };
+		B446F3E12718BA4600BF4214 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		B446F3E32718BA6800BF4214 /* FlashCards.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = FlashCards.entitlements; path = FlashCards/FlashCards.entitlements; sourceTree = SOURCE_ROOT; };
 		B499C980271768D500066FE2 /* FlashCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B499C983271768D500066FE2 /* FlashCardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardsApp.swift; sourceTree = "<group>"; };
 		B499C985271768D500066FE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,7 +60,7 @@
 		B40756A527176A5C00B29D34 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B40C7A2327176F8100B818C9 /* Placeholder.swift */,
+				B446F3E12718BA4600BF4214 /* NotificationManager.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -85,6 +87,7 @@
 				B40756A327176A3C00B29D34 /* Model */,
 				B40756A427176A4800B29D34 /* View */,
 				B40756A527176A5C00B29D34 /* Controller */,
+				B446F3E32718BA6800BF4214 /* FlashCards.entitlements */,
 				B499C983271768D500066FE2 /* FlashCardsApp.swift */,
 				B499C985271768D500066FE2 /* ContentView.swift */,
 				B499C987271768D600066FE2 /* Assets.xcassets */,
@@ -173,6 +176,7 @@
 			files = (
 				B40C7A28271774EB00B818C9 /* DeckModel.swift in Sources */,
 				B40C7A2627176FCF00B818C9 /* FlashCardModel.swift in Sources */,
+				B446F3E22718BA4600BF4214 /* NotificationManager.swift in Sources */,
 				B499C986271768D500066FE2 /* ContentView.swift in Sources */,
 				B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */,
 			);

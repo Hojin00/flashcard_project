@@ -14,11 +14,11 @@ struct ContentView: View {
         
         VStack {
             Button("auth") {
-                notificationManager.Authorization()
+                notificationManager.authorization()
             }
             Divider()
             Button("aa") {
-                notificationManager.Send(identifier: UUID().uuidString, title: "hello friend", body: "how r u? XD", hour: 16, minute: 10)
+                notificationManager.send(identifier: UUID().uuidString, title: "hello friend", body: "how r u? XD", hour: 16, minute: 45)
                 print("teste")
                 notificationManager.notificationCenter.getPendingNotificationRequests(completionHandler: { requests in
                     for request in requests {
