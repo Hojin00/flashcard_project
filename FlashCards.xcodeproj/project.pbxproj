@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B2FB98152719F007002AC06B /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB98142719F007002AC06B /* URLManager.swift */; };
+		B2FB98172719F35C002AC06B /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB98162719F35C002AC06B /* ShareView.swift */; };
 		B40C7A2627176FCF00B818C9 /* FlashCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A2527176FCF00B818C9 /* FlashCardModel.swift */; };
 		B40C7A28271774EB00B818C9 /* DeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A27271774EB00B818C9 /* DeckModel.swift */; };
 		B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C983271768D500066FE2 /* FlashCardsApp.swift */; };
@@ -16,7 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B40C7A2127176F7600B818C9 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
+		B2FB98122718AA0E002AC06B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B2FB98142719F007002AC06B /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
+		B2FB98162719F35C002AC06B /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		B40C7A2327176F8100B818C9 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 		B40C7A2527176FCF00B818C9 /* FlashCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashCardModel.swift; sourceTree = "<group>"; };
 		B40C7A27271774EB00B818C9 /* DeckModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckModel.swift; sourceTree = "<group>"; };
@@ -38,6 +42,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B2FB98132719EFEE002AC06B /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				B2FB98142719F007002AC06B /* URLManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		B40756A327176A3C00B29D34 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -50,7 +62,7 @@
 		B40756A427176A4800B29D34 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B40C7A2127176F7600B818C9 /* Placeholder.swift */,
+				B2FB98162719F35C002AC06B /* ShareView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -82,11 +94,13 @@
 		B499C982271768D500066FE2 /* FlashCards */ = {
 			isa = PBXGroup;
 			children = (
+				B2FB98122718AA0E002AC06B /* Info.plist */,
 				B40756A327176A3C00B29D34 /* Model */,
 				B40756A427176A4800B29D34 /* View */,
 				B40756A527176A5C00B29D34 /* Controller */,
 				B499C983271768D500066FE2 /* FlashCardsApp.swift */,
 				B499C985271768D500066FE2 /* ContentView.swift */,
+				B2FB98132719EFEE002AC06B /* Managers */,
 				B499C987271768D600066FE2 /* Assets.xcassets */,
 				B499C989271768D600066FE2 /* Preview Content */,
 			);
@@ -171,9 +185,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2FB98172719F35C002AC06B /* ShareView.swift in Sources */,
 				B40C7A28271774EB00B818C9 /* DeckModel.swift in Sources */,
 				B40C7A2627176FCF00B818C9 /* FlashCardModel.swift in Sources */,
 				B499C986271768D500066FE2 /* ContentView.swift in Sources */,
+				B2FB98152719F007002AC06B /* URLManager.swift in Sources */,
 				B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,9 +321,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FlashCards/Preview Content\"";
-				DEVELOPMENT_TEAM = CUXQ8WM7SV;
+				DEVELOPMENT_TEAM = 26UK52Y76J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FlashCards/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -335,9 +352,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FlashCards/Preview Content\"";
-				DEVELOPMENT_TEAM = CUXQ8WM7SV;
+				DEVELOPMENT_TEAM = 26UK52Y76J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FlashCards/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
