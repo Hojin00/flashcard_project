@@ -10,9 +10,9 @@ import SwiftUI
 
 struct FlashCard {
     //TO DO: Audio for front and back side
-    let frontSideText: String?
-    let frontSideImage: Image?
-    let backSideText: String?
-    let backSideImage: Image?
-    let category: String
+    var frontSideText: String?
+    var frontSideImage: Image?
+    var backSideText: String?
+    var backSideImage: Image?
+    var category: String
 }
