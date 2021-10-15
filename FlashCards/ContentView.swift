@@ -17,7 +17,7 @@ struct ContentView: View {
         
         VStack {
             ShareView()
-
+            
             Button("auth") {
                 notificationManager.authorization()
             }
@@ -30,15 +30,14 @@ struct ContentView: View {
                         print(request)
                     }
                 }
-            )
-        }
+                )
+            }
             Divider()
             Button("delete all notifications") {
                 notificationManager.stopSending()
             }
-
+        }
     }
-}
 }
 
 
