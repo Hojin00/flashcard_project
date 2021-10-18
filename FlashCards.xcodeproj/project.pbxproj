@@ -16,6 +16,7 @@
 		B499C986271768D500066FE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C985271768D500066FE2 /* ContentView.swift */; };
 		B499C988271768D600066FE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C987271768D600066FE2 /* Assets.xcassets */; };
 		B499C98B271768D600066FE2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C98A271768D600066FE2 /* Preview Assets.xcassets */; };
+		CDE83637271E026A001309D8 /* RecordingsList-.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE83636271E026A001309D8 /* RecordingsList-.swift */; };
 		EC2EFF40271A124F00B9B6C8 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EFF3F271A124F00B9B6C8 /* AudioRecorder.swift */; };
 		ECDDEC3B271DEE7800C526C2 /* RecordingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDDEC3A271DEE7800C526C2 /* RecordingModel.swift */; };
 		ECDDEC3D271DEEBA00C526C2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDDEC3C271DEEBA00C526C2 /* Extensions.swift */; };
@@ -35,6 +36,7 @@
 		B499C985271768D500066FE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B499C987271768D600066FE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B499C98A271768D600066FE2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CDE83636271E026A001309D8 /* RecordingsList-.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordingsList-.swift"; sourceTree = "<group>"; };
 		EC2EFF3F271A124F00B9B6C8 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		ECDDEC3A271DEE7800C526C2 /* RecordingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingModel.swift; sourceTree = "<group>"; };
 		ECDDEC3C271DEEBA00C526C2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				B2FB98162719F35C002AC06B /* ShareView.swift */,
+				CDE83636271E026A001309D8 /* RecordingsList-.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				ECDDEC3F271DEF7D00C526C2 /* AudioPlayer.swift in Sources */,
 				ECDDEC3B271DEE7800C526C2 /* RecordingModel.swift in Sources */,
 				EC2EFF40271A124F00B9B6C8 /* AudioRecorder.swift in Sources */,
+				CDE83637271E026A001309D8 /* RecordingsList-.swift in Sources */,
 				B40C7A2627176FCF00B818C9 /* FlashCardModel.swift in Sources */,
 				ECDDEC3D271DEEBA00C526C2 /* Extensions.swift in Sources */,
 				B446F3E22718BA4600BF4214 /* NotificationManager.swift in Sources */,
