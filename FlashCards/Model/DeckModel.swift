@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Deck {
+struct Deck: Identifiable {
+    var id: Int
     var flashcards: [FlashCard]
     var title: String
     var category: String
