@@ -35,7 +35,7 @@ struct HorizontalScrollView: View {
                                 GeometryReader { proxy in
                                     let scale = getScale(proxy: proxy)
                                     VStack(spacing: 8) {
-                                        Text("AAA\(deck.title)")
+                                        Text("AAA\(deck.flashcards[0].frontSideText ?? "nil")")
 //                                        ZStack {
                                             //NavigationLink(destination: BeerView(beer: beer)) {
 //                                            deck.title
@@ -76,7 +76,14 @@ struct HorizontalScrollView: View {
         //MARK: - TEMPORARY MOCKUP
         .onAppear() {
             if decks.isEmpty {
-                let deck1: Deck = Deck(id: 0, flashcards: [], title: "Deck 1", category: "Cat1", reminderDate: nil)
+                var deck1: Deck = Deck(id: 0, flashcards: [], title: "Deck 1", category: "Cat1", reminderDate: nil)
+                let flashcard1: FlashCard = FlashCard(frontSideText: "frontSideText", frontSideImage: nil, backSideText: "backSideText", backSideImage: nil, category: "category")
+                deck1.flashcards.append(flashcard1)
+                decks.append(deck1)
+                decks.append(deck1)
+                decks.append(deck1)
+                decks.append(deck1)
+                decks.append(deck1)
                 decks.append(deck1)
             }
         }
