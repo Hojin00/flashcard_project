@@ -24,18 +24,18 @@ struct HorizontalScrollView: View {
         }
         return scale
     }
+    
     var body: some View {
-        
         VStack {
             ScrollView {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 70) {
-                        ForEach($decks) { deck in
+                        ForEach(decks) { deck in
                             ZStack {
                                 GeometryReader { proxy in
                                     let scale = getScale(proxy: proxy)
                                     VStack(spacing: 8) {
-                                        Text("AAA")
+                                        Text("AAA\(deck.title)")
 //                                        ZStack {
                                             //NavigationLink(destination: BeerView(beer: beer)) {
 //                                            deck.title
@@ -71,6 +71,13 @@ struct HorizontalScrollView: View {
                     .padding(32)
                 }
                 .frame( height: 400)
+            }
+        }
+        //MARK: - TEMPORARY MOCKUP
+        .onAppear() {
+            if decks.isEmpty {
+                let deck1: Deck = Deck(id: 0, flashcards: [], title: "Deck 1", category: "Cat1", reminderDate: nil)
+                decks.append(deck1)
             }
         }
     }
