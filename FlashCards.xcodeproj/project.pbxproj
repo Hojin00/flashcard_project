@@ -86,11 +86,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B2FB981D271A1076002AC06B /* New Group */ = {
+		B2FB981D271A1076002AC06B /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				CDE8362E2717785B001309D8 /* SearchBar.swift */,
+				CDE836302718AA01001309D8 /* SearchView.swift */,
 			);
-			path = "New Group";
+			path = Search;
 			sourceTree = "<group>";
 		};
 		B40756A327176A3C00B29D34 /* Model */ = {
@@ -106,8 +108,6 @@
 		B40756A427176A4800B29D34 /* Share */ = {
 			isa = PBXGroup;
 			children = (
-				CDE8362E2717785B001309D8 /* SearchBar.swift */,
-				CDE836302718AA01001309D8 /* SearchView.swift */,
 				B2FB98162719F35C002AC06B /* ShareView.swift */,
 			);
 			path = Share;
@@ -116,7 +116,7 @@
 		B40756A527176A5C00B29D34 /* FlashCard */ = {
 			isa = PBXGroup;
 			children = (
-				B2FB981D271A1076002AC06B /* New Group */,
+				B2FB981D271A1076002AC06B /* Search */,
 				B40756A427176A4800B29D34 /* Share */,
 			);
 			path = FlashCard;
