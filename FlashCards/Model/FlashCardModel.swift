@@ -53,6 +53,6 @@ struct FlashCard: Hashable {
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        hasher.combine(myrecord.recordID)
     }
 }
