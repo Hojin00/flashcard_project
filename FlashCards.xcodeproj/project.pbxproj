@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B22EE4C6271DFC3300849D9C /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4C5271DFC3300849D9C /* UserDefaultManager.swift */; };
+		B22EE4C8271F4A2300849D9C /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4C7271F4A2300849D9C /* ShareManager.swift */; };
 		B2FB98152719F007002AC06B /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB98142719F007002AC06B /* URLManager.swift */; };
 		B2FB98172719F35C002AC06B /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB98162719F35C002AC06B /* ShareView.swift */; };
+		B2FB981A2719FC04002AC06B /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FB98192719FC04002AC06B /* CloudKit.framework */; };
+		B2FB981C271A0037002AC06B /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB981B271A0037002AC06B /* CloudKitManager.swift */; };
 		B40C7A2627176FCF00B818C9 /* FlashCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A2527176FCF00B818C9 /* FlashCardModel.swift */; };
 		B40C7A28271774EB00B818C9 /* DeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A27271774EB00B818C9 /* DeckModel.swift */; };
 		B446F3E22718BA4600BF4214 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B446F3E12718BA4600BF4214 /* NotificationManager.swift */; };
@@ -19,10 +23,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B22EE4C5271DFC3300849D9C /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		B22EE4C7271F4A2300849D9C /* ShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
 		B2FB98122718AA0E002AC06B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B2FB98142719F007002AC06B /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
 		B2FB98162719F35C002AC06B /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
-		B40C7A2327176F8100B818C9 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
+		B2FB98192719FC04002AC06B /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		B2FB981B271A0037002AC06B /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		B40C7A2527176FCF00B818C9 /* FlashCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashCardModel.swift; sourceTree = "<group>"; };
 		B40C7A27271774EB00B818C9 /* DeckModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckModel.swift; sourceTree = "<group>"; };
 		B446F3E12718BA4600BF4214 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -39,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2FB981A2719FC04002AC06B /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,9 +56,28 @@
 		B2FB98132719EFEE002AC06B /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				B446F3E12718BA4600BF4214 /* NotificationManager.swift */,
 				B2FB98142719F007002AC06B /* URLManager.swift */,
+				B2FB981B271A0037002AC06B /* CloudKitManager.swift */,
+				B22EE4C5271DFC3300849D9C /* UserDefaultManager.swift */,
+				B22EE4C7271F4A2300849D9C /* ShareManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		B2FB98182719FC04002AC06B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B2FB98192719FC04002AC06B /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B2FB981D271A1076002AC06B /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		B40756A327176A3C00B29D34 /* Model */ = {
@@ -62,20 +89,21 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		B40756A427176A4800B29D34 /* View */ = {
+		B40756A427176A4800B29D34 /* Share */ = {
 			isa = PBXGroup;
 			children = (
 				B2FB98162719F35C002AC06B /* ShareView.swift */,
 			);
-			path = View;
+			path = Share;
 			sourceTree = "<group>";
 		};
-		B40756A527176A5C00B29D34 /* Controller */ = {
+		B40756A527176A5C00B29D34 /* FlashCard */ = {
 			isa = PBXGroup;
 			children = (
-				B446F3E12718BA4600BF4214 /* NotificationManager.swift */,
+				B2FB981D271A1076002AC06B /* New Group */,
+				B40756A427176A4800B29D34 /* Share */,
 			);
-			path = Controller;
+			path = FlashCard;
 			sourceTree = "<group>";
 		};
 		B499C977271768D500066FE2 = {
@@ -83,6 +111,7 @@
 			children = (
 				B499C982271768D500066FE2 /* FlashCards */,
 				B499C981271768D500066FE2 /* Products */,
+				B2FB98182719FC04002AC06B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,8 +128,7 @@
 			children = (
 				B2FB98122718AA0E002AC06B /* Info.plist */,
 				B40756A327176A3C00B29D34 /* Model */,
-				B40756A427176A4800B29D34 /* View */,
-				B40756A527176A5C00B29D34 /* Controller */,
+				B40756A527176A5C00B29D34 /* FlashCard */,
 				B446F3E32718BA6800BF4214 /* FlashCards.entitlements */,
 				B499C983271768D500066FE2 /* FlashCardsApp.swift */,
 				B499C985271768D500066FE2 /* ContentView.swift */,
@@ -191,11 +219,14 @@
 			files = (
 				B2FB98172719F35C002AC06B /* ShareView.swift in Sources */,
 				B40C7A28271774EB00B818C9 /* DeckModel.swift in Sources */,
+				B2FB981C271A0037002AC06B /* CloudKitManager.swift in Sources */,
 				B40C7A2627176FCF00B818C9 /* FlashCardModel.swift in Sources */,
 				B446F3E22718BA4600BF4214 /* NotificationManager.swift in Sources */,
 				B499C986271768D500066FE2 /* ContentView.swift in Sources */,
 				B2FB98152719F007002AC06B /* URLManager.swift in Sources */,
+				B22EE4C6271DFC3300849D9C /* UserDefaultManager.swift in Sources */,
 				B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */,
+				B22EE4C8271F4A2300849D9C /* ShareManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +354,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FlashCards/FlashCards.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FlashCards/Preview Content\"";
@@ -341,7 +373,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = JoaoBrentano.FlashCards;
+				PRODUCT_BUNDLE_IDENTIFIER = hojinRyu.FlashCard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -354,6 +386,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FlashCards/FlashCards.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FlashCards/Preview Content\"";
@@ -372,7 +405,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = JoaoBrentano.FlashCards;
+				PRODUCT_BUNDLE_IDENTIFIER = hojinRyu.FlashCard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
