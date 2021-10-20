@@ -8,7 +8,7 @@
 import Foundation
 import CloudKit
 
-struct Deck {
+struct Deck: Hashable {
     var myrecord: CKRecord
     var flashcards: [CKRecord.Reference]?
     var title: String?

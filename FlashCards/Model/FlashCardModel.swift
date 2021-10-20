@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import CloudKit
 
-struct FlashCard {
+struct FlashCard: Hashable {
     var myrecord: CKRecord
     //TO DO: Audio for front and back side
     // var title: String
@@ -50,5 +50,9 @@ struct FlashCard {
         self.category = record["category"]
         self.frontSideAudio = record["frontSideAudio"]
         self.backSideAudio = record["backSideAudio"]
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
