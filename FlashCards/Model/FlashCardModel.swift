@@ -7,12 +7,52 @@
 
 import Foundation
 import SwiftUI
+import CloudKit
 
-struct FlashCard {
+struct FlashCard: Hashable {
+    var myrecord: CKRecord
     //TO DO: Audio for front and back side
+    // var title: String
     var frontSideText: String?
-    var frontSideImage: Image?
+    var frontSideImage: CKAsset?
     var backSideText: String?
-    var backSideImage: Image?
-    var category: String
+    var backSideImage: CKAsset?
+    var category: String?
+    var frontSideAudio: CKAsset?
+    var backSideAudio: CKAsset?
+
+    init(myrecord: CKRecord, frontSideText: String?, frontSideImage: CKAsset?, backSideText: String?, backSideImage: CKAsset?, category: String?, frontSideAudio: CKAsset?, backSideAudio: CKAsset?) {
+
+        self.myrecord = myrecord
+        self.frontSideText = frontSideText
+        self.backSideText = backSideText
+        self.frontSideImage = frontSideImage
+        self.backSideImage = backSideImage
+        self.category = category
+        self.frontSideAudio = frontSideAudio
+        self.backSideAudio = backSideAudio
+
+        myrecord["frontSideText"] = frontSideText
+        myrecord["backSideText"] = backSideText
+        myrecord["frontSideImage"] = frontSideImage
+        myrecord["backSideImage"] = backSideImage
+        myrecord["category"] = frontSideText
+        myrecord["frontSideAudio"] = frontSideAudio
+        myrecord["backSideAudio"] = backSideAudio
+    }
+
+    init(record: CKRecord) {
+        self.myrecord = record
+        self.frontSideText = record["frontSideText"]
+        self.backSideText = record["backSideText"]
+        self.frontSideImage = record["frontSideImage"]
+        self.backSideImage = record["backSideImage"]
+        self.category = record["category"]
+        self.frontSideAudio = record["frontSideAudio"]
+        self.backSideAudio = record["backSideAudio"]
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(myrecord.recordID)
+    }
 }
