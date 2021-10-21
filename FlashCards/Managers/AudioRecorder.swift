@@ -16,6 +16,7 @@ class AudioRecorder: NSObject, ObservableObject {
         super.init()
         fetchRecordings()
     }
+    var auxRecordings: Recording?
     
     let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
     
@@ -75,6 +76,7 @@ class AudioRecorder: NSObject, ObservableObject {
         for audio in directoryContents {
             let recording = Recording(fileURL: audio, createdAt: getCreationDate(for: audio))
             recordings.append(recording)
+            auxRecordings = recording
         }
         
         recordings.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedAscending})
@@ -95,6 +97,8 @@ class AudioRecorder: NSObject, ObservableObject {
         
         fetchRecordings()
     }
+    
+    //MARK: - Helper
     
     func getCreationDate(for file: URL) -> Date {
         if let attributes = try? FileManager.default.attributesOfItem(atPath: file.path) as [FileAttributeKey: Any],

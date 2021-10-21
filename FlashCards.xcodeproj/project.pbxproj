@@ -11,6 +11,12 @@
 		B22EE4C8271F4A2300849D9C /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4C7271F4A2300849D9C /* ShareManager.swift */; };
 		B22EE4CB272094BD00849D9C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4C9272094BD00849D9C /* AudioPlayer.swift */; };
 		B22EE4CC272094BD00849D9C /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4CA272094BD00849D9C /* AudioRecorder.swift */; };
+		B2DB291D2721DA0800E914B8 /* CardFlipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DB291B2721DA0800E914B8 /* CardFlipView.swift */; };
+		B2DB291E2721DA0800E914B8 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DB291C2721DA0800E914B8 /* CardView.swift */; };
+		B2FA341227209801003683F9 /* RecordingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDDEC3A271DEE7800C526C2 /* RecordingModel.swift */; };
+		B2FA341527209B02003683F9 /* AudioButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FA341427209B02003683F9 /* AudioButtonView.swift */; };
+		B2FA341727209B76003683F9 /* RecordingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FA341627209B76003683F9 /* RecordingsListView.swift */; };
+		B2FA341A2721D465003683F9 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FA34192721D465003683F9 /* NotificationView.swift */; };
 		B2FB98152719F007002AC06B /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB98142719F007002AC06B /* URLManager.swift */; };
 		B2FB98172719F35C002AC06B /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB98162719F35C002AC06B /* ShareView.swift */; };
 		B2FB981A2719FC04002AC06B /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FB98192719FC04002AC06B /* CloudKit.framework */; };
@@ -32,6 +38,11 @@
 		B22EE4C7271F4A2300849D9C /* ShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
 		B22EE4C9272094BD00849D9C /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		B22EE4CA272094BD00849D9C /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		B2DB291B2721DA0800E914B8 /* CardFlipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFlipView.swift; sourceTree = "<group>"; };
+		B2DB291C2721DA0800E914B8 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		B2FA341427209B02003683F9 /* AudioButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioButtonView.swift; sourceTree = "<group>"; };
+		B2FA341627209B76003683F9 /* RecordingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsListView.swift; sourceTree = "<group>"; };
+		B2FA34192721D465003683F9 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		B2FB98122718AA0E002AC06B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B2FB98142719F007002AC06B /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
 		B2FB98162719F35C002AC06B /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
@@ -64,6 +75,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B2DB291A2721DA0800E914B8 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				B2DB291B2721DA0800E914B8 /* CardFlipView.swift */,
+				B2DB291C2721DA0800E914B8 /* CardView.swift */,
+			);
+			name = Card;
+			path = FlashCards/FlashCard/Card;
+			sourceTree = SOURCE_ROOT;
+		};
+		B2FA341327209AEB003683F9 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				B2FA341427209B02003683F9 /* AudioButtonView.swift */,
+				B2FA341627209B76003683F9 /* RecordingsListView.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		B2FA34182721D452003683F9 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				B2FA34192721D465003683F9 /* NotificationView.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		B2FB98132719EFEE002AC06B /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +154,9 @@
 		B40756A527176A5C00B29D34 /* FlashCard */ = {
 			isa = PBXGroup;
 			children = (
+				B2DB291A2721DA0800E914B8 /* Card */,
+				B2FA34182721D452003683F9 /* Notification */,
+				B2FA341327209AEB003683F9 /* Audio */,
 				B2FB981D271A1076002AC06B /* Search */,
 				B40756A427176A4800B29D34 /* Share */,
 			);
@@ -234,20 +275,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2FA341227209801003683F9 /* RecordingModel.swift in Sources */,
 				CDE8362F2717785B001309D8 /* SearchBar.swift in Sources */,
 				B2FB98172719F35C002AC06B /* ShareView.swift in Sources */,
 				B40C7A28271774EB00B818C9 /* DeckModel.swift in Sources */,
 				B2FB981C271A0037002AC06B /* CloudKitManager.swift in Sources */,
 				B40C7A2627176FCF00B818C9 /* FlashCardModel.swift in Sources */,
 				ECDDEC3D271DEEBA00C526C2 /* Extensions.swift in Sources */,
+				B2FA341527209B02003683F9 /* AudioButtonView.swift in Sources */,
 				B446F3E22718BA4600BF4214 /* NotificationManager.swift in Sources */,
 				B499C986271768D500066FE2 /* ContentView.swift in Sources */,
+				B2DB291D2721DA0800E914B8 /* CardFlipView.swift in Sources */,
 				CDE836312718AA01001309D8 /* SearchView.swift in Sources */,
 				B22EE4CC272094BD00849D9C /* AudioRecorder.swift in Sources */,
 				B2FB98152719F007002AC06B /* URLManager.swift in Sources */,
 				B22EE4C6271DFC3300849D9C /* UserDefaultManager.swift in Sources */,
+				B2FA341727209B76003683F9 /* RecordingsListView.swift in Sources */,
 				B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */,
 				B22EE4C8271F4A2300849D9C /* ShareManager.swift in Sources */,
+				B2FA341A2721D465003683F9 /* NotificationView.swift in Sources */,
+				B2DB291E2721DA0800E914B8 /* CardView.swift in Sources */,
 				B22EE4CB272094BD00849D9C /* AudioPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
