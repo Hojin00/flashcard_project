@@ -11,6 +11,8 @@
 		B22EE4C8271F4A2300849D9C /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4C7271F4A2300849D9C /* ShareManager.swift */; };
 		B22EE4CB272094BD00849D9C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4C9272094BD00849D9C /* AudioPlayer.swift */; };
 		B22EE4CC272094BD00849D9C /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4CA272094BD00849D9C /* AudioRecorder.swift */; };
+		B2DB291D2721DA0800E914B8 /* CardFlipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DB291B2721DA0800E914B8 /* CardFlipView.swift */; };
+		B2DB291E2721DA0800E914B8 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DB291C2721DA0800E914B8 /* CardView.swift */; };
 		B2FA341227209801003683F9 /* RecordingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDDEC3A271DEE7800C526C2 /* RecordingModel.swift */; };
 		B2FA341527209B02003683F9 /* AudioButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FA341427209B02003683F9 /* AudioButtonView.swift */; };
 		B2FA341727209B76003683F9 /* RecordingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FA341627209B76003683F9 /* RecordingsListView.swift */; };
@@ -36,6 +38,8 @@
 		B22EE4C7271F4A2300849D9C /* ShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
 		B22EE4C9272094BD00849D9C /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		B22EE4CA272094BD00849D9C /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		B2DB291B2721DA0800E914B8 /* CardFlipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFlipView.swift; sourceTree = "<group>"; };
+		B2DB291C2721DA0800E914B8 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		B2FA341427209B02003683F9 /* AudioButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioButtonView.swift; sourceTree = "<group>"; };
 		B2FA341627209B76003683F9 /* RecordingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsListView.swift; sourceTree = "<group>"; };
 		B2FA34192721D465003683F9 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
@@ -71,6 +75,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B2DB291A2721DA0800E914B8 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				B2DB291B2721DA0800E914B8 /* CardFlipView.swift */,
+				B2DB291C2721DA0800E914B8 /* CardView.swift */,
+			);
+			name = Card;
+			path = FlashCards/FlashCard/Card;
+			sourceTree = SOURCE_ROOT;
+		};
 		B2FA341327209AEB003683F9 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +154,7 @@
 		B40756A527176A5C00B29D34 /* FlashCard */ = {
 			isa = PBXGroup;
 			children = (
+				B2DB291A2721DA0800E914B8 /* Card */,
 				B2FA34182721D452003683F9 /* Notification */,
 				B2FA341327209AEB003683F9 /* Audio */,
 				B2FB981D271A1076002AC06B /* Search */,
@@ -270,6 +285,7 @@
 				B2FA341527209B02003683F9 /* AudioButtonView.swift in Sources */,
 				B446F3E22718BA4600BF4214 /* NotificationManager.swift in Sources */,
 				B499C986271768D500066FE2 /* ContentView.swift in Sources */,
+				B2DB291D2721DA0800E914B8 /* CardFlipView.swift in Sources */,
 				CDE836312718AA01001309D8 /* SearchView.swift in Sources */,
 				B22EE4CC272094BD00849D9C /* AudioRecorder.swift in Sources */,
 				B2FB98152719F007002AC06B /* URLManager.swift in Sources */,
@@ -278,6 +294,7 @@
 				B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */,
 				B22EE4C8271F4A2300849D9C /* ShareManager.swift in Sources */,
 				B2FA341A2721D465003683F9 /* NotificationView.swift in Sources */,
+				B2DB291E2721DA0800E914B8 /* CardView.swift in Sources */,
 				B22EE4CB272094BD00849D9C /* AudioPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
