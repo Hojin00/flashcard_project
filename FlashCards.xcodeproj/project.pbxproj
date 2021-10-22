@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B22EE4C6271DFC3300849D9C /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4C5271DFC3300849D9C /* UserDefaultManager.swift */; };
+		B22EE4C6271DFC3300849D9C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4C5271DFC3300849D9C /* UserDefaultsManager.swift */; };
 		B22EE4C8271F4A2300849D9C /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4C7271F4A2300849D9C /* ShareManager.swift */; };
 		B22EE4CB272094BD00849D9C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4C9272094BD00849D9C /* AudioPlayer.swift */; };
 		B22EE4CC272094BD00849D9C /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4CA272094BD00849D9C /* AudioRecorder.swift */; };
@@ -34,7 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B22EE4C5271DFC3300849D9C /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		B22EE4C5271DFC3300849D9C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		B22EE4C7271F4A2300849D9C /* ShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
 		B22EE4C9272094BD00849D9C /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		B22EE4CA272094BD00849D9C /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 				B446F3E12718BA4600BF4214 /* NotificationManager.swift */,
 				B2FB98142719F007002AC06B /* URLManager.swift */,
 				B2FB981B271A0037002AC06B /* CloudKitManager.swift */,
-				B22EE4C5271DFC3300849D9C /* UserDefaultManager.swift */,
+				B22EE4C5271DFC3300849D9C /* UserDefaultsManager.swift */,
 				B22EE4C7271F4A2300849D9C /* ShareManager.swift */,
 			);
 			path = Managers;
@@ -289,7 +289,7 @@
 				CDE836312718AA01001309D8 /* SearchView.swift in Sources */,
 				B22EE4CC272094BD00849D9C /* AudioRecorder.swift in Sources */,
 				B2FB98152719F007002AC06B /* URLManager.swift in Sources */,
-				B22EE4C6271DFC3300849D9C /* UserDefaultManager.swift in Sources */,
+				B22EE4C6271DFC3300849D9C /* UserDefaultsManager.swift in Sources */,
 				B2FA341727209B76003683F9 /* RecordingsListView.swift in Sources */,
 				B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */,
 				B22EE4C8271F4A2300849D9C /* ShareManager.swift in Sources */,

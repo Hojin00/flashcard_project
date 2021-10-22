@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import CloudKit
+import AVFoundation
 
 struct AudioButtonView: View {
     
@@ -75,7 +76,20 @@ struct AudioButtonView: View {
                         case .success(let flashcard):
                             print(flashcard)
                         default:
-                            print("no decks")
+                            print("no flashcards")
+                        }
+                    }
+                }
+                Button("fetch userid") {
+                    
+                    
+                    CloudKitManager.shared.fetchAllFlashCards {
+                        Result in
+                        switch Result {
+                        case .success(let flashcard):
+                            print(flashcard)
+                        default:
+                            print("no userid")
                         }
                     }
                 }

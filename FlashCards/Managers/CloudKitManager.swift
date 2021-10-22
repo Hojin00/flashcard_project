@@ -14,6 +14,7 @@ class CloudKitManager {
     let publicDB = CKContainer.default().publicCloudDatabase
     
     static let shared: CloudKitManager = CloudKitManager()
+    var records = [CKRecord.ID]()
     
     // MARK: TODO
     // duplicate FlashCard
@@ -23,7 +24,7 @@ class CloudKitManager {
     
     
     func createFlashCard(flashCard: CKRecord) {
-
+        
         self.publicDB.save(flashCard) { (savedRecord, error) in
 
             guard let _ = savedRecord else {
@@ -33,6 +34,7 @@ class CloudKitManager {
             }
 
             print("Flash Card saved")
+            
             if let error = error{
                 print(error.localizedDescription)
                 return
@@ -84,7 +86,7 @@ class CloudKitManager {
             }
 
             let flashCards = results.map{ FlashCard.init(record: $0) }
-
+            print(results)
             completionQueue.async {
 
                 completion(.success(flashCards))
