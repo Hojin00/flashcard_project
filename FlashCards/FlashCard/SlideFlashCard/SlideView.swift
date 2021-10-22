@@ -18,7 +18,7 @@ struct User: Hashable, CustomStringConvertible {
 }
 
 struct SlideView: View {
-    /// List of users
+    /// List of users EXEMPLO TROCAR DEPOIS POR FLASH CARD
     @State var users: [User] = [
         User(id: 0, firstName: "",imageName: ""),
         User(id: 1, firstName: "",imageName: ""),
