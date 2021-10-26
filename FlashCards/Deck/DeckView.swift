@@ -7,16 +7,17 @@
 
 import SwiftUI
 
-struct DeckView: View {
+struct DeckView: View, Identifiable {
+    var id: ObjectIdentifier
     
     var color1: Color
     var color2: Color
     var color3: Color
     
-    var deck: Deck
-    var flashcard1: FlashCard
-    var flashcard2: FlashCard
-    var flashcard3: FlashCard
+//    var deck: Deck
+//    var flashcard1: FlashCard
+//    var flashcard2: FlashCard
+//    var flashcard3: FlashCard
     
 //    func getFlashcards() -> [FlashCard] {
 //        CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { result, error in
@@ -31,6 +32,10 @@ struct DeckView: View {
 ////            }
 //        }
 //    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
     
     var body: some View {
         Button {
