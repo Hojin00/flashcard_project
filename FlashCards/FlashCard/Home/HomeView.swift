@@ -47,54 +47,93 @@ struct HomeView: View {
                         .padding(.trailing)
                     }
                     .padding(.leading)
-                    
+                ScrollView(.horizontal) {
                     HStack(){
-                        VStack(){
-                            
-                            Button {
-                                print("Image tapped!")
-                            } label: {
-                                ZStack {
-                                    Image("buttonNewCard")
-                                    HStack {
-                                        Image(systemName:"plus")
-                                            .resizable()
-                                            .foregroundColor(Color.black)
-                                            .scaledToFit()
-                                            .frame(width: 25, height: 25)
-                                        
-                                        Text("New \n Card")
-                                            .font(.system(size: 16.0))
-                                            .fontWeight(.bold)
-                                            .lineLimit(2)
-                                            .foregroundColor(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
-                                    }
-                                }
+                        
+                            VStack(){
                                 
-                            }
-                            
-                            Button {
-                                print("new deck")
-                            } label : {
-                                ZStack {
-                                    Image("buttonNewDeck")
-                                    HStack(alignment: .center, spacing: 0.0) {
-                                        Text("New \n Deck")
-                                            .font(.system(size: 16.0))
-                                            .fontWeight(.bold)
-                                            .lineLimit(2)
-                                            .foregroundColor(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
-                                        
-                                        Image(systemName:"plus")
-                                            .resizable()
-                                            .foregroundColor(Color.black)
-                                            .scaledToFit()
-                                            .frame(width: 25, height: 25)
-                                        
+                                Button {
+                                    print("new card")
+                                } label: {
+                                    ZStack {
+                                        Image("buttonNewCard")
+                                        HStack {
+                                            Image(systemName:"plus")
+                                                .resizable()
+                                                .foregroundColor(Color.black)
+                                                .scaledToFit()
+                                                .frame(width: 25, height: 25)
+                                            
+                                            Text("New \n Card")
+                                                .font(.system(size: 16.0))
+                                                .fontWeight(.bold)
+                                                .lineLimit(2)
+                                                .foregroundColor(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
+                                        }
                                     }
-                                    .offset(x: /*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/, y:  -10)
+                                }
+            
+                                Button {
+                                    print("new deck")
+                                } label : {
+                                    ZStack {
+                                        Image("buttonNewDeck")
+                                        HStack(alignment: .center, spacing: 0.0) {
+                                            Text("New \n Deck")
+                                                .font(.system(size: 16.0))
+                                                .fontWeight(.bold)
+                                                .lineLimit(2)
+                                                .foregroundColor(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
+                                            
+                                            Image(systemName:"plus")
+                                                .resizable()
+                                                .foregroundColor(Color.black)
+                                                .scaledToFit()
+                                                .frame(width: 25, height: 25)
+                                            
+                                        }
+                                        .offset(x: /*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/, y:  -10)
+                                    }
                                 }
                             }
+                            .padding(-2.0)
+                        
+                            HStack(){
+                                ForEach(0..<10){ i in
+                                    EmptyView()
+                                    Button {
+                                        //action
+                                    } label: {
+                                        ZStack {
+                                            //Image("AllDecksDeckBackground")
+                                            //    .padding(.top, UIScreen.main.bounds.height * 0.1)
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .foregroundColor(Color.red)
+                                                .frame(width: UIScreen.main.bounds.width * 0.270, height: UIScreen.main.bounds.height * 0.2)
+                                                .shadow(radius: 10)
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .foregroundColor(Color.blue)
+                                                .frame(width: UIScreen.main.bounds.width * 0.285, height: UIScreen.main.bounds.height * 0.2)
+                                                .padding(.bottom, UIScreen.main.bounds.height * 0.015)
+                                                .shadow(radius: 10)
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .foregroundColor(Color.green)
+                                                .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.height * 0.2)
+                                                .padding(.bottom, UIScreen.main.bounds.height * 0.030)
+                                                .shadow(radius: 10)
+                                            VStack {
+                                                Text("+")
+                                                    .font(.title)
+                                                Text("Algum deck")
+                                            }
+                                            .padding(.bottom, UIScreen.main.bounds.height * 0.030)
+                                            .foregroundColor(Color.black)
+                                        }
+                                    }
+                                    .frame(width: UIScreen.main.bounds.width * 0.45, height: UIScreen.main.bounds.height * 0.25)
+                                }
+                            }
+                            .background(Color.red)
                         }
                     }
                     
