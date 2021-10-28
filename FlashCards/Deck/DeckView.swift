@@ -6,57 +6,87 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct DeckView: View {
     
-    var color1: Color
-    var color2: Color
-    var color3: Color
+    let deck: Deck
+    var flashcards: [FlashCard] = []
+    var topCardColor: Color = Color.white
+    var middleCardColor: Color = Color.white
+    var bottomCardColor: Color = Color.white
     
-    var deck: Deck
-    var flashcard1: FlashCard
-    var flashcard2: FlashCard
-    var flashcard3: FlashCard
+    init(deck: Deck) {
+        self.deck = deck
+        self.flashcards = getFlashcards()
+        //        self.topCardColor = flashcards[0].frontSideColor as! Color
+        //        self.middleCardColor = flashcards[1].frontSideColor as! Color
+        //        self.bottomCardColor = flashcards[2].frontSideColor as! Color
+    }
     
-//    func getFlashcards() -> [FlashCard] {
-//        CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { result, error in
-////            switch Result {
-////            case .success(let flashcards):
-////                let aux = flashcards as [FlashCard]
-////                return [FlashCard]()
-////                break
-////            default:
-////                print("no flashcards in deck")
-////                break
-////            }
-//        }
-//    }
+    func getFlashcards() -> [FlashCard] {
+        var list: [FlashCard] = []
+        CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
+            switch Result {
+            case .success(let rr):
+                list = rr
+                break
+            default:
+                print("no flashcards in deck")
+                break
+            }
+        }
+        return list
+    }
     
     var body: some View {
         Button {
             //action
         } label: {
             ZStack {
-                //Image("AllDecksDeckBackground")
-                //    .padding(.top, UIScreen.main.bounds.height * 0.1)
                 RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(color3)
+                    .foregroundColor(bottomCardColor)
                     .frame(width: UIScreen.main.bounds.width * 0.270, height: UIScreen.main.bounds.height * 0.2)
                     .shadow(radius: 10)
                 RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(color2)
+                    .foregroundColor(middleCardColor)
                     .frame(width: UIScreen.main.bounds.width * 0.285, height: UIScreen.main.bounds.height * 0.2)
                     .padding(.bottom, UIScreen.main.bounds.height * 0.015)
                     .shadow(radius: 10)
                 RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(color1)
+                    .foregroundColor(topCardColor)
                     .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.height * 0.2)
                     .padding(.bottom, UIScreen.main.bounds.height * 0.030)
                     .shadow(radius: 10)
                 VStack {
-                    Text("+")
+                    Spacer()
+                    Text("High importance")
+                        .font(.caption)
+                    Spacer()
                         .font(.title)
-                    Text("New Deck")
+                    Text("\(deck.title ?? "No title")")
+                    Spacer()
+                    Text("Remembered")
+                        .font(.caption)
+                    Text("77% easily")
+                        .font(.caption)
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 5)
+                                .foregroundColor(.gray)
+                                .shadow(radius: 3)
+                                .opacity(0.5)
+                            Image(systemName: "ellipsis")
+                                .foregroundColor(.black)
+                        }
+                        .frame(width: UIScreen.main.bounds.width * 0.08, height: UIScreen.main.bounds.width * 0.08)
+                        Text("120 cards")
+                            .font(.caption)
+                        Spacer()
+                    }
+                    Spacer()
                 }
                 .padding(.bottom, UIScreen.main.bounds.height * 0.030)
                 .foregroundColor(Color.black)
@@ -65,9 +95,9 @@ struct DeckView: View {
         .frame(width: UIScreen.main.bounds.width * 0.45, height: UIScreen.main.bounds.height * 0.25)
     }
 }
-//
-//struct DeckView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DeckView(color1: Color.red, color2: Color.green, color3: Color.orange)
-//    }
-//}
+
+struct DeckView_Previews: PreviewProvider {
+    static var previews: some View {
+        DeckView(deck: Deck.init(record: CKRecord.init(recordType: "Deck")))
+    }
+}

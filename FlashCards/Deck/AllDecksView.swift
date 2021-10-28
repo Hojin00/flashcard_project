@@ -6,23 +6,35 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct AllDecksView: View {
+    
+    var decks: [Deck]
+    
+    init(decks: [Deck]) {
+        self.decks = decks
+        
+    }
+    
     var body: some View {
         ScrollView {
             VStack {
-//                HStack {
-                    //NewDeckView()
-//                    DeckView()
-//                }
-//                HStack {
-//                    DeckView()
-//                    DeckView()
-//                }
-//                HStack {
-//                    DeckView()
-//                    DeckView()
-//                }
+                switch decks.count {
+                case 0:
+                    HStack {
+                        NewDeckView()
+                    }
+                case 1:
+                    HStack {
+                        NewDeckView()
+                        DeckView(deck: decks[0])
+                    }
+                default:
+                    HStack {
+                            
+                    }
+                }
             }
         }
     }
@@ -30,6 +42,6 @@ struct AllDecksView: View {
 
 struct AllDecksView_Previews: PreviewProvider {
     static var previews: some View {
-        AllDecksView()
+        AllDecksView(decks: [Deck.init(record: CKRecord.init(recordType: "Deck"))])
     }
 }
