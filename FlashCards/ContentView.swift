@@ -12,10 +12,10 @@ import UIKit
 
 
 struct ContentView: View {
-    
+    let deck = Deck.init(record: CKRecord.init(recordType: "Deck"))
     
     var body: some View {
-        AllDecksView(decks: [Deck.init(record: CKRecord.init(recordType: "Deck"))])
+        AllDecksView(decks: [deck, deck, deck, deck])
     }
 }
 
