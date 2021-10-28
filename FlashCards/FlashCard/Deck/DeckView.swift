@@ -31,8 +31,6 @@ struct DeckView: View {
     }
 
     var body: some View {
-        
-        //var auxFlash: FlashCard? = nil
         ZStack {
             Circle()
                 .ignoresSafeArea()
@@ -205,21 +203,6 @@ struct CardPreview: View {
 
 enum CardType {
     case newCard, practiceCard, normalCard, informationCard
-}
-
-struct StandartButton: View {
-    let screenSize: CGSize = UIScreen.main.bounds.size
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 5)
-                .foregroundColor(.gray)
-                .shadow(radius: 3)
-                .opacity(0.5)
-            Image(systemName: "ellipsis")
-                .foregroundColor(.black)
-        }
-        .frame(width: screenSize.width * 0.08, height: screenSize.width * 0.08)
-    }
 }
 
 
