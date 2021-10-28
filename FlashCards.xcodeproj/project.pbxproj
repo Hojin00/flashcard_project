@@ -30,10 +30,12 @@
 		B499C986271768D500066FE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C985271768D500066FE2 /* ContentView.swift */; };
 		B499C988271768D600066FE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C987271768D600066FE2 /* Assets.xcassets */; };
 		B499C98B271768D600066FE2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C98A271768D600066FE2 /* Preview Assets.xcassets */; };
-		B4A324D827232AF20031FAD0 /* DeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A324D727232AF20031FAD0 /* DeckView.swift */; };
+		B4A324D827232AF20031FAD0 /* SingleDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A324D727232AF20031FAD0 /* SingleDeckView.swift */; };
 		B4A324DA27232BF80031FAD0 /* AllDecksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A324D927232BF80031FAD0 /* AllDecksView.swift */; };
 		CDE8362F2717785B001309D8 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE8362E2717785B001309D8 /* SearchBar.swift */; };
 		CDE836312718AA01001309D8 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE836302718AA01001309D8 /* SearchView.swift */; };
+		ECCDD0ED272B3AE700BACCAD /* StandardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCDD0EC272B3AE700BACCAD /* StandardButton.swift */; };
+		ECD1DF4C2723332E00838CC9 /* DeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD1DF4B2723332E00838CC9 /* DeckView.swift */; };
 		ECDDEC3D271DEEBA00C526C2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDDEC3C271DEEBA00C526C2 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,10 +65,12 @@
 		B499C985271768D500066FE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B499C987271768D600066FE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B499C98A271768D600066FE2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		B4A324D727232AF20031FAD0 /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
+		B4A324D727232AF20031FAD0 /* SingleDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleDeckView.swift; sourceTree = "<group>"; };
 		B4A324D927232BF80031FAD0 /* AllDecksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDecksView.swift; sourceTree = "<group>"; };
 		CDE8362E2717785B001309D8 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		CDE836302718AA01001309D8 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		ECCDD0EC272B3AE700BACCAD /* StandardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButton.swift; sourceTree = "<group>"; };
+		ECD1DF4B2723332E00838CC9 /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
 		ECDDEC3A271DEE7800C526C2 /* RecordingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingModel.swift; sourceTree = "<group>"; };
 		ECDDEC3C271DEEBA00C526C2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,6 +166,8 @@
 		B40756A527176A5C00B29D34 /* FlashCard */ = {
 			isa = PBXGroup;
 			children = (
+				ECCDD0EB272B3AC900BACCAD /* Components */,
+				ECD1DF4A2723331C00838CC9 /* Deck */,
 				B2DB291A2721DA0800E914B8 /* Card */,
 				B2FA34182721D452003683F9 /* Notification */,
 				B2FA341327209AEB003683F9 /* Audio */,
@@ -171,15 +177,15 @@
 			path = FlashCard;
 			sourceTree = "<group>";
 		};
-		B44F1F9327209B570031F076 /* Deck */ = {
+		B44F1F9327209B570031F076 /* AllDeck */ = {
 			isa = PBXGroup;
 			children = (
 				B4A324D927232BF80031FAD0 /* AllDecksView.swift */,
 				B44F1F9427209B770031F076 /* NewDeckView.swift */,
-				B4A324D727232AF20031FAD0 /* DeckView.swift */,
+				B4A324D727232AF20031FAD0 /* SingleDeckView.swift */,
 				B420B2D2272B37F500BBA7B1 /* EmptyView.swift */,
 			);
-			path = Deck;
+			path = AllDeck;
 			sourceTree = "<group>";
 		};
 		B499C977271768D500066FE2 = {
@@ -205,7 +211,7 @@
 				B2FB98122718AA0E002AC06B /* Info.plist */,
 				B40756A327176A3C00B29D34 /* Model */,
 				B40756A527176A5C00B29D34 /* FlashCard */,
-				B44F1F9327209B570031F076 /* Deck */,
+				B44F1F9327209B570031F076 /* AllDeck */,
 				B446F3E32718BA6800BF4214 /* FlashCards.entitlements */,
 				B499C983271768D500066FE2 /* FlashCardsApp.swift */,
 				B499C985271768D500066FE2 /* ContentView.swift */,
@@ -223,6 +229,22 @@
 				B499C98A271768D600066FE2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		ECCDD0EB272B3AC900BACCAD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				ECCDD0EC272B3AE700BACCAD /* StandardButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		ECD1DF4A2723331C00838CC9 /* Deck */ = {
+			isa = PBXGroup;
+			children = (
+				ECD1DF4B2723332E00838CC9 /* DeckView.swift */,
+			);
+			path = Deck;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,6 +329,7 @@
 				B2FA341527209B02003683F9 /* AudioButtonView.swift in Sources */,
 				B446F3E22718BA4600BF4214 /* NotificationManager.swift in Sources */,
 				B499C986271768D500066FE2 /* ContentView.swift in Sources */,
+				ECCDD0ED272B3AE700BACCAD /* StandardButton.swift in Sources */,
 				B2DB291D2721DA0800E914B8 /* CardFlipView.swift in Sources */,
 				CDE836312718AA01001309D8 /* SearchView.swift in Sources */,
 				B22EE4CC272094BD00849D9C /* AudioRecorder.swift in Sources */,
@@ -315,10 +338,11 @@
 				B2FA341727209B76003683F9 /* RecordingsListView.swift in Sources */,
 				B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */,
 				B22EE4C8271F4A2300849D9C /* ShareManager.swift in Sources */,
-				B4A324D827232AF20031FAD0 /* DeckView.swift in Sources */,
+				B4A324D827232AF20031FAD0 /* SingleDeckView.swift in Sources */,
 				B420B2D3272B37F600BBA7B1 /* EmptyView.swift in Sources */,
 				B2FA341A2721D465003683F9 /* NotificationView.swift in Sources */,
 				B2DB291E2721DA0800E914B8 /* CardView.swift in Sources */,
+				ECD1DF4C2723332E00838CC9 /* DeckView.swift in Sources */,
 				B22EE4CB272094BD00849D9C /* AudioPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

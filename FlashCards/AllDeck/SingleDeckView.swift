@@ -8,7 +8,7 @@
 import SwiftUI
 import CloudKit
 
-struct DeckView: View {
+struct SingleDeckView: View {
     
     let deck: Deck
     var flashcards: [FlashCard] = []
@@ -96,8 +96,8 @@ struct DeckView: View {
     }
 }
 
-struct DeckView_Previews: PreviewProvider {
+struct SingleDeckView_Previews: PreviewProvider {
     static var previews: some View {
-        DeckView(deck: Deck.init(record: CKRecord.init(recordType: "Deck")))
+        SingleDeckView(deck: Deck.init(record: CKRecord.init(recordType: "Deck")))
     }
 }

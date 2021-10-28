@@ -14,7 +14,6 @@ struct AllDecksView: View {
     
     init(decks: [Deck]) {
         self.decks = decks
-        
     }
     
     var body: some View {
@@ -23,36 +22,36 @@ struct AllDecksView: View {
                 switch decks.count {
                 case 0:
                     HStack {
-                        NewDeckView()
+                        NewAllDecksView()
                         EmptyView()
                     }
                 case 1:
                     HStack {
-                        NewDeckView()
-                        DeckView(deck: decks[0])
+                        NewAllDecksView()
+                        AllDecksView(deck: decks[0])
                     }
                 case 2:
                     HStack {
-                        NewDeckView()
-                        DeckView(deck: decks[0])
+                        NewAllDecksView()
+                        AllDecksView(deck: decks[0])
                     }
                     HStack {
-                        DeckView(deck: decks[1])
+                        AllDecksView(deck: decks[1])
                         EmptyView()
                     }
                 default:
                     HStack {
-                        NewDeckView()
-                        DeckView(deck: decks[0])
+                        NewAllDecksView()
+                        AllDecksView(deck: decks[0])
                     }
                     ForEach(1..<decks.count) { n in
                         HStack {
                             if n % 2 != 0 {
                                 if n+1 < decks.count {
-                                    DeckView(deck: decks[n])
-                                    DeckView(deck: decks[n+1])
+                                    AllDecksView(deck: decks[n])
+                                    AllDecksView(deck: decks[n+1])
                                 } else {
-                                    DeckView(deck: decks[n])
+                                    AllDecksView(deck: decks[n])
                                     EmptyView()
                                 }
                             }
