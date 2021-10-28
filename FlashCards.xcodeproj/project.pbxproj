@@ -119,9 +119,9 @@
 			children = (
 				B22EE4C9272094BD00849D9C /* AudioPlayer.swift */,
 				B22EE4CA272094BD00849D9C /* AudioRecorder.swift */,
+				B2FB981B271A0037002AC06B /* CloudKitManager.swift */,
 				B446F3E12718BA4600BF4214 /* NotificationManager.swift */,
 				B2FB98142719F007002AC06B /* URLManager.swift */,
-				B2FB981B271A0037002AC06B /* CloudKitManager.swift */,
 				B22EE4C5271DFC3300849D9C /* UserDefaultManager.swift */,
 				B22EE4C7271F4A2300849D9C /* ShareManager.swift */,
 			);
@@ -472,7 +472,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FlashCards/FlashCards.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FlashCards/Preview Content\"";
 				DEVELOPMENT_TEAM = 26UK52Y76J;
@@ -492,6 +493,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = hojinRyu.FlashCard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = flashcard_dev;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -504,7 +506,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FlashCards/FlashCards.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FlashCards/Preview Content\"";
 				DEVELOPMENT_TEAM = 26UK52Y76J;
@@ -524,6 +527,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = hojinRyu.FlashCard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = flashcard_dev;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

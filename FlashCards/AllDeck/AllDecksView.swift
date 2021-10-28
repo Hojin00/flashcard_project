@@ -22,36 +22,36 @@ struct AllDecksView: View {
                 switch decks.count {
                 case 0:
                     HStack {
-                        NewAllDecksView()
+                        NewDeckView()
                         EmptyView()
                     }
                 case 1:
                     HStack {
-                        NewAllDecksView()
-                        AllDecksView(deck: decks[0])
+                        NewDeckView()
+                        SingleDeckView(deck: decks[0])
                     }
                 case 2:
                     HStack {
-                        NewAllDecksView()
-                        AllDecksView(deck: decks[0])
+                        NewDeckView()
+                        SingleDeckView(deck: decks[0])
                     }
                     HStack {
-                        AllDecksView(deck: decks[1])
+                        SingleDeckView(deck: decks[1])
                         EmptyView()
                     }
                 default:
                     HStack {
-                        NewAllDecksView()
-                        AllDecksView(deck: decks[0])
+                        NewDeckView()
+                        SingleDeckView(deck: decks[0])
                     }
                     ForEach(1..<decks.count) { n in
                         HStack {
                             if n % 2 != 0 {
                                 if n+1 < decks.count {
-                                    AllDecksView(deck: decks[n])
-                                    AllDecksView(deck: decks[n+1])
+                                    SingleDeckView(deck: decks[n])
+                                    SingleDeckView(deck: decks[n+1])
                                 } else {
-                                    AllDecksView(deck: decks[n])
+                                    SingleDeckView(deck: decks[n])
                                     EmptyView()
                                 }
                             }

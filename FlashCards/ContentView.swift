@@ -9,8 +9,6 @@ import SwiftUI
 import CloudKit
 import UIKit
 
-
-
 struct ContentView: View {
     let deck = Deck.init(record: CKRecord.init(recordType: "Deck"))
     
@@ -19,15 +17,8 @@ struct ContentView: View {
     }
 }
 
-
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
-
-
-
-
-
