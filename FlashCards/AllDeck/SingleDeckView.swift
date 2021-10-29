@@ -61,8 +61,14 @@ struct SingleDeckView: View {
                         .shadow(radius: 10)
                     VStack {
                         Spacer()
-                        Text("High importance")
-                            .font(.caption)
+                        HStack {
+                            Text("!!!")
+                                .bold()
+                                .padding(.leading, UIScreen.main.bounds.size.width * 0.08)
+                            Spacer()
+                            Image(systemName: "clock")
+                                .padding(.trailing, UIScreen.main.bounds.size.width * 0.08)
+                        }
                         Spacer()
                             .font(.title)
                         Text("\(deck.title ?? "No title")")
@@ -74,7 +80,7 @@ struct SingleDeckView: View {
                         Spacer()
                         HStack {
                             Spacer()
-                            Text("120 cards")
+                            Text("\(flashcards.count)\ncards")
                                 .font(.caption)
                                 .padding(.trailing, UIScreen.main.bounds.size.width * 0.07)
                         }
