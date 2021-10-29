@@ -14,19 +14,25 @@ struct Deck: Hashable {
     var title: String?
     var category: String?
     var reminderDate: Date?
+    var lastView: Date?
+    var hardFlashcards: Int?
 
-    init(myrecord: CKRecord, flashcards: [CKRecord.Reference]?, title: String?, category: String?, reminderDate: Date?) {
+    init(myrecord: CKRecord, flashcards: [CKRecord.Reference]?, title: String?, category: String?, reminderDate: Date?, lastView: Date?, hardFlashcards: Int) {
 
         self.myrecord = myrecord
         self.flashcards = flashcards
         self.title = title
         self.category = category
         self.reminderDate = reminderDate
+        self.lastView = lastView
+        self.hardFlashcards = hardFlashcards
 
         myrecord["flashCardList"] = flashcards
         myrecord["title"] = title
         myrecord["category"] = category
         myrecord["reminderDate"] = reminderDate
+        myrecord["lastView"] = lastView
+        myrecord["hardFlashcards"] = hardFlashcards
 
     }
 
@@ -36,7 +42,10 @@ struct Deck: Hashable {
         self.title = record["title"]
         self.category = record["category"]
         self.reminderDate = record["reminderDate"]
-
+        self.lastView = record["lastView"]
+        self.hardFlashcards = record["hardFlashcards"]
+        
+        
     }
 }
 

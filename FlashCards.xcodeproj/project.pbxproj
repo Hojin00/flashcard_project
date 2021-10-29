@@ -11,6 +11,8 @@
 		B22EE4C8271F4A2300849D9C /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4C7271F4A2300849D9C /* ShareManager.swift */; };
 		B22EE4CB272094BD00849D9C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4C9272094BD00849D9C /* AudioPlayer.swift */; };
 		B22EE4CC272094BD00849D9C /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EE4CA272094BD00849D9C /* AudioRecorder.swift */; };
+		B2C1E4DA2729E13600CDB5FC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C1E4D92729E13600CDB5FC /* Extensions.swift */; };
+		B2C1E4DE272B320B00CDB5FC /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C1E4DD272B320B00CDB5FC /* Helper.swift */; };
 		B2DB291D2721DA0800E914B8 /* CardFlipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DB291B2721DA0800E914B8 /* CardFlipView.swift */; };
 		B2DB291E2721DA0800E914B8 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DB291C2721DA0800E914B8 /* CardView.swift */; };
 		B2FA341227209801003683F9 /* RecordingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDDEC3A271DEE7800C526C2 /* RecordingModel.swift */; };
@@ -30,7 +32,6 @@
 		B499C98B271768D600066FE2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C98A271768D600066FE2 /* Preview Assets.xcassets */; };
 		CDE8362F2717785B001309D8 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE8362E2717785B001309D8 /* SearchBar.swift */; };
 		CDE836312718AA01001309D8 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE836302718AA01001309D8 /* SearchView.swift */; };
-		ECDDEC3D271DEEBA00C526C2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDDEC3C271DEEBA00C526C2 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,8 @@
 		B22EE4C7271F4A2300849D9C /* ShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
 		B22EE4C9272094BD00849D9C /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		B22EE4CA272094BD00849D9C /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		B2C1E4D92729E13600CDB5FC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B2C1E4DD272B320B00CDB5FC /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		B2DB291B2721DA0800E914B8 /* CardFlipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFlipView.swift; sourceTree = "<group>"; };
 		B2DB291C2721DA0800E914B8 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		B2FA341427209B02003683F9 /* AudioButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioButtonView.swift; sourceTree = "<group>"; };
@@ -60,7 +63,6 @@
 		CDE8362E2717785B001309D8 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		CDE836302718AA01001309D8 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		ECDDEC3A271DEE7800C526C2 /* RecordingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingModel.swift; sourceTree = "<group>"; };
-		ECDDEC3C271DEEBA00C526C2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B2C1E4D82729E12800CDB5FC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B2C1E4D92729E13600CDB5FC /* Extensions.swift */,
+				B2C1E4DD272B320B00CDB5FC /* Helper.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		B2DB291A2721DA0800E914B8 /* Card */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +194,7 @@
 		B499C982271768D500066FE2 /* FlashCards */ = {
 			isa = PBXGroup;
 			children = (
+				B2C1E4D82729E12800CDB5FC /* Resources */,
 				B2FB98122718AA0E002AC06B /* Info.plist */,
 				B40756A327176A3C00B29D34 /* Model */,
 				B40756A527176A5C00B29D34 /* FlashCard */,
@@ -192,7 +204,6 @@
 				B2FB98132719EFEE002AC06B /* Managers */,
 				B499C987271768D600066FE2 /* Assets.xcassets */,
 				B499C989271768D600066FE2 /* Preview Content */,
-				ECDDEC3C271DEEBA00C526C2 /* Extensions.swift */,
 			);
 			path = FlashCards;
 			sourceTree = "<group>";
@@ -281,11 +292,12 @@
 				B40C7A28271774EB00B818C9 /* DeckModel.swift in Sources */,
 				B2FB981C271A0037002AC06B /* CloudKitManager.swift in Sources */,
 				B40C7A2627176FCF00B818C9 /* FlashCardModel.swift in Sources */,
-				ECDDEC3D271DEEBA00C526C2 /* Extensions.swift in Sources */,
 				B2FA341527209B02003683F9 /* AudioButtonView.swift in Sources */,
 				B446F3E22718BA4600BF4214 /* NotificationManager.swift in Sources */,
+				B2C1E4DA2729E13600CDB5FC /* Extensions.swift in Sources */,
 				B499C986271768D500066FE2 /* ContentView.swift in Sources */,
 				B2DB291D2721DA0800E914B8 /* CardFlipView.swift in Sources */,
+				B2C1E4DE272B320B00CDB5FC /* Helper.swift in Sources */,
 				CDE836312718AA01001309D8 /* SearchView.swift in Sources */,
 				B22EE4CC272094BD00849D9C /* AudioRecorder.swift in Sources */,
 				B2FB98152719F007002AC06B /* URLManager.swift in Sources */,
@@ -424,7 +436,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FlashCards/FlashCards.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FlashCards/Preview Content\"";
 				DEVELOPMENT_TEAM = 26UK52Y76J;
@@ -444,6 +457,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = hojinRyu.FlashCard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = flashcard_dev;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -456,7 +470,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FlashCards/FlashCards.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FlashCards/Preview Content\"";
 				DEVELOPMENT_TEAM = 26UK52Y76J;
@@ -476,6 +491,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = hojinRyu.FlashCard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = flashcard_dev;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

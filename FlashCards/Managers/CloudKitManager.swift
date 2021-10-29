@@ -8,19 +8,17 @@
 import Foundation
 import CloudKit
 import SwiftUI
+import UIKit
 
 class CloudKitManager {
     
     let publicDB = CKContainer.default().publicCloudDatabase
     
     static let shared: CloudKitManager = CloudKitManager()
-    var records = [CKRecord.ID]()
     
     // MARK: TODO
     // duplicate FlashCard
     // duplicate Deck
-    // UpdateFlashCard
-    // UpdateDeck
     
     
     func createFlashCard(flashCard: CKRecord) {
@@ -117,9 +115,7 @@ class CloudKitManager {
                     }
 
                     print("flashcard updated")
-
-//                    UserDefaultManager.shared.saveUserDecks()
-
+                    
                     if let error = error{
                         print(error.localizedDescription)
                         return
@@ -140,9 +136,6 @@ class CloudKitManager {
             }
 
             print("deck saved")
-
-//            UserDefaultManager.shared.userDecks.append(deck)
-//            UserDefaultManager.shared.saveUserDecks()
 
             if let error = error{
                 print(error.localizedDescription)
@@ -224,8 +217,6 @@ class CloudKitManager {
 
                     print("deck updated")
 
-//                    UserDefaultManager.shared.saveUserDecks()
-
                     if let error = error{
                         print(error.localizedDescription)
                         return
@@ -235,7 +226,46 @@ class CloudKitManager {
         }
     }
     
-    //MARK: - Fetch All Flashcards de um Deck
+    //MARK: - Fetch All Decks with sort by
+    func fetchDeckSortBy( queryWith: [NSSortDescriptor], completionQueue: DispatchQueue = .main, completion: @escaping (Result<[Deck], Error>) -> Void) {
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: "Deck", predicate: predicate)
+
+        if queryWith.count != 0 {
+            query.sortDescriptors = queryWith
+        }
+
+        self.publicDB.perform(query, inZoneWith: nil) { results, error in
+
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+                return
+            }
+
+            guard let results = results else {
+                DispatchQueue.main.async {
+                    let error = NSError(
+                        domain: "hojinRyu.FlashCard", code: -1,
+                        userInfo: [NSLocalizedDescriptionKey: "Could not download notes"])
+                    completion(.failure(error))
+                }
+                return
+            }
+
+            let deck = results.map{ Deck.init(record: $0) }
+            
+            
+            completionQueue.async {
+
+                completion(.success(deck))
+
+            }
+        }
+    }
+    
+    //MARK: - Fetch All Flashcards of a Deck
     
     func fetchDeck(deckID: CKRecord.ID, completionQueue: DispatchQueue = .main, completion: @escaping (Result<[FlashCard], Error>) -> Void) {
         //TODO
@@ -267,6 +297,7 @@ class CloudKitManager {
             
             for d in deck {
                 for f in d.flashcards ?? [] {
+                    
                     self.fetchDeckFlashcards(flashcardID: f.recordID) { Result in
                         switch Result {
                         case .success(let flashcards):
@@ -282,11 +313,12 @@ class CloudKitManager {
         }
     }
     
+    // MARK: Return a flashcard with ID
     func fetchDeckFlashcards(flashcardID: CKRecord.ID, completionQueue: DispatchQueue = .main, completion: @escaping (Result<[FlashCard], Error>) -> Void) {
         
         let predicate = NSPredicate(format: "recordID == %@", argumentArray: [flashcardID] )
         let query = CKQuery(recordType: "FlashCard", predicate: predicate)
-
+        
 //        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
 
         self.publicDB.perform(query, inZoneWith: nil) { results, error in
