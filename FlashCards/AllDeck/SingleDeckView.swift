@@ -66,7 +66,7 @@ struct SingleDeckView: View {
                                 .bold()
                                 .padding(.leading, UIScreen.main.bounds.size.width * 0.08)
                             Spacer()
-                            Image(systemName: "clock")
+                            Image(systemName: "alarm")
                                 .padding(.trailing, UIScreen.main.bounds.size.width * 0.08)
                         }
                         Spacer()
