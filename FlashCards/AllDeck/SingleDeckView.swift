@@ -40,39 +40,57 @@ struct SingleDeckView: View {
     }
     
     var body: some View {
-        Button {
-            //action
-        } label: {
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(bottomCardColor)
-                    .frame(width: UIScreen.main.bounds.width * 0.270, height: UIScreen.main.bounds.height * 0.2)
-                    .shadow(radius: 10)
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(middleCardColor)
-                    .frame(width: UIScreen.main.bounds.width * 0.285, height: UIScreen.main.bounds.height * 0.2)
-                    .padding(.bottom, UIScreen.main.bounds.height * 0.015)
-                    .shadow(radius: 10)
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(topCardColor)
-                    .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.height * 0.2)
-                    .padding(.bottom, UIScreen.main.bounds.height * 0.030)
-                    .shadow(radius: 10)
-                VStack {
-                    Spacer()
-                    Text("High importance")
-                        .font(.caption)
-                    Spacer()
-                        .font(.title)
-                    Text("\(deck.title ?? "No title")")
-                    Spacer()
-                    Text("Remembered")
-                        .font(.caption)
-                    Text("77% easily")
-                        .font(.caption)
-                    Spacer()
-                    HStack {
+        ZStack {
+            Button {
+                print("deck")
+            } label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(bottomCardColor)
+                        .frame(width: UIScreen.main.bounds.width * 0.270, height: UIScreen.main.bounds.height * 0.2)
+                        .shadow(radius: 10)
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(middleCardColor)
+                        .frame(width: UIScreen.main.bounds.width * 0.285, height: UIScreen.main.bounds.height * 0.2)
+                        .padding(.bottom, UIScreen.main.bounds.height * 0.015)
+                        .shadow(radius: 10)
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(topCardColor)
+                        .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.height * 0.2)
+                        .padding(.bottom, UIScreen.main.bounds.height * 0.030)
+                        .shadow(radius: 10)
+                    VStack {
                         Spacer()
+                        Text("High importance")
+                            .font(.caption)
+                        Spacer()
+                            .font(.title)
+                        Text("\(deck.title ?? "No title")")
+                        Spacer()
+                        Text("Remembered")
+                            .font(.caption)
+                        Text("77% easily")
+                            .font(.caption)
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Text("120 cards")
+                                .font(.caption)
+                                .padding(.trailing, UIScreen.main.bounds.size.width * 0.07)
+                        }
+                        Spacer()
+                    }
+                    .padding(.bottom, UIScreen.main.bounds.height * 0.030)
+                    .foregroundColor(Color.black)
+                }
+            }
+            .frame(width: UIScreen.main.bounds.width * 0.40, height: UIScreen.main.bounds.height * 0.25)
+            VStack {
+                Spacer()
+                HStack {
+                    Button {
+                        print("...")
+                    } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
                                 .foregroundColor(.gray)
@@ -82,17 +100,12 @@ struct SingleDeckView: View {
                                 .foregroundColor(.black)
                         }
                         .frame(width: UIScreen.main.bounds.width * 0.08, height: UIScreen.main.bounds.width * 0.08)
-                        Text("120 cards")
-                            .font(.caption)
-                        Spacer()
                     }
                     Spacer()
                 }
-                .padding(.bottom, UIScreen.main.bounds.height * 0.030)
-                .foregroundColor(Color.black)
             }
+            .frame(width: UIScreen.main.bounds.width * 0.23, height: UIScreen.main.bounds.height * 0.15)
         }
-        .frame(width: UIScreen.main.bounds.width * 0.40, height: UIScreen.main.bounds.height * 0.25)
     }
 }
 
