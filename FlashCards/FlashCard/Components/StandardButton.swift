@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StandartButton: View {
+struct StandardButton: View {
     let screenSize: CGSize = UIScreen.main.bounds.size
     var body: some View {
         ZStack {
@@ -22,8 +22,8 @@ struct StandartButton: View {
     }
 }
 
-struct StandartButton_Previews: PreviewProvider {
+struct StandardButton_Previews: PreviewProvider {
     static var previews: some View {
-        StandartButton()
+        StandardButton()
     }
 }
