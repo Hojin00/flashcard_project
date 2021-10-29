@@ -91,15 +91,7 @@ struct SingleDeckView: View {
                     Button {
                         print("...")
                     } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 5)
-                                .foregroundColor(.gray)
-                                .shadow(radius: 3)
-                                .opacity(0.5)
-                            Image(systemName: "ellipsis")
-                                .foregroundColor(.black)
-                        }
-                        .frame(width: UIScreen.main.bounds.width * 0.08, height: UIScreen.main.bounds.width * 0.08)
+                        StandardButton()
                     }
                     Spacer()
                 }
