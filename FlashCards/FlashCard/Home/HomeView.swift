@@ -73,14 +73,16 @@ struct HomeView: View {
                                     }
                                 }
                             }
-                            
-                           
-                            
+                        
+                            .background(Color.red)
+                        
                             Button {
                                 print("new deck")
                             } label : {
                                 ZStack {
                                     Image("buttonNewDeck")
+                                        .frame(width: 23, height: 24)
+                                        
                                     HStack(alignment: .center, spacing: 0.0) {
                                         Text("New \n Deck")
                                             .font(.system(size: 16.0))
@@ -97,10 +99,13 @@ struct HomeView: View {
                                     }
                                     .offset(x: /*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/, y:  -10)
                                 }
+                                
                             }
+                            .padding()
+                            
                             //Spacer()
                         }
-                        .padding(-2.0)
+                        //.padding(-2.0)
                         
                         HStack(){
                             ForEach(0..<10){ i in
@@ -146,9 +151,31 @@ struct HomeView: View {
             Divider()
                 .frame(height: 10)
             VStack{
-                HorizontalScrollView()
+                GeometryReader{ reader in
+                    let screenSize = reader.size
+                    deckCarousel(reader: reader)
+                }
+                .frame( maxWidth: .infinity,  maxHeight: .infinity)
+                
             }
+            
         }
+    }
+    func deckCarousel(reader: GeometryProxy) -> some View{
+        let screenSize =  reader.size
+        let itemWidth: CGFloat = screenSize.width * 0.62
+        let paddingX: CGFloat = (screenSize.width - itemWidth) / 2
+        return ScrollView(.horizontal,showsIndicators: false) {
+            HStack{
+                ForEach(0..<10) { i in
+                    EmptyView()
+                    HorizontalScrollView(screenSize: screenSize, width: itemWidth, paddingX: paddingX)
+                }
+            }
+            .padding(.horizontal, paddingX)
+        }
+        //.padding(.horizontal)
+        
     }
 }
 
