@@ -11,6 +11,7 @@ struct EditDeckView: View {
     
     @State var text: String = ""
     @State var isAlarmOn: Bool = true
+    @State var currentDate = Date()
     
     var body: some View {
         ZStack {
@@ -74,26 +75,31 @@ struct EditDeckView: View {
                                 Text("Alarm")
                                     .fontWeight(.bold)
                             }
-                            .padding()
+                            .padding(.horizontal)
                             HStack {
-                                Text("Alarm date and time")
-                                    .fontWeight(.bold)
+                                VStack {
+                                    Text("Alarm date")
+                                        .fontWeight(.bold)
+                                    Text("and time")
+                                        .fontWeight(.bold)
+                                }
                                 Spacer()
-                                Text("???")
+                                DatePicker("", selection: $currentDate)
                             }
                             .padding()
                             HStack {
-                                Text("Repeat every")
+                                Text("Repeat")
                                     .fontWeight(.bold)
+                                    .padding(.leading)
                                 Spacer()
-                                Text("???")
+                                WeekdayPickerView()
                             }
                             .padding()
                             HStack {
                                 Text("End repeat")
                                     .fontWeight(.bold)
                                 Spacer()
-                                Text("???")
+                                DatePicker("", selection: $currentDate)
                             }
                             .padding()
                             Divider()

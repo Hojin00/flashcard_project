@@ -13,7 +13,7 @@ struct ContentView: View {
     let deck = Deck.init(record: CKRecord.init(recordType: "Deck"))
     
     var body: some View {
-        HomeView()
+        EditDeckView()
     }
 }
 
