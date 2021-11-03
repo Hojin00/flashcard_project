@@ -9,17 +9,17 @@ import Foundation
 import CloudKit
 import SwiftUI
 
-class CloudKitManager {
+class CloudKitManager: ObservableObject {
     
     let publicDB = CKContainer.default().publicCloudDatabase
     
     static let shared: CloudKitManager = CloudKitManager()
     
+    @Published var allDecks: [Deck] = []
+    
     // MARK: TODO
     // duplicate FlashCard
     // duplicate Deck
-    // UpdateFlashCard
-    // UpdateDeck
     
     
     func createFlashCard(flashCard: CKRecord) {
@@ -197,6 +197,7 @@ class CloudKitManager {
             completionQueue.async {
 
                 completion(.success(decks))
+                self.allDecks = decks
 
             }
         }

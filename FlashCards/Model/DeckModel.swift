@@ -8,7 +8,8 @@
 import Foundation
 import CloudKit
 
-struct Deck: Hashable {
+struct Deck: Hashable, Identifiable {
+    var id: CKRecord.ID
     var myrecord: CKRecord
     var flashcards: [CKRecord.Reference]?
     var title: String?
@@ -16,7 +17,7 @@ struct Deck: Hashable {
     var reminderDate: Date?
 
     init(myrecord: CKRecord, flashcards: [CKRecord.Reference]?, title: String?, category: String?, reminderDate: Date?) {
-
+        self.id = myrecord.recordID
         self.myrecord = myrecord
         self.flashcards = flashcards
         self.title = title
@@ -31,6 +32,7 @@ struct Deck: Hashable {
     }
 
     init(record: CKRecord) {
+        self.id = record.recordID
         self.myrecord = record
         self.flashcards = record["flashCardList"]
         self.title = record["title"]

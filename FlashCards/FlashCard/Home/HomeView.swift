@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+    @EnvironmentObject private var cloudkitManager: CloudKitManager
     @State var sortKey = 0
     
     var options = ["Last Seen", "Hardest","Alphabet","Biggest"]
+    @State var auxDeckLists: [Deck] = []
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -81,8 +83,6 @@ struct HomeView: View {
                                     }
                                 }
                                 
-                                //.background(Color.red)
-                                
                                 Button {
                                     print("new deck")
                                 } label : {
@@ -110,51 +110,23 @@ struct HomeView: View {
                                 }
                                 .padding()
                                 
-                                //Spacer()
                             }
-                            //.padding(-2.0)
                             
                             HStack(){
-                                ForEach(0..<10){ i in
+                                ForEach(cloudkitManager.allDecks){ i in
                                     EmptyView()
                                     Button {
                                         //action
+                                        print(i.title)
                                     } label: {
-                                        ZStack {
-                                            //Image("AllDecksDeckBackground")
-                                            //    .padding(.top, UIScreen.main.bounds.height * 0.1)
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .foregroundColor(Color.red)
-                                                .frame(width: UIScreen.main.bounds.width * 0.270, height: UIScreen.main.bounds.height * 0.2)
-                                                .shadow(radius: 10)
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .foregroundColor(Color.blue)
-                                                .frame(width: UIScreen.main.bounds.width * 0.285, height: UIScreen.main.bounds.height * 0.2)
-                                                .padding(.bottom, UIScreen.main.bounds.height * 0.015)
-                                                .shadow(radius: 10)
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .foregroundColor(Color.green)
-                                                .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.height * 0.2)
-                                                .padding(.bottom, UIScreen.main.bounds.height * 0.030)
-                                                .shadow(radius: 10)
-                                            VStack {
-                                                Text("+")
-                                                    .font(.title)
-                                                Text("Algum deck")
-                                            }
-                                            .padding(.bottom, UIScreen.main.bounds.height * 0.030)
-                                            .foregroundColor(Color.black)
-                                        }
+                                        SingleDeckView(deck: i)
                                     }
                                     .frame(width: UIScreen.main.bounds.width * 0.35, height: UIScreen.main.bounds.height * 0.25)
                                 }
                             }
-                            
                         }
                     }
-                    
-                    
-                }//.background(Color(hue: 0.739, saturation: 0.422, brightness: 0.585))
+                }
                 Divider()
                     .frame(height: 10)
                 VStack{
@@ -165,9 +137,30 @@ struct HomeView: View {
                     .frame( maxWidth: .infinity,  maxHeight: .infinity)
                     
                 }
-                
             }
         }
+        .onAppear() {
+            cloudkitManager.fetchAllDecks { Result in
+                switch Result {
+                case .success:
+                    print("success")
+                case .failure:
+                    print("fail")
+                }
+            }
+        }
+    }
+    func getAllDecks() -> [Deck]{
+        var auxDeck: [Deck] = []
+        cloudkitManager.fetchAllDecks { Result in
+            switch Result {
+            case .success(let decks):
+                auxDeck = decks
+            case .failure:
+                print("no decks")
+            }
+        }
+        return auxDeck
     }
     func deckCarousel(reader: GeometryProxy) -> some View{
         let screenSize =  reader.size
