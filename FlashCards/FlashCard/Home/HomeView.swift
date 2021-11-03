@@ -60,8 +60,6 @@ struct HomeView: View {
                         HStack(alignment: .center){
                             
                             VStack(){
-                                
-                                //Spacer()
                                 Button {
                                     print("new card")
                                 } label: {
@@ -108,7 +106,7 @@ struct HomeView: View {
                                     }
                                     
                                 }
-                                .padding()
+                                .padding(UIScreen.main.bounds.size.height * 0.038)
                                 
                             }
                             
