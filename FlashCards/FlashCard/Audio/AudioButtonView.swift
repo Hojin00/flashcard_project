@@ -55,7 +55,7 @@ struct AudioButtonView: View {
                 
                 Button("create flashcard") {
                     
-                    let auxFlashCard = FlashCard.init(myrecord: auxRecord, frontSideText: "frontText", frontSideImage: nil, backSideText: "backText", backSideImage: nil, category: "category", frontSideAudio: recordAudio, backSideAudio: nil)
+                    let auxFlashCard = FlashCard.init(myrecord: auxRecord, frontSideText: "frontText", frontSideImage: nil, backSideText: "backText", backSideImage: nil, category: "category", frontSideAudio: recordAudio, backSideAudio: nil, frontSideColor: nil, backSideColor: nil)
                     
                     CloudKitManager.shared.createFlashCard(flashCard: auxFlashCard.myrecord)
                     

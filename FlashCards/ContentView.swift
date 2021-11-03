@@ -9,25 +9,16 @@ import SwiftUI
 import CloudKit
 import UIKit
 
-
-
 struct ContentView: View {
-
+    let deck = Deck.init(record: CKRecord.init(recordType: "Deck"))
     
     var body: some View {
-        Text("Hello World")
+        AllDecksView(decks: [deck, deck, deck, deck])
     }
 }
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
-
-
-
-
-

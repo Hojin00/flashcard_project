@@ -24,6 +24,10 @@
 		B40C7A2627176FCF00B818C9 /* FlashCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A2527176FCF00B818C9 /* FlashCardModel.swift */; };
 		B40C7A28271774EB00B818C9 /* DeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C7A27271774EB00B818C9 /* DeckModel.swift */; };
 		B446F3E22718BA4600BF4214 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B446F3E12718BA4600BF4214 /* NotificationManager.swift */; };
+		B481C6CE2732FF880053998C /* NewDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B481C6CA2732FF880053998C /* NewDeckView.swift */; };
+		B481C6CF2732FF880053998C /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B481C6CB2732FF880053998C /* EmptyView.swift */; };
+		B481C6D02732FF880053998C /* SingleDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B481C6CC2732FF880053998C /* SingleDeckView.swift */; };
+		B481C6D12732FF880053998C /* AllDecksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B481C6CD2732FF880053998C /* AllDecksView.swift */; };
 		B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C983271768D500066FE2 /* FlashCardsApp.swift */; };
 		B499C986271768D500066FE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C985271768D500066FE2 /* ContentView.swift */; };
 		B499C988271768D600066FE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C987271768D600066FE2 /* Assets.xcassets */; };
@@ -55,6 +59,10 @@
 		B40C7A27271774EB00B818C9 /* DeckModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckModel.swift; sourceTree = "<group>"; };
 		B446F3E12718BA4600BF4214 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		B446F3E32718BA6800BF4214 /* FlashCards.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = FlashCards.entitlements; path = FlashCards/FlashCards.entitlements; sourceTree = SOURCE_ROOT; };
+		B481C6CA2732FF880053998C /* NewDeckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDeckView.swift; sourceTree = "<group>"; };
+		B481C6CB2732FF880053998C /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		B481C6CC2732FF880053998C /* SingleDeckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleDeckView.swift; sourceTree = "<group>"; };
+		B481C6CD2732FF880053998C /* AllDecksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllDecksView.swift; sourceTree = "<group>"; };
 		B499C980271768D500066FE2 /* FlashCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B499C983271768D500066FE2 /* FlashCardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardsApp.swift; sourceTree = "<group>"; };
 		B499C985271768D500066FE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -162,6 +170,7 @@
 			children = (
 				ECCDD0EB272B3AC900BACCAD /* Components */,
 				ECD1DF4A2723331C00838CC9 /* Deck */,
+				B481C6C92732FF880053998C /* AllDeck */,
 				B2DB291A2721DA0800E914B8 /* Card */,
 				B2FA34182721D452003683F9 /* Notification */,
 				B2FA341327209AEB003683F9 /* Audio */,
@@ -169,6 +178,17 @@
 				B40756A427176A4800B29D34 /* Share */,
 			);
 			path = FlashCard;
+			sourceTree = "<group>";
+		};
+		B481C6C92732FF880053998C /* AllDeck */ = {
+			isa = PBXGroup;
+			children = (
+				B481C6CA2732FF880053998C /* NewDeckView.swift */,
+				B481C6CB2732FF880053998C /* EmptyView.swift */,
+				B481C6CC2732FF880053998C /* SingleDeckView.swift */,
+				B481C6CD2732FF880053998C /* AllDecksView.swift */,
+			);
+			path = AllDeck;
 			sourceTree = "<group>";
 		};
 		B499C977271768D500066FE2 = {
@@ -311,10 +331,14 @@
 				B2FA341527209B02003683F9 /* AudioButtonView.swift in Sources */,
 				B446F3E22718BA4600BF4214 /* NotificationManager.swift in Sources */,
 				B499C986271768D500066FE2 /* ContentView.swift in Sources */,
+				B481C6D12732FF880053998C /* AllDecksView.swift in Sources */,
 				ECCDD0ED272B3AE700BACCAD /* StandardButton.swift in Sources */,
 				B2DB291D2721DA0800E914B8 /* CardFlipView.swift in Sources */,
+				B481C6D02732FF880053998C /* SingleDeckView.swift in Sources */,
 				CDE836312718AA01001309D8 /* SearchView.swift in Sources */,
+				B481C6CF2732FF880053998C /* EmptyView.swift in Sources */,
 				B22EE4CC272094BD00849D9C /* AudioRecorder.swift in Sources */,
+				B481C6CE2732FF880053998C /* NewDeckView.swift in Sources */,
 				B2FB98152719F007002AC06B /* URLManager.swift in Sources */,
 				B22EE4C6271DFC3300849D9C /* UserDefaultManager.swift in Sources */,
 				B2FA341727209B76003683F9 /* RecordingsListView.swift in Sources */,
