@@ -172,6 +172,7 @@
 				B2FA34182721D452003683F9 /* Notification */,
 				B2FA341327209AEB003683F9 /* Audio */,
 				B2FB981D271A1076002AC06B /* Search */,
+				B44F1F9327209B570031F076 /* AllDeck */,
 				B40756A427176A4800B29D34 /* Share */,
 			);
 			path = FlashCard;
@@ -211,7 +212,6 @@
 				B2FB98122718AA0E002AC06B /* Info.plist */,
 				B40756A327176A3C00B29D34 /* Model */,
 				B40756A527176A5C00B29D34 /* FlashCard */,
-				B44F1F9327209B570031F076 /* AllDeck */,
 				B446F3E32718BA6800BF4214 /* FlashCards.entitlements */,
 				B499C983271768D500066FE2 /* FlashCardsApp.swift */,
 				B499C985271768D500066FE2 /* ContentView.swift */,
