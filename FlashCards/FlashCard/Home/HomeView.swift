@@ -159,7 +159,6 @@ struct HomeView: View {
                     .frame(height: 10)
                 VStack{
                     GeometryReader{ reader in
-                        let screenSize = reader.size
                         deckCarousel(reader: reader)
                     }
                     .frame( maxWidth: .infinity,  maxHeight: .infinity)
