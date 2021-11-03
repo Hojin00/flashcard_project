@@ -14,8 +14,6 @@ struct NewDeckView: View {
             //action
         } label: {
             ZStack {
-                //Image("AllDecksDeckBackground")
-                //    .padding(.top, UIScreen.main.bounds.height * 0.1)
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(Color.white)
                     .frame(width: UIScreen.main.bounds.width * 0.270, height: UIScreen.main.bounds.height * 0.2)

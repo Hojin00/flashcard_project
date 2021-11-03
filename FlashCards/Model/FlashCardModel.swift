@@ -20,8 +20,10 @@ struct FlashCard: Hashable {
     var category: String?
     var frontSideAudio: CKAsset?
     var backSideAudio: CKAsset?
+    var frontSideColor: CKAsset?
+    var backSideColor: CKAsset?
 
-    init(myrecord: CKRecord, frontSideText: String?, frontSideImage: CKAsset?, backSideText: String?, backSideImage: CKAsset?, category: String?, frontSideAudio: CKAsset?, backSideAudio: CKAsset?) {
+    init(myrecord: CKRecord, frontSideText: String?, frontSideImage: CKAsset?, backSideText: String?, backSideImage: CKAsset?, category: String?, frontSideAudio: CKAsset?, backSideAudio: CKAsset?, frontSideColor: CKAsset?, backSideColor: CKAsset?) {
 
         self.myrecord = myrecord
         self.frontSideText = frontSideText
@@ -31,6 +33,8 @@ struct FlashCard: Hashable {
         self.category = category
         self.frontSideAudio = frontSideAudio
         self.backSideAudio = backSideAudio
+        self.frontSideColor = frontSideColor
+        self.backSideColor = backSideColor
 
         myrecord["frontSideText"] = frontSideText
         myrecord["backSideText"] = backSideText
