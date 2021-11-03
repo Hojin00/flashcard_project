@@ -9,25 +9,15 @@ import SwiftUI
 import CloudKit
 import UIKit
 
-
-
 struct ContentView: View {
-    
-    
+
     var body: some View {
-        AudioButtonView()
+        HomeView()
     }
 }
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
-
-
-
-
-

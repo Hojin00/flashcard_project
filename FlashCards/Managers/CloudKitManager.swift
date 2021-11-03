@@ -10,11 +10,13 @@ import CloudKit
 import SwiftUI
 import UIKit
 
-class CloudKitManager {
+class CloudKitManager: ObservableObject {
     
     let publicDB = CKContainer.default().publicCloudDatabase
     
     static let shared: CloudKitManager = CloudKitManager()
+    
+    @Published var allDecks: [Deck] = []
     
     // MARK: TODO
     // duplicate FlashCard
@@ -192,6 +194,7 @@ class CloudKitManager {
             completionQueue.async {
 
                 completion(.success(decks))
+                self.allDecks = decks
 
             }
         }
