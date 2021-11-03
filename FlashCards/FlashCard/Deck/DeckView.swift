@@ -162,15 +162,26 @@ struct CardPreview: View {
                 VStack {
                     VStack {
                         Spacer()
-                        Text("High importance")
-                            .font(.caption)
+                        HStack {
+                            CardStatusView(status: .exclamation, opacity: 1)
+                                .padding(.leading, screenSize.width * 0.03)
+                                .padding(.bottom, screenSize.width * 0.04)
+                                .padding(.top, screenSize.width * -0.04)
+                            Spacer()
+                            CardStatusView(status: .clock, opacity: 1)
+                                .padding(.trailing, screenSize.width * 0.03)
+                                .padding(.bottom, screenSize.width * 0.04)
+                                .padding(.top, screenSize.width * -0.04)
+                        }
+//                        Text("High importance")
+//                            .font(.caption)
+//                            .padding(.bottom, screenSize.width * 0.07)
                         Text("\(deck?.title ?? "Deck title here if to big ooooooooo")")
                             .fixedSize(horizontal: false, vertical: true)
                             .lineLimit(2)
                             .padding(.vertical, screenSize.width * 0.01)
                             .padding(.horizontal, screenSize.width * 0.015)
-                        Text("Remembered")
-                            .font(.caption)
+                        
                         Text("77% easily")
                             .font(.caption)
                         Spacer()
