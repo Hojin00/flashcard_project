@@ -29,6 +29,7 @@ struct EditDeckView: View {
                         //to do
                     } label: {
                         Text("Cancel")
+                            .foregroundColor(.black)
                     }
                     
                 }
