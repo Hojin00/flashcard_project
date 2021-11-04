@@ -10,7 +10,7 @@ import Foundation
 class UserDefaultManager {
     
     static let shared: UserDefaultManager = UserDefaultManager()
-    var userDecks = [Deck]()
+    var userDecks = [flashCardMock]()
     
 //    func saveUserDecks() {
 //        let encoder = JSONEncoder()

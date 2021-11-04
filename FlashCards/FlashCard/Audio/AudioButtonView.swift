@@ -62,7 +62,7 @@ struct AudioButtonView: View {
                 }
                 Button("create deck") {
                     
-                    let auxDeck = Deck.init(myrecord: auxRecord2, flashcards: FlashCardReferenceList, title: "deck title", category: "deck category", reminderDate: Date())
+                    let auxDeck = flashCardMock.init(myrecord: auxRecord2, flashcards: FlashCardReferenceList, title: "deck title", category: "deck category", reminderDate: Date())
                     
                     CloudKitManager.shared.createDeck(deck: auxDeck.myrecord)
                     

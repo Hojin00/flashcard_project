@@ -10,7 +10,7 @@ import CloudKit
 import UIKit
 
 struct ContentView: View {
-    let deck = Deck.init(record: CKRecord.init(recordType: "Deck"))
+    let deck = flashCardMock.init(record: CKRecord.init(recordType: "Deck"))
     
     var body: some View {
        SlideView()

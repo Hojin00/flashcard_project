@@ -9,20 +9,23 @@ import SwiftUI
 
 struct CardViewSlide: View {
     @State private var translation: CGSize = .zero
-    @State private var swipeStatus: LikeDislike = .none
+    @State private var swipeStatus: EasyHard = .none
     
-    private var user: Deck
-    private var onRemove: (_ user: Deck) -> Void
+    private var card: FlashCardMock
+    private var onRemove: (_ user: FlashCardMock) -> Void
     
-    private var thresholdPercentage: CGFloat = 0.5 // when the user has draged 50% the width of the screen in either direction
+
     
-    private enum LikeDislike: Int {
-        case like, dislike, none
+    private var thresholdPercentage: CGFloat = 0.20 // when the user has draged 35% the width of the screen in either direction
+    
+    private enum EasyHard: Int {
+        case easy, hard, none
     }
     
-    init(user: Deck, onRemove: @escaping (_ user: Deck) -> Void) {
-        self.user = user
+    init(card: FlashCardMock, onRemove: @escaping (_ card: FlashCardMock) -> Void) {
+        self.card = card
         self.onRemove = onRemove
+        
     }
     
     /// What percentage of our own width have we swipped
@@ -35,87 +38,109 @@ struct CardViewSlide: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack(alignment: .leading) {
-                 ZStack(alignment: self.swipeStatus == .like ? .topLeading : .topTrailing) {
-                    Image(self.user.imageName)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
-                        .clipped()
-                    
-                    if self.swipeStatus == .like {
-                        Text("LIKE")
-                            .font(.headline)
-                            .padding()
-                            .cornerRadius(10)
-                            .foregroundColor(Color.green)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.green, lineWidth: 3.0)
-                        ).padding(24)
-                            .rotationEffect(Angle.degrees(-45))
-                    } else if self.swipeStatus == .dislike {
-                        Text("DISLIKE")
-                            .font(.headline)
-                            .padding()
-                            .cornerRadius(10)
-                            .foregroundColor(Color.red)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.red, lineWidth: 3.0)
-                        ).padding(.top, 45)
-                            .rotationEffect(Angle.degrees(45))
-                    }
-                }
+            
+            ZStack(alignment: self.swipeStatus == .easy ? .topLeading : .topTrailing) {
                 
-                HStack {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("\(self.user.firstName)")
-                            .font(.title)
-                            .bold()
-//                        Text(self.user.occupation)
-//                            .font(.subheadline)
-//                            .bold()
-//                        Text("\(self.user.mutualFriends) Mutual Friends")
-//                            .font(.subheadline)
-//                            .foregroundColor(.gray)
-                    }
+//                     Image(self.card.frontSideImage ?? "")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fill)
+//                        .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
+//                        .clipped()
+               
+               if self.swipeStatus == .easy {
+                   Text("EASY")
+                       .font(.headline)
+                       
+                       .padding()
+                       .background(Color.green)
+                       .cornerRadius(10)
+                       .foregroundColor(Color.white)
+                       
+                       .overlay(
+                           RoundedRectangle(cornerRadius: 10)
+                               .stroke(Color.green, lineWidth: 3.0)
+                   ).padding(24)
+                       .rotationEffect(Angle.degrees(-45))
+               } else if self.swipeStatus == .hard {
+                   Text("DISLIKE")
+                       .font(.headline)
+                       
+                       .padding()
+                       .background(Color.red)
+                       .cornerRadius(10)
+                       .foregroundColor(Color.white)
+                       
+                       .overlay(
+                           RoundedRectangle(cornerRadius: 10)
+                               .stroke(Color.red, lineWidth: 3.0)
+                   ).padding(.top, 45)
+                       .rotationEffect(Angle.degrees(45))
+               }
+                VStack {
+                     
+                    HStack{
+                        Text("12/40")
+                            .font(.caption)
+                        
                     Spacer()
-                    
-                    Image(systemName: "info.circle")
-                        .foregroundColor(.gray)
-                }
-                .padding(.horizontal)
-            }
-            .padding(.bottom)
-            .background(Color.white)
-            .cornerRadius(10)
-            .shadow(radius: 5)
-            .animation(.interactiveSpring())
-            .offset(x: self.translation.width, y: 0)
-            .rotationEffect(.degrees(Double(self.translation.width / geometry.size.width) * 25), anchor: .bottom)
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        self.translation = value.translation
-                        
-                        if (self.getGesturePercentage(geometry, from: value)) >= self.thresholdPercentage {
-                            self.swipeStatus = .like
-                        } else if self.getGesturePercentage(geometry, from: value) <= -self.thresholdPercentage {
-                            self.swipeStatus = .dislike
-                        } else {
-                            self.swipeStatus = .none
-                        }
-                        
-                }.onEnded { value in
-                    // determine snap distance > 0.5 aka half the width of the screen
-                        if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
-                            self.onRemove(self.user)
-                        } else {
-                            self.translation = .zero
-                        }
+                        Text("High")
+                            .font(.caption)
+
                     }
-            )
+                    .padding(.horizontal)
+                                        
+                    
+                        VStack(alignment: .center) {
+                            Text("\(self.card.frontSideText ?? "") PUDIM")
+                                .font(.title)
+                                .bold()
+    //                        Text(self.user.occupation)
+    //                            .font(.subheadline)
+    //                            .bold()
+    //                        Text("\(self.user.mutualFriends) Mutual Friends")
+    //                            .font(.subheadline)
+    //                            .foregroundColor(.gray)
+                        }
+                    VStack{
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color.red)
+                            .frame(width: 200, height: 200)
+
+                    }
+
+                }
+                .padding(.bottom)
+                .background(Color.white)
+                .cornerRadius(10)
+                .shadow(radius: 5)
+                .animation(.interactiveSpring())
+                .offset(x: self.translation.width, y: 0)
+                .rotationEffect(.degrees(Double(self.translation.width / geometry.size.width) * 25), anchor: .bottom)
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            self.translation = value.translation
+                            
+                            if (self.getGesturePercentage(geometry, from: value)) >= self.thresholdPercentage {
+                                self.swipeStatus = .easy
+                            } else if self.getGesturePercentage(geometry, from: value) <= -self.thresholdPercentage {
+                                self.swipeStatus = .hard
+                            } else {
+                                self.swipeStatus = .none
+                            }
+                            
+                    }.onEnded { value in
+                        // determine snap distance > 0.5 aka half the width of the screen
+                            if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
+                                self.onRemove(self.card)
+                            } else {
+                                self.translation = .zero
+                            }
+                        }
+                )
+           }
+            
+            
         }
     }
 }
@@ -123,7 +148,7 @@ struct CardViewSlide: View {
 // 7
 struct CardViewSlide_Previews: PreviewProvider {
     static var previews: some View {
-        CardViewSlide(user: Deck(id: 1, firstName: "", imageName: ""),
+        CardViewSlide(card: FlashCardMock(id: 01, frontSideText: "", frontSideImage: "", backSideText: "", backSideImage: "", category: "", frontSideAudio: "", backSideAudio: "", frontSideColor: "", backSideColor: ""),
                  onRemove: { _ in
                     // do nothing
             })

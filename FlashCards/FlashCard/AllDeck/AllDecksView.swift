@@ -10,10 +10,10 @@ import CloudKit
 
 struct AllDecksView: View {
     
-    var decks: [Deck]
+    var decks: [flashCardMock]
     @State private var searchText: String = ""
     
-    init(decks: [Deck]) {
+    init(decks: [flashCardMock]) {
         self.decks = decks
     }
     
@@ -80,6 +80,6 @@ struct AllDecksView: View {
 
 struct AllDecksView_Previews: PreviewProvider {
     static var previews: some View {
-        AllDecksView(decks: [Deck.init(record: CKRecord.init(recordType: "Deck"))])
+        AllDecksView(decks: [flashCardMock.init(record: CKRecord.init(recordType: "Deck"))])
     }
 }

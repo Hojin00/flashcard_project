@@ -7,31 +7,28 @@
 
 import SwiftUI
 
-struct Deck: Hashable, CustomStringConvertible {
+struct FlashCardMock: Hashable  {
+    //var description: String
+    
     var id: Int
     
-    let firstName: String
-   let imageName: String
-    var description: String {
-        return "\(firstName), id: \(id)"
-    }
+    var frontSideText: String?
+    var frontSideImage: String?
+    var backSideText: String?
+    var backSideImage: String?
+    var category: String?
+    var frontSideAudio: String?
+    var backSideAudio: String?
+    var frontSideColor: String?
+    var backSideColor: String?
+    
 }
-
-
 
 struct SlideView: View {
     /// List of users EXEMPLO TROCAR DEPOIS POR FLASH CARD
-    @State var users: [Deck] = [
-        Deck(id: 0, firstName: "",imageName: ""),
-        Deck(id: 1, firstName: "",imageName: ""),
-        Deck(id: 2, firstName: "",imageName: ""),
-        Deck(id: 3, firstName: "",imageName: ""),
-        Deck(id: 4, firstName: "",imageName: ""),
-        Deck(id: 5, firstName: "",imageName: ""),
-        Deck(id: 6, firstName: "",imageName: ""),
-        Deck(id: 7, firstName: "",imageName: ""),
-        Deck(id: 8, firstName: "",imageName: ""),
-        Deck(id: 9, firstName: "",imageName: "")
+    @State var cards: [FlashCardMock] = [
+        FlashCardMock(id: 01, frontSideText: "", frontSideImage: "", backSideText: "", backSideImage: "", category: "", frontSideAudio: "", backSideAudio: "", frontSideColor: "", backSideColor: ""), FlashCardMock(id: 02, frontSideText: "", frontSideImage: "", backSideText: "", backSideImage: "", category: "", frontSideAudio: "", backSideAudio: "", frontSideColor: "", backSideColor: ""), FlashCardMock(id: 03, frontSideText: "", frontSideImage: "", backSideText: "", backSideImage: "", category: "", frontSideAudio: "", backSideAudio: "", frontSideColor: "", backSideColor: ""), FlashCardMock(id: 04, frontSideText: "", frontSideImage: "", backSideText: "", backSideImage: "", category: "", frontSideAudio: "", backSideAudio: "", frontSideColor: "", backSideColor: ""),
+    
     ]
     
     /// Return the CardViews width for the given offset in the array
@@ -39,8 +36,12 @@ struct SlideView: View {
     ///   - geometry: The geometry proxy of the parent
     ///   - id: The ID of the current user
     private func getCardWidth(_ geometry: GeometryProxy, id: Int) -> CGFloat {
-        let offset: CGFloat = CGFloat(users.count - 1 - id) * 20
+        let offset: CGFloat = CGFloat(cards.count - 1 - id)
         return geometry.size.width - offset
+    }
+    private func getCardHeight(_ geometry: GeometryProxy, id: Int) -> CGFloat {
+        let offset: CGFloat = CGFloat(cards.count - 1 - id)
+        return geometry.size.height - offset
     }
     
     /// Return the CardViews frame offset for the given offset in the array
@@ -48,11 +49,11 @@ struct SlideView: View {
     ///   - geometry: The geometry proxy of the parent
     ///   - id: The ID of the current user
     private func getCardOffset(_ geometry: GeometryProxy, id: Int) -> CGFloat {
-        return  CGFloat(users.count - 5 - id) * -10
+        return  CGFloat(cards.count - 5 - id) * -10
     }
     
     private var maxID: Int {
-        return self.users.map { $0.id }.max() ?? 0
+        return self.cards.map { $0.id }.max() ?? 0
     }
     
     var body: some View {
@@ -65,20 +66,20 @@ struct SlideView: View {
                     .offset(x: -geometry.size.width / 4, y: -geometry.size.height / 2)
                     
                 
-                VStack(spacing: 24) {
+                VStack(alignment: .center, spacing: 0.0) {
                     //DateView()
                     ZStack {
-                        ForEach(self.users, id: \.self) { user in
+                        ForEach(self.cards, id: \.self) { card in
                             Group {
                                 // Range Operator
-                                if (self.maxID - 3)...self.maxID ~= user.id {
-                                    CardViewSlide(user: user, onRemove: { removedUser in
+                                if (self.maxID - 3)...self.maxID ~= card.id {
+                                    CardViewSlide(card: card, onRemove: { removedUser in
                                         // Remove that user from our array
-                                        self.users.removeAll { $0.id == removedUser.id }
+                                        self.cards.removeAll { $0.id == removedUser.id }
                                     })
                                         .animation(.spring())
-                                        .frame(width: self.getCardWidth(geometry, id: user.id), height: 800)
-                                        .offset(x: 0, y: self.getCardOffset(geometry, id: user.id))
+                                        .frame(width: self.getCardWidth(geometry, id: card.id), height: 500)
+                                        .offset(x: 0, y: self.getCardOffset(geometry, id: card.id))
                                 }
                             }
                         }

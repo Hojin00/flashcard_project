@@ -10,13 +10,13 @@ import CloudKit
 
 struct SingleDeckView: View {
     
-    let deck: Deck
+    let deck: flashCardMock
     var flashcards: [FlashCard] = []
     var topCardColor: Color = Color.white
     var middleCardColor: Color = Color.white
     var bottomCardColor: Color = Color.white
     
-    init(deck: Deck) {
+    init(deck: flashCardMock) {
         self.deck = deck
         self.flashcards = getFlashcards()
         //        self.topCardColor = flashcards[0].frontSideColor as! Color
@@ -109,6 +109,6 @@ struct SingleDeckView: View {
 
 struct SingleDeckView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleDeckView(deck: Deck.init(record: CKRecord.init(recordType: "Deck")))
+        SingleDeckView(deck: flashCardMock.init(record: CKRecord.init(recordType: "Deck")))
     }
 }

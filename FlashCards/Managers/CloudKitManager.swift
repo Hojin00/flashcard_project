@@ -167,7 +167,7 @@ class CloudKitManager {
         }
     }
 
-    func fetchAllDecks(completionQueue: DispatchQueue = .main, completion: @escaping (Result<[Deck], Error>) -> Void) {
+    func fetchAllDecks(completionQueue: DispatchQueue = .main, completion: @escaping (Result<[flashCardMock], Error>) -> Void) {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Deck", predicate: predicate)
 
@@ -192,7 +192,7 @@ class CloudKitManager {
                 return
             }
 
-            let decks = results.map{ Deck.init(record: $0) }
+            let decks = results.map{ flashCardMock.init(record: $0) }
             
             completionQueue.async {
 
@@ -202,7 +202,7 @@ class CloudKitManager {
         }
     }
 
-    func updateDeck(deck: Deck) {
+    func updateDeck(deck: flashCardMock) {
 
         self.publicDB.fetch(withRecordID: deck.myrecord.recordID) { updateRecord, error in
             if error == nil {
@@ -260,7 +260,7 @@ class CloudKitManager {
                 return
             }
 
-            let deck = results.map{ Deck.init(record: $0) }
+            let deck = results.map{ flashCardMock.init(record: $0) }
             
             
             for d in deck {
