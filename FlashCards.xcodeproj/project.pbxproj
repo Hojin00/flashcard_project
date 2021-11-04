@@ -41,6 +41,11 @@
 		B4F0FA25273454FE00DC8678 /* NewCardSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0FA21273454FE00DC8678 /* NewCardSideView.swift */; };
 		B4F0FA26273454FE00DC8678 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0FA22273454FE00DC8678 /* CardView.swift */; };
 		B4F0FA27273454FE00DC8678 /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0FA23273454FE00DC8678 /* NewCardView.swift */; };
+		B4F0FA2E2734570200DC8678 /* EditDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0FA292734570200DC8678 /* EditDeckView.swift */; };
+		B4F0FA2F2734570200DC8678 /* PriorityButtonList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0FA2A2734570200DC8678 /* PriorityButtonList.swift */; };
+		B4F0FA302734570200DC8678 /* WeekdayPickerSingleDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0FA2B2734570200DC8678 /* WeekdayPickerSingleDayView.swift */; };
+		B4F0FA312734570200DC8678 /* PriorityButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0FA2C2734570200DC8678 /* PriorityButtonView.swift */; };
+		B4F0FA322734570200DC8678 /* WeekdayPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F0FA2D2734570200DC8678 /* WeekdayPickerView.swift */; };
 		ECDDEC3D271DEEBA00C526C2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDDEC3C271DEEBA00C526C2 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +86,11 @@
 		B4F0FA21273454FE00DC8678 /* NewCardSideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCardSideView.swift; sourceTree = "<group>"; };
 		B4F0FA22273454FE00DC8678 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		B4F0FA23273454FE00DC8678 /* NewCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCardView.swift; sourceTree = "<group>"; };
+		B4F0FA292734570200DC8678 /* EditDeckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDeckView.swift; sourceTree = "<group>"; };
+		B4F0FA2A2734570200DC8678 /* PriorityButtonList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriorityButtonList.swift; sourceTree = "<group>"; };
+		B4F0FA2B2734570200DC8678 /* WeekdayPickerSingleDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdayPickerSingleDayView.swift; sourceTree = "<group>"; };
+		B4F0FA2C2734570200DC8678 /* PriorityButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriorityButtonView.swift; sourceTree = "<group>"; };
+		B4F0FA2D2734570200DC8678 /* WeekdayPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdayPickerView.swift; sourceTree = "<group>"; };
 		ECDDEC3A271DEE7800C526C2 /* RecordingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingModel.swift; sourceTree = "<group>"; };
 		ECDDEC3C271DEEBA00C526C2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				B481C71C273303770053998C /* AllDeck */,
+				B4F0FA282734570200DC8678 /* EditDeck */,
 				B481C714273303770053998C /* Audio */,
 				B4F0FA1F273454FE00DC8678 /* Card */,
 				B481C721273303770053998C /* Components */,
@@ -269,6 +280,18 @@
 			path = Card;
 			sourceTree = "<group>";
 		};
+		B4F0FA282734570200DC8678 /* EditDeck */ = {
+			isa = PBXGroup;
+			children = (
+				B4F0FA292734570200DC8678 /* EditDeckView.swift */,
+				B4F0FA2A2734570200DC8678 /* PriorityButtonList.swift */,
+				B4F0FA2B2734570200DC8678 /* WeekdayPickerSingleDayView.swift */,
+				B4F0FA2C2734570200DC8678 /* PriorityButtonView.swift */,
+				B4F0FA2D2734570200DC8678 /* WeekdayPickerView.swift */,
+			);
+			path = EditDeck;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -345,6 +368,7 @@
 				B481C736273303770053998C /* StandardButton.swift in Sources */,
 				B481C738273303770053998C /* SearchView.swift in Sources */,
 				B2FB981C271A0037002AC06B /* CloudKitManager.swift in Sources */,
+				B4F0FA302734570200DC8678 /* WeekdayPickerSingleDayView.swift in Sources */,
 				B4F0FA25273454FE00DC8678 /* NewCardSideView.swift in Sources */,
 				B40C7A2627176FCF00B818C9 /* FlashCardModel.swift in Sources */,
 				B481C735273303770053998C /* CardStatusView.swift in Sources */,
@@ -365,9 +389,13 @@
 				B481C730273303770053998C /* HomeView.swift in Sources */,
 				B481C731273303770053998C /* NewDeckView.swift in Sources */,
 				B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */,
+				B4F0FA2E2734570200DC8678 /* EditDeckView.swift in Sources */,
+				B4F0FA2F2734570200DC8678 /* PriorityButtonList.swift in Sources */,
 				B481C733273303770053998C /* SingleDeckView.swift in Sources */,
 				B481C72D273303770053998C /* RecordingsListView.swift in Sources */,
 				B481C737273303770053998C /* NotificationView.swift in Sources */,
+				B4F0FA322734570200DC8678 /* WeekdayPickerView.swift in Sources */,
+				B4F0FA312734570200DC8678 /* PriorityButtonView.swift in Sources */,
 				B22EE4C8271F4A2300849D9C /* ShareManager.swift in Sources */,
 				B481C734273303770053998C /* AllDecksView.swift in Sources */,
 				B22EE4CB272094BD00849D9C /* AudioPlayer.swift in Sources */,
