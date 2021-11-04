@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WeekdayPickerView: View {
     
-    @State var selectedDays: [Bool] = [false, false, false, false, false, false, false]
+    @Binding var selectedDays: [Bool]
     
     var body: some View {
         HStack {
@@ -27,7 +27,10 @@ struct WeekdayPickerView: View {
 }
 
 struct WeekdayPickerView_Previews: PreviewProvider {
+    
+    @State static var selectedWeekdays: [Bool] = [false, false, false, false, false, false, false]
+    
     static var previews: some View {
-        WeekdayPickerView()
+        WeekdayPickerView(selectedDays: $selectedWeekdays)
     }
 }

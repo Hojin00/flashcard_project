@@ -11,7 +11,12 @@ struct EditDeckView: View {
     
     @State var text: String = ""
     @State var isAlarmOn: Bool = true
-    @State var currentDate = Date()
+    @State var startDate = Date()
+    @State var stopDate = Date()
+    @State var selectedPriority: Int = 0
+    @State var selectedWeekdays: [Bool] = [false, false, false, false, false, false, false]
+    
+    var deck: Deck
     
     var body: some View {
         ZStack {
@@ -32,7 +37,6 @@ struct EditDeckView: View {
                         Text("Cancel")
                             .foregroundColor(.black)
                     }
-                    
                 }
                 .padding(.horizontal, UIScreen.main.bounds.width * 0.27)
                     ZStack {
@@ -67,7 +71,7 @@ struct EditDeckView: View {
                                 Text("Priority")
                                     .fontWeight(.bold)
                                     .padding(.bottom, UIScreen.main.bounds.height * 0.04)
-                                PriorityButtonList()
+                                PriorityButtonList(selectedPriority: $selectedPriority)
                             }
                             Divider()
                                 .padding()
@@ -84,7 +88,7 @@ struct EditDeckView: View {
                                         .fontWeight(.bold)
                                 }
                                 Spacer()
-                                DatePicker("", selection: $currentDate)
+                                DatePicker("", selection: $startDate)
                             }
                             .padding()
                             HStack {
@@ -92,14 +96,14 @@ struct EditDeckView: View {
                                     .fontWeight(.bold)
                                     .padding(.leading)
                                 Spacer()
-                                WeekdayPickerView()
+                                WeekdayPickerView(selectedDays: $selectedWeekdays)
                             }
                             .padding()
                             HStack {
                                 Text("End repeat")
                                     .fontWeight(.bold)
                                 Spacer()
-                                DatePicker("", selection: $currentDate)
+                                DatePicker("", selection: $stopDate)
                             }
                             .padding()
                             Divider()
@@ -128,11 +132,19 @@ struct EditDeckView: View {
                 }
             }
         }
+        .onAppear {
+            text = deck.title ?? ""
+        }
     }
 }
 
+import CloudKit
+
 struct EditDeckView_Previews: PreviewProvider {
     static var previews: some View {
-        EditDeckView()
+        
+        let deck: Deck = Deck.init(record: CKRecord.init(recordType: "Deck"))
+        
+        EditDeckView(deck: deck)
     }
 }
