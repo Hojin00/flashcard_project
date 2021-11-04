@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 enum SortBy: String {
-    case lastSeen, lastUpdated, alphabet, hadest, hardest
+
+    case lastSeen, lastUpdated, alphabet, hadest, hardest, importance, importanceAlphabet,  none
     
     var id: String { self.rawValue }
-    static var emtpy: [NSSortDescriptor] { [] }
     
     func getSortBy(withAscending: Bool) -> [NSSortDescriptor] {
         switch self {
@@ -24,12 +25,12 @@ enum SortBy: String {
             return [NSSortDescriptor(key: "title", ascending: withAscending)]
         case .hardest:
             return [NSSortDescriptor(key: "hardFlashcards", ascending: withAscending)]
+        case .importance:
+            return [NSSortDescriptor(key: "importance", ascending: withAscending)]
+        case .importanceAlphabet:
+            return [NSSortDescriptor(key: "importance", ascending: withAscending), NSSortDescriptor(key: "title", ascending: true)]
         default:
             return []
         }
-    }
-    
-    func getSortByFlashCardCount(sort: [Deck]) -> [Deck] {
-        return sort.sorted(by: { ($0.flashcards ?? []).count > ($1.flashcards ?? []).count })
     }
 }

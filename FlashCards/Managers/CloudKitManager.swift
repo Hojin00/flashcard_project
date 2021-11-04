@@ -17,6 +17,7 @@ class CloudKitManager: ObservableObject {
     static let shared: CloudKitManager = CloudKitManager()
     
     @Published var allDecks: [Deck] = []
+    @Published var allDecksImportant: [Deck] = []
     
     // MARK: TODO
     // duplicate FlashCard
@@ -229,14 +230,28 @@ class CloudKitManager: ObservableObject {
         }
     }
     
-    //MARK: - Fetch All Decks with sort by
-    func fetchDeckSortBy( queryWith: [NSSortDescriptor], completionQueue: DispatchQueue = .main, completion: @escaping (Result<[Deck], Error>) -> Void) {
+    //MARK: - Fetch All Decks with sortby
+    func fetchDeckSortBy(sortType: SortBy, completionQueue: DispatchQueue = .main, completion: @escaping (Result<[Deck], Error>) -> Void) {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Deck", predicate: predicate)
 
-        if queryWith.count != 0 {
-            query.sortDescriptors = queryWith
+        switch sortType {
+        case .lastSeen:
+            query.sortDescriptors = sortType.getSortBy(withAscending: false)
+        case .lastUpdated:
+            query.sortDescriptors = sortType.getSortBy(withAscending: false)
+        case .alphabet:
+            query.sortDescriptors = sortType.getSortBy(withAscending: true)
+        case .hardest:
+            query.sortDescriptors = sortType.getSortBy(withAscending: false)
+        case .importance:
+            query.sortDescriptors = sortType.getSortBy(withAscending: false)
+        case .importanceAlphabet:
+            query.sortDescriptors = sortType.getSortBy(withAscending: false)
+        default:
+            print("no sortDescriptors")
         }
+        
 
         self.publicDB.perform(query, inZoneWith: nil) { results, error in
 
@@ -263,7 +278,15 @@ class CloudKitManager: ObservableObject {
             completionQueue.async {
 
                 completion(.success(deck))
-
+                
+                switch sortType {
+                case .hadest:
+                    self.allDecks = deck.sorted(by: { ($0.flashcards ?? []).count > ($1.flashcards ?? []).count })
+                case .importanceAlphabet:
+                    self.allDecksImportant = deck
+                default:
+                    self.allDecks = deck
+                }
             }
         }
     }

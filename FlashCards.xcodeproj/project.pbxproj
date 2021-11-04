@@ -75,18 +75,11 @@
 		B439385827332596007BE3CA /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		B446F3E12718BA4600BF4214 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		B446F3E32718BA6800BF4214 /* FlashCards.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = FlashCards.entitlements; path = FlashCards/FlashCards.entitlements; sourceTree = SOURCE_ROOT; };
-		B481C6CA2732FF880053998C /* NewDeckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDeckView.swift; sourceTree = "<group>"; };
-		B481C6CB2732FF880053998C /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
-		B481C6CC2732FF880053998C /* SingleDeckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleDeckView.swift; sourceTree = "<group>"; };
-		B481C6CD2732FF880053998C /* AllDecksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllDecksView.swift; sourceTree = "<group>"; };
 		B499C980271768D500066FE2 /* FlashCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B499C983271768D500066FE2 /* FlashCardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardsApp.swift; sourceTree = "<group>"; };
 		B499C985271768D500066FE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B499C987271768D600066FE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B499C98A271768D600066FE2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		ECCDD0EC272B3AE700BACCAD /* StandardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButton.swift; sourceTree = "<group>"; };
-		ECCDD0EE272C87EE00BACCAD /* CardStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStatusView.swift; sourceTree = "<group>"; };
-		ECD1DF4B2723332E00838CC9 /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
 		ECDDEC3A271DEE7800C526C2 /* RecordingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -239,27 +232,12 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		B481C6D22733028A0053998C /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				ECCDD0EE272C87EE00BACCAD /* CardStatusView.swift */,
-				B481C6CD2732FF880053998C /* AllDecksView.swift */,
-				ECCDD0EC272B3AE700BACCAD /* StandardButton.swift */,
-				B481C6CC2732FF880053998C /* SingleDeckView.swift */,
-				B481C6CB2732FF880053998C /* EmptyView.swift */,
-				B481C6CA2732FF880053998C /* NewDeckView.swift */,
-				ECD1DF4B2723332E00838CC9 /* DeckView.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		B499C977271768D500066FE2 = {
 			isa = PBXGroup;
 			children = (
 				B499C982271768D500066FE2 /* FlashCards */,
 				B499C981271768D500066FE2 /* Products */,
 				B2FB98182719FC04002AC06B /* Frameworks */,
-				B481C6D22733028A0053998C /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};

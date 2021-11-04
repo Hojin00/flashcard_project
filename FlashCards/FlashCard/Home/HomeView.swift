@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct HomeView: View {
     @EnvironmentObject private var cloudkitManager: CloudKitManager
-    @State var sortKey = 0
     
-    var options = ["Last Seen", "Hardest","Alphabet","Biggest"]
-    @State var auxDeckLists: [Deck] = []
+    @State var sortKey = 0
+    var options = ["None", "Alphabet", "Biggest", "Hardest", "Importance", "Last Seen", "Last Updated" ]
+    
     
     var body: some View {
         
@@ -40,8 +41,83 @@ struct HomeView: View {
                                 Text(self.options[$0])
                                     .foregroundColor(.black)
                             }
-                            
                         }
+                        .onChange(of: sortKey, perform: { newValue in
+                            
+                            switch sortKey {
+                            case 1:
+                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.alphabet) { Result in
+                                    switch Result {
+                                    case .success:
+                                        print("success alphabet")
+                                    case .failure:
+                                        print("no last seen")
+                                    }
+                                }
+                                
+                            case 2:
+                                
+                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.hadest) { Result in
+                                    switch Result {
+                                    case .success:
+                                        print("success biggest")
+                                    case .failure:
+                                        print("no last seen")
+                                    }
+                                }
+
+                            case 3:
+                                
+                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.hardest) { Result in
+                                    
+                                    switch Result {
+                                    case .success:
+                                        print("success hardest")
+                                    case .failure:
+                                        print("no last seen")
+                                    }
+                                }
+                                
+                            case 4:
+                                
+                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.importance) { Result in
+                                    
+                                    switch Result {
+                                    case .success:
+                                        print("success importance")
+                                    case .failure:
+                                        print("no last seen")
+                                    }
+                                }
+                                
+                            case 5:
+                                
+                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.lastSeen) { Result in
+                                    
+                                    switch Result {
+                                    case .success:
+                                        print("success last seen")
+                                    case .failure:
+                                        print("no last seen")
+                                    }
+                                }
+                                
+                            case 6:
+                                
+                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.lastUpdated) { Result in
+                                    
+                                    switch Result {
+                                    case .success:
+                                        print("success last updated")
+                                    case .failure:
+                                        print("no last seen")
+                                    }
+                                }
+                                
+                            default:
+                                print("no sortTypes")
+                            }
+                        })
                         .padding(.horizontal, 3)
                         .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color(hue: 1.0, saturation: 0.012, brightness: 0.869)/*@END_MENU_TOKEN@*/)
                         .foregroundColor(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
@@ -111,14 +187,10 @@ struct HomeView: View {
                             }
                             
                             HStack(){
+                                
                                 ForEach(cloudkitManager.allDecks){ i in
                                     EmptyView()
-                                    Button {
-                                        //action
-                                        print(i.title)
-                                    } label: {
-                                        SingleDeckView(deck: i)
-                                    }
+                                    SingleDeckView(deck: i)
                                     .frame(width: UIScreen.main.bounds.width * 0.35, height: UIScreen.main.bounds.height * 0.25)
                                 }
                             }
@@ -138,9 +210,10 @@ struct HomeView: View {
             }
         }
         .onAppear() {
+            
             cloudkitManager.fetchAllDecks { Result in
                 switch Result {
-                case .success:
+                case .success(let decks):
                     print("success")
                 case .failure:
                     print("fail")
@@ -148,27 +221,17 @@ struct HomeView: View {
             }
         }
     }
-    func getAllDecks() -> [Deck]{
-        var auxDeck: [Deck] = []
-        cloudkitManager.fetchAllDecks { Result in
-            switch Result {
-            case .success(let decks):
-                auxDeck = decks
-            case .failure:
-                print("no decks")
-            }
-        }
-        return auxDeck
-    }
+    
     func deckCarousel(reader: GeometryProxy) -> some View{
         let screenSize =  reader.size
         let itemWidth: CGFloat = screenSize.width * 0.62
         let paddingX: CGFloat = (screenSize.width - itemWidth) / 2
         return ScrollView(.horizontal,showsIndicators: false) {
             HStack{
-                ForEach(0..<10) { i in
+                ForEach(cloudkitManager.allDecks) { i in
                     EmptyView()
-                    HorizontalScrollView(screenSize: screenSize, width: itemWidth, paddingX: paddingX)
+                    HorizontalScrollView(deck: i, screenSize: screenSize, width: itemWidth, paddingX: paddingX)
+                    
                 }
             }
             .padding(.horizontal, paddingX)

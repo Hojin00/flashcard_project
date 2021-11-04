@@ -253,7 +253,7 @@ struct CardPreview: View {
     struct DeckView_Previews: PreviewProvider {
         @State static private var flashcardMock = FlashCard.init(myrecord: CKRecord.init(recordType: "FlashCard"), title: "", frontSideText: "front text", frontSideImage: nil, backSideText: "back text", backSideImage: nil, category: nil, frontSideAudio: nil, backSideAudio: nil, frontSideColor: nil, backSideColor: nil, hard: "")
         
-        static private var deckmock = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: [CKRecord.Reference.init(record: flashcardMock.myrecord, action: .none)], title: "deck title hellou", category: "lk", reminderDate: Date(), lastView: Date(), hardFlashcards: 3)
+        static private var deckmock = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: [CKRecord.Reference.init(record: flashcardMock.myrecord, action: .none)], title: "deck title hellou", category: "lk", reminderDate: Date(), lastView: Date(), hardFlashcards: 3, importance: 2)
         static var previews: some View {
             DeckView(deck: deckmock)
         }
