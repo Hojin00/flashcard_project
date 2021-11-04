@@ -39,76 +39,81 @@ struct CardViewSlide: View {
     var body: some View {
         GeometryReader { geometry in
             
-            ZStack(alignment: self.swipeStatus == .easy ? .topLeading : .topTrailing) {
                 
-//                     Image(self.card.frontSideImage ?? "")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fill)
-//                        .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
-//                        .clipped()
-               
-               if self.swipeStatus == .easy {
-                   Text("EASY")
-                       .font(.headline)
-                       
-                       .padding()
-                       .background(Color.green)
-                       .cornerRadius(10)
-                       .foregroundColor(Color.white)
-                       
-                       .overlay(
-                           RoundedRectangle(cornerRadius: 10)
-                               .stroke(Color.green, lineWidth: 3.0)
-                   ).padding(24)
-                       .rotationEffect(Angle.degrees(-45))
-               } else if self.swipeStatus == .hard {
-                   Text("DISLIKE")
-                       .font(.headline)
-                       
-                       .padding()
-                       .background(Color.red)
-                       .cornerRadius(10)
-                       .foregroundColor(Color.white)
-                       
-                       .overlay(
-                           RoundedRectangle(cornerRadius: 10)
-                               .stroke(Color.red, lineWidth: 3.0)
-                   ).padding(.top, 45)
-                       .rotationEffect(Angle.degrees(45))
-               }
-                VStack {
-                     
-                    HStack{
-                        Text("12/40")
-                            .font(.caption)
+                    VStack {
+                        ZStack(alignment: self.swipeStatus == .easy ? .topLeading : .topTrailing) {
+                            
+            //                     Image(self.card.frontSideImage ?? "")
+            //                        .resizable()
+            //                        .aspectRatio(contentMode: .fill)
+            //                        .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
+            //                        .clipped()
+                            VStack {
+                                HStack{
+                                    Text("12/40")
+                                        .font(.caption)
+                                    
+                                Spacer()
+                                    Text("High")
+                                        .font(.caption)
+            
+                                }
+                                .padding([.leading, .bottom, .trailing])
+                                VStack(alignment: .center) {
+                                    Text("\(self.card.frontSideText ?? "") PUDIM")
+                                        .font(.title)
+                                        .bold()
+            //                        Text(self.user.occupation)
+            //                            .font(.subheadline)
+            //                            .bold()
+            //                        Text("\(self.user.mutualFriends) Mutual Friends")
+            //                            .font(.subheadline)
+            //                            .foregroundColor(.gray)
+                                }
+                            VStack{
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundColor(Color.red)
+                                    .frame(width: 200, height: 200)
+                            }
+                            }
+                           if self.swipeStatus == .easy {
+                               Text("EASY")
+                                   .font(.headline)
+                                   
+                                   .padding()
+                                   .background(Color.green)
+                                   .cornerRadius(10)
+                                   .foregroundColor(Color.white)
+                                   
+                                   .overlay(
+                                       RoundedRectangle(cornerRadius: 10)
+                                           .stroke(Color.green, lineWidth: 3.0)
+                               ).padding(24)
+                                   .rotationEffect(Angle.degrees(-45))
+                           } else if self.swipeStatus == .hard {
+                               Text("HARD")
+                                   .font(.headline)
+                                   
+                                   .padding()
+                                   .background(Color.red)
+                                   .cornerRadius(10)
+                                   .foregroundColor(Color.white)
+                                   
+                                   .overlay(
+                                       RoundedRectangle(cornerRadius: 10)
+                                           .stroke(Color.red, lineWidth: 3.0)
+                               ).padding(.top, 45)
+                                   .rotationEffect(Angle.degrees(45))
+                           }
                         
-                    Spacer()
-                        Text("High")
-                            .font(.caption)
-
+    
                     }
-                    .padding(.horizontal)
-                                        
-                    
-                        VStack(alignment: .center) {
-                            Text("\(self.card.frontSideText ?? "") PUDIM")
-                                .font(.title)
-                                .bold()
-    //                        Text(self.user.occupation)
-    //                            .font(.subheadline)
-    //                            .bold()
-    //                        Text("\(self.user.mutualFriends) Mutual Friends")
-    //                            .font(.subheadline)
-    //                            .foregroundColor(.gray)
-                        }
-                    VStack{
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(Color.red)
-                            .frame(width: 200, height: 200)
+                        
+                                            
+                        
 
-                    }
-
-                }
+                   
+               }
                 .padding(.bottom)
                 .background(Color.white)
                 .cornerRadius(10)
@@ -138,7 +143,6 @@ struct CardViewSlide: View {
                             }
                         }
                 )
-           }
             
             
         }
