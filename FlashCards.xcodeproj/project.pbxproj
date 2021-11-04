@@ -34,6 +34,8 @@
 		ECCDD0EF272C87EE00BACCAD /* CardStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCDD0EE272C87EE00BACCAD /* CardStatusView.swift */; };
 		ECD1DF4C2723332E00838CC9 /* DeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD1DF4B2723332E00838CC9 /* DeckView.swift */; };
 		ECDDEC3D271DEEBA00C526C2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDDEC3C271DEEBA00C526C2 /* Extensions.swift */; };
+		ECF1154E2732F945005CCB8F /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF1154D2732F945005CCB8F /* NewCardView.swift */; };
+		ECF115502732F98D005CCB8F /* NewCardSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF1154F2732F98D005CCB8F /* NewCardSideView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,8 @@
 		ECD1DF4B2723332E00838CC9 /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
 		ECDDEC3A271DEE7800C526C2 /* RecordingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingModel.swift; sourceTree = "<group>"; };
 		ECDDEC3C271DEEBA00C526C2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		ECF1154D2732F945005CCB8F /* NewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardView.swift; sourceTree = "<group>"; };
+		ECF1154F2732F98D005CCB8F /* NewCardSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardSideView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 			children = (
 				B2DB291B2721DA0800E914B8 /* CardFlipView.swift */,
 				B2DB291C2721DA0800E914B8 /* CardView.swift */,
+				ECF1154D2732F945005CCB8F /* NewCardView.swift */,
+				ECF1154F2732F98D005CCB8F /* NewCardSideView.swift */,
 			);
 			name = Card;
 			path = FlashCards/FlashCard/Card;
@@ -304,6 +310,8 @@
 				B2FA341227209801003683F9 /* RecordingModel.swift in Sources */,
 				CDE8362F2717785B001309D8 /* SearchBar.swift in Sources */,
 				B2FB98172719F35C002AC06B /* ShareView.swift in Sources */,
+				ECF1154E2732F945005CCB8F /* NewCardView.swift in Sources */,
+				ECF115502732F98D005CCB8F /* NewCardSideView.swift in Sources */,
 				B40C7A28271774EB00B818C9 /* DeckModel.swift in Sources */,
 				B2FB981C271A0037002AC06B /* CloudKitManager.swift in Sources */,
 				B40C7A2627176FCF00B818C9 /* FlashCardModel.swift in Sources */,
