@@ -233,7 +233,7 @@ class CloudKitManager {
         }
     }
     
-    //MARK: - Fetch All Flashcards de um Deck
+    //MARK: - Fetch All Flashcards de um Deckw
     
     func fetchDeck(deckID: CKRecord.ID, completionQueue: DispatchQueue = .main, completion: @escaping (Result<[FlashCard], Error>) -> Void) {
         //TODO
