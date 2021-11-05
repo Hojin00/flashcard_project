@@ -6,55 +6,57 @@
 //
 
 import SwiftUI
+import AVFoundation
+import CloudKit
 
-struct FlashCardTeste: Hashable  {
-    //var description: String
-    
-    var id: Int
-    
-    var frontSideText: String?
-    var frontSideImage: String?
-    var backSideText: String?
-    var backSideImage: String?
-    var category: String?
-    var frontSideAudio: String?
-    var backSideAudio: String?
-    var frontSideColor: String?
-    var backSideColor: String?
-    
-}
+
 
 struct SlideView: View {
-    /// List of users EXEMPLO TROCAR DEPOIS POR FLASH CARD
-    @State var cards: [FlashCardTeste] = [
-        FlashCardTeste(id: 01, frontSideText: "", frontSideImage: "", backSideText: "", backSideImage: "", category: "", frontSideAudio: "", backSideAudio: "", frontSideColor: "", backSideColor: ""), FlashCardTeste(id: 02, frontSideText: "", frontSideImage: "", backSideText: "", backSideImage: "", category: "", frontSideAudio: "", backSideAudio: "", frontSideColor: "", backSideColor: ""), FlashCardTeste(id: 03, frontSideText: "", frontSideImage: "", backSideText: "", backSideImage: "", category: "", frontSideAudio: "", backSideAudio: "", frontSideColor: "", backSideColor: ""), FlashCardTeste(id: 04, frontSideText: "", frontSideImage: "", backSideText: "", backSideImage: "", category: "", frontSideAudio: "", backSideAudio: "", frontSideColor: "", backSideColor: ""),
     
-    ]
+    @EnvironmentObject private var cloudkitManager: CloudKitManager
+    /// List of users EXEMPLO TROCAR DEPOIS POR FLASH CARD
+    var deck: Deck
+    init(deck: Deck){
+        self.deck = deck
+        CloudKitManager.shared.fetchDeck(deckID: deck.id) { Result in
+            switch Result {
+            case .success:
+                print("Uhul")
+                break
+            default:
+                print("no flashcards in deck")
+                break
+            }
+        }
+    }
     
     /// Return the CardViews width for the given offset in the array
     /// - Parameters:
     ///   - geometry: The geometry proxy of the parent
     ///   - id: The ID of the current user
-    private func getCardWidth(_ geometry: GeometryProxy, id: Int) -> CGFloat {
-        let offset: CGFloat = CGFloat(cards.count - 1 - id)
+    private func getCardWidth(_ geometry: GeometryProxy, id: String) -> CGFloat {
+        guard let index = cloudkitManager.allFlashCards.firstIndex(where: {$0.id.recordName == id}) else {return 0}
+        let offset: CGFloat = CGFloat((deck.flashcards ?? []).count - 1 - index)
         return geometry.size.width - offset
     }
-    private func getCardHeight(_ geometry: GeometryProxy, id: Int) -> CGFloat {
-        let offset: CGFloat = CGFloat(cards.count - 1 - id)
-        return geometry.size.height - offset
-    }
+    //    private func getCardHeight(_ geometry: GeometryProxy, id: Int) -> CGFloat {
+    //        let offset: CGFloat = CGFloat(deck.flashcards.count - 1 - id)
+    //        return geometry.size.height - offset
+    //    }
     
     /// Return the CardViews frame offset for the given offset in the array
     /// - Parameters:
     ///   - geometry: The geometry proxy of the parent
     ///   - id: The ID of the current user
-    private func getCardOffset(_ geometry: GeometryProxy, id: Int) -> CGFloat {
-        return  CGFloat(cards.count - 5 - id) * -10
+    private func getCardOffset(_ geometry: GeometryProxy, id: String) -> CGFloat {
+        guard let index = cloudkitManager.allFlashCards.firstIndex(where: {$0.id.recordName == id}) else {return 0}
+        return  CGFloat((deck.flashcards ?? []).count - 5 - index) * -10
     }
     
-    private var maxID: Int {
-        return self.cards.map { $0.id }.max() ?? 0
-    }
+ 
+    
+    
+    
     
     var body: some View {
         VStack {
@@ -64,25 +66,22 @@ struct SlideView: View {
                     .background(Color.blue)
                     .clipShape(Circle())
                     .offset(x: -geometry.size.width / 4, y: -geometry.size.height / 2)
-                    
+                
                 
                 VStack(alignment: .center, spacing: 0.0) {
                     //DateView()
                     ZStack {
-                        ForEach(self.cards, id: \.self) { card in
-                            Group {
-                                // Range Operator
-                                if (self.maxID - 3)...self.maxID ~= card.id {
-                                    CardViewSlide(card: card, onRemove: { removedUser in
-                                        // Remove that user from our array
-                                        self.cards.removeAll { $0.id == removedUser.id }
-                                    })
-                                        .animation(.spring())
-                                        .frame(width: self.getCardWidth(geometry, id: card.id), height: 500)
-                                        .offset(x: 0, y: self.getCardOffset(geometry, id: card.id))
-                                }
+                        ForEach.init(cloudkitManager.allFlashCards) { card in
+                            CardViewSlide(card: card) { _ in
+                                
                             }
+                            .animation(.spring())
+                            .frame(width: self.getCardWidth(geometry, id: card.id.recordName), height: 500)
+                            .offset(x: 0, y: self.getCardOffset(geometry, id: card.id.recordName))
                         }
+                    
+                        //self.cards.removeAll { $0.id == removedUser.id }
+                 
                     }
                     Spacer()
                 }
@@ -91,42 +90,9 @@ struct SlideView: View {
     }
 }
 
-//struct DateView: View {
-//    var body: some View {
-//        VStack {
-//            HStack {
-//                VStack(alignment: .leading) {
-//                    Text("Friday, 10th January")
-//                        .font(.title)
-//                        .bold()
-//                    Text("Today")
-//                        .font(.subheadline)
-//                        .foregroundColor(.gray)
-//                }
-//                Spacer()
-//            }.padding()
-//        }
-//        .background(Color.white)
-//        .cornerRadius(10)
-//        .shadow(radius: 5)
-//    }
-//}
-
-//struct Triangle: Shape {
-//    func path(in rect: CGRect) -> Path {
-//        var path = Path()
-//
-//        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
-//        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
-//        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
-//        path.addLine(to: CGPoint(x: rect.midX, y: rect.minY))
-//
-//        return path
-//    }
-//}
 
 struct SlideView_Previews: PreviewProvider {
     static var previews: some View {
-    SlideView()
+        SlideView(deck: Deck.init(record: CKRecord.init(recordType: "Deck")))
     }
 }

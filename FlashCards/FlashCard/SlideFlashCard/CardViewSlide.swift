@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
-
+import CloudKit
 struct CardViewSlide: View {
     @State private var translation: CGSize = .zero
     @State private var swipeStatus: EasyHard = .none
     
-    private var card: FlashCardTeste
-    private var onRemove: (_ user: FlashCardTeste) -> Void
+    private var card: FlashCard
+    private var onRemove: (FlashCard) -> Void
     
     
     
@@ -22,7 +22,7 @@ struct CardViewSlide: View {
         case easy, hard, none
     }
     
-    init(card: FlashCardTeste, onRemove: @escaping (_ card: FlashCardTeste) -> Void) {
+    init(card: FlashCard, onRemove: @escaping (FlashCard) -> Void) {
         self.card = card
         self.onRemove = onRemove
         
@@ -175,10 +175,9 @@ struct CardViewSlide: View {
 // 7
 struct CardViewSlide_Previews: PreviewProvider {
     static var previews: some View {
-        CardViewSlide(card: FlashCardTeste(id: 01, frontSideText: "", frontSideImage: "", backSideText: "", backSideImage: "", category: "", frontSideAudio: "", backSideAudio: "", frontSideColor: "", backSideColor: ""),
-                      onRemove: { _ in
-            // do nothing
-        })
+        CardViewSlide(card: FlashCard.init(record: CKRecord(recordType: ""))) { _ in
+            
+        }
             .frame(height: 400)
             .padding()
     }

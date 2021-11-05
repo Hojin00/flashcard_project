@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 import CloudKit
 
-struct FlashCard: Hashable {
+struct FlashCard: Hashable, Identifiable {
+    let id: CKRecord.ID
     var myrecord: CKRecord
     var title: String?
     var frontSideText: String?
@@ -24,7 +25,7 @@ struct FlashCard: Hashable {
     var hard: String?
     
     init(myrecord: CKRecord, title: String?, frontSideText: String?, frontSideImage: CKAsset?, backSideText: String?, backSideImage: CKAsset?, category: String?, frontSideAudio: CKAsset?, backSideAudio: CKAsset?, frontSideColor: CKAsset?, backSideColor: CKAsset?, hard: String?) {
-        
+        self.id = myrecord.recordID
         self.myrecord = myrecord
         self.title = title
         self.frontSideText = frontSideText
@@ -37,6 +38,7 @@ struct FlashCard: Hashable {
         self.frontSideColor = frontSideColor
         self.backSideColor = backSideColor
         self.hard = hard
+        
         
         myrecord["title"] = title
         myrecord["frontSideText"] = frontSideText
@@ -53,6 +55,7 @@ struct FlashCard: Hashable {
     }
     
     init(record: CKRecord) {
+        self.id = record.recordID
         self.myrecord = record
         self.title = record["title"]
         self.frontSideText = record["frontSideText"]
@@ -68,6 +71,6 @@ struct FlashCard: Hashable {
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(myrecord.recordID)
+        hasher.combine(id)
     }
 }

@@ -18,6 +18,7 @@ class CloudKitManager: ObservableObject {
     
     @Published var allDecks: [Deck] = []
     @Published var allDecksImportant: [Deck] = []
+    @Published var allFlashCards: [FlashCard] = []
     
     // MARK: TODO
     // duplicate FlashCard
@@ -329,6 +330,7 @@ class CloudKitManager: ObservableObject {
                         case .success(let flashcards):
                             completionQueue.async {
                                 completion(.success(flashcards))
+                                self.allFlashCards = flashcards
                             }
                         default:
                             print("no flashcards in deck")
