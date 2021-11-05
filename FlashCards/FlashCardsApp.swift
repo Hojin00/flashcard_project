@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct FlashCardsApp: App {
     @State var sharing = "com.FlashCard"
+    @StateObject private var cloudkitManager: CloudKitManager = CloudKitManager.shared
     
     var body: some Scene {
         WindowGroup {
@@ -30,6 +31,7 @@ struct FlashCardsApp: App {
                         print(sharing)
                     }
                 }
+                .environmentObject(cloudkitManager)
         }
     }
 }

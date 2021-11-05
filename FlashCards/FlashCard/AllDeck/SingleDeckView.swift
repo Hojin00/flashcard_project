@@ -80,9 +80,11 @@ struct SingleDeckView: View {
                         Spacer()
                         HStack {
                             Spacer()
-                            Text("\(flashcards.count)\ncards")
-                                .font(.caption)
-                                .padding(.trailing, UIScreen.main.bounds.size.width * 0.07)
+                            if let flashcardsNum = deck.flashcards {
+                                Text("\(flashcardsNum.count)\ncards")
+                                    .font(.caption)
+                                    .padding(.trailing, UIScreen.main.bounds.size.width * 0.07)
+                            }
                         }
                         Spacer()
                     }

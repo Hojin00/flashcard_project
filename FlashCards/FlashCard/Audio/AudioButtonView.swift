@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import CloudKit
+import AVFoundation
 
 struct AudioButtonView: View {
     
@@ -54,30 +55,64 @@ struct AudioButtonView: View {
                 }
                 
                 Button("create flashcard") {
+//                    guard let auxColor1 = Color.blue.toURL() else { return }
+//                    let tes = CKAsset.init(fileURL: auxColor1)
                     
-                    let auxFlashCard = FlashCard.init(myrecord: auxRecord, frontSideText: "frontText", frontSideImage: nil, backSideText: "backText", backSideImage: nil, category: "category", frontSideAudio: recordAudio, backSideAudio: nil, frontSideColor: nil, backSideColor: nil)
+                    let auxFlashCard = FlashCard.init(myrecord: auxRecord, title: "title", frontSideText: "frontText", frontSideImage: nil, backSideText: "backText", backSideImage: nil, category: "category", frontSideAudio: recordAudio, backSideAudio: nil, frontSideColor: nil, backSideColor: nil, hard: "difficult".lowercased())
+                    
+                    let auxFlashCard2 = FlashCard.init(myrecord: CKRecord.init(recordType: "FlashCard"), title: "title", frontSideText: "frontText", frontSideImage: nil, backSideText: "backText", backSideImage: nil, category: "category", frontSideAudio: recordAudio, backSideAudio: nil, frontSideColor: nil, backSideColor: nil, hard: "difficult")
+                    
+                    let auxFlashCard3 = FlashCard.init(myrecord: CKRecord.init(recordType: "FlashCard"), title: "title", frontSideText: "frontText", frontSideImage: nil, backSideText: "backText", backSideImage: nil, category: "category", frontSideAudio: recordAudio, backSideAudio: nil, frontSideColor: nil, backSideColor: nil, hard: "difficult")
+                    
+                    
+                    
                     
                     CloudKitManager.shared.createFlashCard(flashCard: auxFlashCard.myrecord)
+                    CloudKitManager.shared.createFlashCard(flashCard: auxFlashCard2.myrecord)
+                    CloudKitManager.shared.createFlashCard(flashCard: auxFlashCard3.myrecord)
+                    
+                    FlashCardReferenceList.append(CKRecord.Reference.init(record: auxFlashCard.myrecord, action: .none))
+                    FlashCardReferenceList.append(CKRecord.Reference.init(record: auxFlashCard2.myrecord, action: .none))
+                    FlashCardReferenceList.append(CKRecord.Reference.init(record: auxFlashCard3.myrecord, action: .none))
+                    
                     
                 }
-                Button("create deck") {
+                Button("create deck1") {
                     
-                    let auxDeck = Deck.init(myrecord: auxRecord2, flashcards: FlashCardReferenceList, title: "deck title", category: "deck category", reminderDate: Date())
+                    let auxDeck = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "11111", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0)
                     
                     CloudKitManager.shared.createDeck(deck: auxDeck.myrecord)
+                    
+                    
+                }
+                Button("create deck2") {
+                    
+                    let auxDeck = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "555555", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 6, importance: 2)
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck.myrecord)
+                    
+                    
+                }
+                Button("create deck3") {
+                    
+                    let auxDeck = Deck.init(myrecord: auxRecord2, flashcards: FlashCardReferenceList, title: "44444", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 5, importance: 1)
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck.myrecord)
+                    
                     
                 }
                 Button("fetch deck flashcards") {
                     
-                    
-                    CloudKitManager.shared.fetchDeck(deckID: CKRecord.ID.init(recordName: "DBEF706B-8DFC-473C-971B-E49BE3BEB807")) { Result in
+                    CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.hardest) { Result in
                         switch Result {
-                        case .success(let flashcard):
-                            print(flashcard)
+                        case .success(let decks):
+                            print(decks)
                         default:
-                            print("no decks")
+                            print("no flashcards")
                         }
                     }
+                    
+                    
                 }
             }
         }
@@ -87,6 +122,7 @@ struct AudioButtonView: View {
 }
 
 struct AudioButtonView_Previews: PreviewProvider {
+    
     static var previews: some View {
         AudioButtonView()
     }

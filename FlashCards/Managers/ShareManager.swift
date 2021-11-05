@@ -6,10 +6,14 @@
 //
 
 import Foundation
+import CloudKit
 
 class ShareManager {
     
     static let shared: ShareManager = ShareManager()
+    var copyDecks = [Deck]()
     
-    
+    func copyDeck(_ deck: CKRecord.ID) {
+        
+    }
 }

@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct HomeView: View {
+    @EnvironmentObject private var cloudkitManager: CloudKitManager
     
     @State var sortKey = 0
+    var options = ["None", "Alphabet", "Biggest", "Hardest", "Importance", "Last Seen", "Last Updated" ]
     
-    var options = ["Last Seen", "Hardest","Alphabet","Biggest"]
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -38,8 +41,83 @@ struct HomeView: View {
                                 Text(self.options[$0])
                                     .foregroundColor(.black)
                             }
-                            
                         }
+                        .onChange(of: sortKey, perform: { newValue in
+                            
+                            switch sortKey {
+                            case 1:
+                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.alphabet) { Result in
+                                    switch Result {
+                                    case .success:
+                                        print("success alphabet")
+                                    case .failure:
+                                        print("no last seen")
+                                    }
+                                }
+                                
+                            case 2:
+                                
+                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.hadest) { Result in
+                                    switch Result {
+                                    case .success:
+                                        print("success biggest")
+                                    case .failure:
+                                        print("no last seen")
+                                    }
+                                }
+
+                            case 3:
+                                
+                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.hardest) { Result in
+                                    
+                                    switch Result {
+                                    case .success:
+                                        print("success hardest")
+                                    case .failure:
+                                        print("no last seen")
+                                    }
+                                }
+                                
+                            case 4:
+                                
+                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.importance) { Result in
+                                    
+                                    switch Result {
+                                    case .success:
+                                        print("success importance")
+                                    case .failure:
+                                        print("no last seen")
+                                    }
+                                }
+                                
+                            case 5:
+                                
+                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.lastSeen) { Result in
+                                    
+                                    switch Result {
+                                    case .success:
+                                        print("success last seen")
+                                    case .failure:
+                                        print("no last seen")
+                                    }
+                                }
+                                
+                            case 6:
+                                
+                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.lastUpdated) { Result in
+                                    
+                                    switch Result {
+                                    case .success:
+                                        print("success last updated")
+                                    case .failure:
+                                        print("no last seen")
+                                    }
+                                }
+                                
+                            default:
+                                print("no sortTypes")
+                            }
+                        })
                         .padding(.horizontal, 3)
                         .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color(hue: 1.0, saturation: 0.012, brightness: 0.869)/*@END_MENU_TOKEN@*/)
                         .foregroundColor(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
@@ -58,8 +136,6 @@ struct HomeView: View {
                         HStack(alignment: .center){
                             
                             VStack(){
-                                
-                                //Spacer()
                                 Button {
                                     print("new card")
                                 } label: {
@@ -80,8 +156,6 @@ struct HomeView: View {
                                         }
                                     }
                                 }
-                                
-                                //.background(Color.red)
                                 
                                 Button {
                                     print("new deck")
@@ -108,53 +182,21 @@ struct HomeView: View {
                                     }
                                     
                                 }
-                                .padding()
+                                .padding(UIScreen.main.bounds.size.height * 0.038)
                                 
-                                //Spacer()
                             }
-                            //.padding(-2.0)
                             
                             HStack(){
-                                ForEach(0..<10){ i in
+                                
+                                ForEach(cloudkitManager.allDecks){ i in
                                     EmptyView()
-                                    Button {
-                                        //action
-                                    } label: {
-                                        ZStack {
-                                            //Image("AllDecksDeckBackground")
-                                            //    .padding(.top, UIScreen.main.bounds.height * 0.1)
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .foregroundColor(Color.red)
-                                                .frame(width: UIScreen.main.bounds.width * 0.270, height: UIScreen.main.bounds.height * 0.2)
-                                                .shadow(radius: 10)
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .foregroundColor(Color.blue)
-                                                .frame(width: UIScreen.main.bounds.width * 0.285, height: UIScreen.main.bounds.height * 0.2)
-                                                .padding(.bottom, UIScreen.main.bounds.height * 0.015)
-                                                .shadow(radius: 10)
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .foregroundColor(Color.green)
-                                                .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.height * 0.2)
-                                                .padding(.bottom, UIScreen.main.bounds.height * 0.030)
-                                                .shadow(radius: 10)
-                                            VStack {
-                                                Text("+")
-                                                    .font(.title)
-                                                Text("Algum deck")
-                                            }
-                                            .padding(.bottom, UIScreen.main.bounds.height * 0.030)
-                                            .foregroundColor(Color.black)
-                                        }
-                                    }
+                                    SingleDeckView(deck: i)
                                     .frame(width: UIScreen.main.bounds.width * 0.35, height: UIScreen.main.bounds.height * 0.25)
                                 }
                             }
-                            
                         }
                     }
-                    
-                    
-                }//.background(Color(hue: 0.739, saturation: 0.422, brightness: 0.585))
+                }
                 Divider()
                     .frame(height: 10)
                 VStack{
@@ -164,19 +206,31 @@ struct HomeView: View {
                     .frame( maxWidth: .infinity,  maxHeight: .infinity)
                     
                 }
-                
+            }
+        }
+        .onAppear() {
+            
+            cloudkitManager.fetchAllDecks { Result in
+                switch Result {
+                case .success(_):
+                    print("success")
+                case .failure:
+                    print("fail")
+                }
             }
         }
     }
+    
     func deckCarousel(reader: GeometryProxy) -> some View{
         let screenSize =  reader.size
         let itemWidth: CGFloat = screenSize.width * 0.62
         let paddingX: CGFloat = (screenSize.width - itemWidth) / 2
         return ScrollView(.horizontal,showsIndicators: false) {
             HStack{
-                ForEach(0..<10) { i in
+                ForEach(cloudkitManager.allDecks) { i in
                     EmptyView()
-                    HorizontalScrollView(screenSize: screenSize, width: itemWidth, paddingX: paddingX)
+                    HorizontalScrollView(deck: i, screenSize: screenSize, width: itemWidth, paddingX: paddingX)
+                    
                 }
             }
             .padding(.horizontal, paddingX)
