@@ -48,6 +48,8 @@
 		B499C986271768D500066FE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C985271768D500066FE2 /* ContentView.swift */; };
 		B499C988271768D600066FE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C987271768D600066FE2 /* Assets.xcassets */; };
 		B499C98B271768D600066FE2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C98A271768D600066FE2 /* Preview Assets.xcassets */; };
+		CDE807462735A5B000F0F4A3 /* SlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE807442735A5B000F0F4A3 /* SlideView.swift */; };
+		CDE807472735A5B000F0F4A3 /* CardViewSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE807452735A5B000F0F4A3 /* CardViewSlide.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +97,8 @@
 		B499C985271768D500066FE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B499C987271768D600066FE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B499C98A271768D600066FE2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CDE807442735A5B000F0F4A3 /* SlideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideView.swift; sourceTree = "<group>"; };
+		CDE807452735A5B000F0F4A3 /* CardViewSlide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardViewSlide.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,7 @@
 		B467EE1227359C4C00559E65 /* FlashCard */ = {
 			isa = PBXGroup;
 			children = (
+				CDE807432735A5B000F0F4A3 /* SlideFlashCard */,
 				B467EE1327359C4C00559E65 /* Home */,
 				B467EE1627359C4C00559E65 /* Card */,
 				B467EE1B27359C4C00559E65 /* Notification */,
@@ -303,6 +308,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		CDE807432735A5B000F0F4A3 /* SlideFlashCard */ = {
+			isa = PBXGroup;
+			children = (
+				CDE807442735A5B000F0F4A3 /* SlideView.swift */,
+				CDE807452735A5B000F0F4A3 /* CardViewSlide.swift */,
+			);
+			path = SlideFlashCard;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -377,6 +391,7 @@
 				B467EE4627359C4C00559E65 /* RecordingsListView.swift in Sources */,
 				B467EE5227359C6000559E65 /* FlashCardModel.swift in Sources */,
 				B467EE3F27359C4C00559E65 /* PriorityButtonView.swift in Sources */,
+				CDE807472735A5B000F0F4A3 /* CardViewSlide.swift in Sources */,
 				B467EE6127359C6F00559E65 /* CloudKitManager.swift in Sources */,
 				B467EE3827359C4C00559E65 /* NewCardSideView.swift in Sources */,
 				B467EE3D27359C4C00559E65 /* PriorityButtonList.swift in Sources */,
@@ -397,6 +412,7 @@
 				B467EE5C27359C6F00559E65 /* AudioPlayer.swift in Sources */,
 				B467EE3C27359C4C00559E65 /* EditDeckView.swift in Sources */,
 				B467EE4C27359C4C00559E65 /* ShareView.swift in Sources */,
+				CDE807462735A5B000F0F4A3 /* SlideView.swift in Sources */,
 				B467EE5127359C6000559E65 /* DeckModel.swift in Sources */,
 				B467EE4727359C4C00559E65 /* NewDeckView.swift in Sources */,
 				B467EE5D27359C6F00559E65 /* NotificationManager.swift in Sources */,
