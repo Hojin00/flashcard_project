@@ -210,10 +210,10 @@
 		B481C71C273303770053998C /* AllDeck */ = {
 			isa = PBXGroup;
 			children = (
+				B481C720273303770053998C /* AllDecksView.swift */,
+				B481C71F273303770053998C /* SingleDeckView.swift */,
 				B481C71D273303770053998C /* NewDeckView.swift */,
 				B481C71E273303770053998C /* EmptyView.swift */,
-				B481C71F273303770053998C /* SingleDeckView.swift */,
-				B481C720273303770053998C /* AllDecksView.swift */,
 			);
 			path = AllDeck;
 			sourceTree = "<group>";
