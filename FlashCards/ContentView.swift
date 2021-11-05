@@ -13,7 +13,7 @@ struct ContentView: View {
     let deck = flashCardMock.init(record: CKRecord.init(recordType: "Deck"))
     
     var body: some View {
-       SlideView()
+        HomeView()
     }
 }
 
