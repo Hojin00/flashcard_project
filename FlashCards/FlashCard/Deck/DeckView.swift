@@ -18,7 +18,7 @@ struct DeckView: View {
     init(deck: Deck) {
         self.deck = deck
         var auxFlashCard: [FlashCard] = []
-        CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
+        CloudKitManager.shared.fetchDeck(deckID: "2E0DE1C5-5CF2-4E64-B8DA-A342B3D70ABC") { Result in
             switch Result {
             case .success(let flashcard):
                 auxFlashCard = flashcard

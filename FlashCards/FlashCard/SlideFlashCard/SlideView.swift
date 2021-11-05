@@ -18,7 +18,7 @@ struct SlideView: View {
     var deck: Deck
     init(deck: Deck){
         self.deck = deck
-        CloudKitManager.shared.fetchDeck(deckID: deck.id) { Result in
+        CloudKitManager.shared.fetchDeck(deckID: "2E0DE1C5-5CF2-4E64-B8DA-A342B3D70ABC") { Result in
             switch Result {
             case .success:
                 print("Uhul")

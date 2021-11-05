@@ -12,7 +12,7 @@ import UIKit
 struct ContentView: View {
 
     var body: some View {
-        HomeView()
+        SlideView(deck: Deck.init(record: CKRecord.init(recordType: "Deck")))
     }
 }
 

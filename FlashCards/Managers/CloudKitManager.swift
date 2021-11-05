@@ -294,7 +294,7 @@ class CloudKitManager: ObservableObject {
     
     //MARK: - Fetch All Flashcards of a Deck
     
-    func fetchDeck(deckID: CKRecord.ID, completionQueue: DispatchQueue = .main, completion: @escaping (Result<[FlashCard], Error>) -> Void) {
+    func fetchDeck(deckID: String, completionQueue: DispatchQueue = .main, completion: @escaping (Result<[FlashCard], Error>) -> Void) {
         //TODO
         //when no deck id encountered, print("no deck id exists")
         let predicate = NSPredicate(format: "recordID == %@", argumentArray: [deckID])
