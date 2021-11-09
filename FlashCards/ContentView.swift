@@ -13,7 +13,7 @@ struct ContentView: View {
 
     var body: some View {
 //        SlideView(deck: Deck.init(record: CKRecord.init(recordType: "Deck")))
-        AudioButtonView()
+        HomeView()
     }
 }
 
