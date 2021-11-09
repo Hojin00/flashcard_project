@@ -41,9 +41,7 @@ struct SingleDeckView: View {
     
     var body: some View {
         ZStack {
-            Button {
-                print("deck")
-            } label: {
+            NavigationLink(destination: DeckView(deck: deck)) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(bottomCardColor)
