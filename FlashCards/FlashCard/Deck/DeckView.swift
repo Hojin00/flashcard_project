@@ -10,24 +10,22 @@ import CloudKit
 
 struct DeckView: View {
     
+    @EnvironmentObject private var cloudkitManager: CloudKitManager
     var deck: Deck
     let screenSize: CGSize = UIScreen.main.bounds.size
     @State private var searchText: String = ""
-    @State var flashcards: [FlashCard] = []
+    
     
     init(deck: Deck) {
         self.deck = deck
-        var auxFlashCard: [FlashCard] = []
-        CloudKitManager.shared.fetchDeck(deckID: "2E0DE1C5-5CF2-4E64-B8DA-A342B3D70ABC") { Result in
-            switch Result {
-            case .success(let flashcard):
-                auxFlashCard = flashcard
-                print(flashcard)
-            default:
-                print("error")
-            }
-        }
-        flashcards = auxFlashCard
+//        CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
+//            switch Result {
+//            case .success:
+//                print("success")
+//            default:
+//                print("error")
+//            }
+//        }
     }
     
     var body: some View {
@@ -57,17 +55,17 @@ struct DeckView: View {
                             }
                             CardPreview(cardType: .informationCard, deck: deck)
                         }
-                        ForEach(1..<6) { n in
+                        ForEach(0..<cloudkitManager.allFlashCards.count) { n in
                             HStack(alignment: .center) {
                                 if n % 2 != 0 {
-                                    if n+1 < 6 {
-                                        CardPreview(cardType: .informationCard, deck: deck)
-                                        CardPreview(cardType: .informationCard, deck: deck)
+                                    if n+1 < cloudkitManager.allFlashCards.count {
+                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n])
+                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n+1])
 //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
 //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n+1])
                                     } else {
 //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
-                                        CardPreview(cardType: .informationCard, deck: deck)
+                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n])
                                         DeckEmptyView(width: screenSize.width * 0.35, height: screenSize.width * 0.26)
                                     }
                                 }
@@ -80,6 +78,16 @@ struct DeckView: View {
             .padding()
         }
         .frame(width: screenSize.width, height: screenSize.height)
+        .onAppear() {
+            CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
+                switch Result {
+                case .success:
+                    print("success")
+                default:
+                    print("error")
+                }
+            }
+        }
     }
 }
 
@@ -213,7 +221,7 @@ struct CardPreview: View {
                     .padding(.all, screenSize.width * 0.01)
                 VStack {
                     VStack {
-                        Text("Card Title goes here if too big ohh")
+                        Text("\(flashcard?.title ?? "Deck title here if to big ooooooooo")")
                             .fixedSize(horizontal: false, vertical: true)
                             .lineLimit(2)
                             .padding(.top, screenSize.width * 0.02)

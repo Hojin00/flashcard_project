@@ -18,13 +18,13 @@ struct SlideView: View {
     var deck: Deck
     init(deck: Deck){
         self.deck = deck
-        CloudKitManager.shared.fetchDeck(deckID: "2E0DE1C5-5CF2-4E64-B8DA-A342B3D70ABC") { Result in
+        CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
             switch Result {
             case .success:
                 print("Uhul")
                 break
             default:
-                print("no flashcards in deck")
+                print("failed")
                 break
             }
         }
@@ -86,7 +86,20 @@ struct SlideView: View {
                     Spacer()
                 }
             }
-        }.padding()
+        }
+        .padding()
+        .onAppear() {
+            CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
+                switch Result {
+                case .success:
+                    print("Uhul")
+                    break
+                default:
+                    print("failed")
+                    break
+                }
+            }
+        }
     }
 }
 
