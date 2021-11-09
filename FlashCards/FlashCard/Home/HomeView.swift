@@ -138,9 +138,7 @@ struct HomeView: View {
                                             }
                                         }
                                     }
-                                    Button {
-                                        print("new deck")
-                                    } label : {
+                                    NavigationLink(destination: EditDeckView()) {
                                         ZStack {
                                             Image("buttonNewDeck")
                                                 .frame(width: 23, height: 24)

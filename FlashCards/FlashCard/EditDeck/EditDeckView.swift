@@ -26,13 +26,10 @@ struct EditDeckView: View {
                     Text("Edit Deck")
                         .font(.title).bold()
                     Spacer()
-                    Button {
-                        //to do
-                    } label: {
-                        Text("Cancel")
-                            .foregroundColor(.black)
-                    }
-                    
+//                    NavigationLink(destination: HomeView()) {
+//                        Text("Cancel")
+//                            .foregroundColor(.black)
+//                    }
                 }
                 .padding(.horizontal, UIScreen.main.bounds.width * 0.27)
                     ZStack {
