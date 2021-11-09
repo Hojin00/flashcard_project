@@ -1,19 +1,20 @@
 //
-//  NewCardSideView.swift
+//  EditCardSideView.swift
 //  FlashCards
 //
-//  Created by Lucca Molon on 03/11/21.
+//  Created by Lucca Molon on 05/11/21.
 //
 
 import SwiftUI
 
-struct NewCardSideView: View {
+struct EditCardSideView: View {
     
     let screenSize: CGSize = UIScreen.main.bounds.size
     @State private var title: String = ""
     @State private var text: String = ""
     @State private var sliderValue: Double = 0
     var side: Side
+    var flashcard: FlashCard?
     
     var body: some View {
         VStack {
@@ -40,17 +41,29 @@ struct NewCardSideView: View {
                     .padding(.leading, screenSize.width * 0.03)
                 Spacer()
             }
-            Button() {
-                print("aaaa")
-            } label: {
-                RoundedRectangle(cornerRadius: 5)
+            if flashcard?.frontSideImage != nil && side == .front {
+                RoundedRectangle(cornerRadius: 5)                    // alterar roundedRectangle por Image
                     .frame(width: screenSize.width * 0.8, height: screenSize.height * 0.1)
                     .foregroundColor(.gray)
                     .opacity(0.5)
-                    .overlay(
-                        Text("\(Image(systemName: "photo")) Add Image")
-                            .foregroundColor(.black)
-                    )
+            } else if flashcard?.backSideImage != nil && side == .back {
+                RoundedRectangle(cornerRadius: 5)                     // alterar roundedRectangle por Image
+                    .frame(width: screenSize.width * 0.8, height: screenSize.height * 0.1)
+                    .foregroundColor(.gray)
+                    .opacity(0.5)
+            } else {
+                Button() {
+                    print("aaaa")
+                } label: {
+                    RoundedRectangle(cornerRadius: 5)
+                        .frame(width: screenSize.width * 0.8, height: screenSize.height * 0.1)
+                        .foregroundColor(.gray)
+                        .opacity(0.5)
+                        .overlay(
+                            Text("\(Image(systemName: "photo")) Add Image")
+                                .foregroundColor(.black)
+                        )
+                }
             }
             HStack {
                 Text("Description or Question")
@@ -127,12 +140,31 @@ struct NewCardSideView: View {
             }
             .padding(.horizontal, screenSize.width * 0.02)
         }
+        .onAppear {
+            guard let flashcard = flashcard else {
+                return
+            }
+            if flashcard.title != nil {
+                title = flashcard.title!
+            }
+            if flashcard.frontSideText != nil && side == .front {
+                text = flashcard.frontSideText!
+            }
+            if flashcard.backSideText != nil && side == .back {
+                text = flashcard.backSideText!
+            }
+            
+        }
         //.background(color)
     }
+       
+            
 }
 
-struct NewCardSideView_Previews: PreviewProvider {
+
+
+struct EditCardSideView_Previews: PreviewProvider {
     static var previews: some View {
-        NewCardSideView(side: .front)
+        EditCardSideView(side: .front)
     }
 }
