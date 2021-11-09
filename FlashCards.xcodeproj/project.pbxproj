@@ -48,6 +48,8 @@
 		B499C986271768D500066FE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C985271768D500066FE2 /* ContentView.swift */; };
 		B499C988271768D600066FE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C987271768D600066FE2 /* Assets.xcassets */; };
 		B499C98B271768D600066FE2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C98A271768D600066FE2 /* Preview Assets.xcassets */; };
+		ECF1155527359FAC005CCB8F /* EditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF1155427359FAC005CCB8F /* EditCardView.swift */; };
+		ECF115572735A22E005CCB8F /* EditCardSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF115562735A22D005CCB8F /* EditCardSideView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +97,8 @@
 		B499C985271768D500066FE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B499C987271768D600066FE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B499C98A271768D600066FE2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		ECF1155427359FAC005CCB8F /* EditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardView.swift; sourceTree = "<group>"; };
+		ECF115562735A22D005CCB8F /* EditCardSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardSideView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,7 @@
 		B467EE1227359C4C00559E65 /* FlashCard */ = {
 			isa = PBXGroup;
 			children = (
+				ECF1155327359F8F005CCB8F /* EditCard */,
 				B467EE1327359C4C00559E65 /* Home */,
 				B467EE1627359C4C00559E65 /* Card */,
 				B467EE1B27359C4C00559E65 /* Notification */,
@@ -303,6 +308,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		ECF1155327359F8F005CCB8F /* EditCard */ = {
+			isa = PBXGroup;
+			children = (
+				ECF1155427359FAC005CCB8F /* EditCardView.swift */,
+				ECF115562735A22D005CCB8F /* EditCardSideView.swift */,
+			);
+			path = EditCard;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -394,6 +408,7 @@
 				B467EE4127359C4C00559E65 /* SearchView.swift in Sources */,
 				B467EE6227359C6F00559E65 /* AudioRecorder.swift in Sources */,
 				B467EE4827359C4C00559E65 /* EmptyView.swift in Sources */,
+				ECF1155527359FAC005CCB8F /* EditCardView.swift in Sources */,
 				B467EE5C27359C6F00559E65 /* AudioPlayer.swift in Sources */,
 				B467EE3C27359C4C00559E65 /* EditDeckView.swift in Sources */,
 				B467EE4C27359C4C00559E65 /* ShareView.swift in Sources */,
@@ -405,6 +420,7 @@
 				B467EE4327359C4C00559E65 /* CardStatusView.swift in Sources */,
 				B467EE5F27359C6F00559E65 /* URLManager.swift in Sources */,
 				B467EE4A27359C4C00559E65 /* AllDecksView.swift in Sources */,
+				ECF115572735A22E005CCB8F /* EditCardSideView.swift in Sources */,
 				B467EE5327359C6000559E65 /* RecordingModel.swift in Sources */,
 				B467EE3927359C4C00559E65 /* CardView.swift in Sources */,
 				B467EE4027359C4C00559E65 /* WeekdayPickerView.swift in Sources */,

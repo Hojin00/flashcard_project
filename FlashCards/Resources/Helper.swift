@@ -34,3 +34,8 @@ enum SortBy: String {
         }
     }
 }
+
+
+enum Side {
+    case front, back
+}
