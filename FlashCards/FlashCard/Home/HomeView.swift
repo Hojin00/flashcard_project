@@ -112,8 +112,9 @@ struct HomeView: View {
                             .pickerStyle(MenuPickerStyle())
                             
                             Spacer()
-                            Button("See all"){
-                                print("Print tudo")
+                            NavigationLink(destination: AllDecksView(decks: cloudkitManager.allDecks)) {
+                                Text("See all")
+                                    .foregroundColor(.black)
                             }
                             .padding(.trailing)
                         }
