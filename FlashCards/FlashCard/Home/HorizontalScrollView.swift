@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HorizontalScrollView: View {
+    
     @EnvironmentObject private var cloudkitManager: CloudKitManager
     let deck: Deck
     let screenSize: CGSize
@@ -18,9 +19,7 @@ struct HorizontalScrollView: View {
     var bottomCardColor: Color = Color.white
     
     var body: some View {
-        
-        
-        GeometryReader { reader in
+            GeometryReader { reader in
             
             let midX = reader.frame(in: .global).midX
             let distance = abs(screenSize.width / 2 - midX)
@@ -29,9 +28,7 @@ struct HorizontalScrollView: View {
             
             //ScrollView(.horizontal,showsIndicators: false) {
             ZStack{
-                Button{
-                    //action
-                }label: {
+                NavigationLink(destination: DeckView(deck: deck)) {
                     ZStack {
                         //Image("AllDecksDeckBackground")
                         //    .padding(.top, UIScreen.main.bounds.height * 0.1)
@@ -109,7 +106,7 @@ struct HorizontalScrollView: View {
         //                    print("no last seen")
         //                }
         //            }
-        //            
+        //
         //        }
         .frame(width: width)
         .frame(maxHeight: .infinity)

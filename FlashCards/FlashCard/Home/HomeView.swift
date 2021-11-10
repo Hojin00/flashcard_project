@@ -204,7 +204,7 @@ struct HomeView: View {
         let paddingX: CGFloat = (screenSize.width - itemWidth) / 2
         return ScrollView(.horizontal,showsIndicators: false) {
             HStack{
-                ForEach(cloudkitManager.allDecks) { i in
+                ForEach(cloudkitManager.allDecks) { i in // navigation deveria ser aqui, e passar o objeto  por parametro
                     EmptyView()
                     HorizontalScrollView(deck: i, screenSize: screenSize, width: itemWidth, paddingX: paddingX)
                 }

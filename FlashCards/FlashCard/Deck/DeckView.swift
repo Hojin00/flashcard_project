@@ -108,6 +108,7 @@ struct DeckEmptyView: View {
 }
 
 struct CardPreview: View {
+    @State private var presentAlert = false
     let screenSize: CGSize = UIScreen.main.bounds.size
     var cardType: CardType
     var flashcard: FlashCard?
@@ -140,7 +141,7 @@ struct CardPreview: View {
                     
                 }
             } else if cardType == .practiceCard {
-               
+                
                 if deck != nil {
                     NavigationLink(destination: SlideView(deck: deck!)){
                         ZStack {
@@ -164,6 +165,31 @@ struct CardPreview: View {
                         
                         
                     }
+                }
+                else {
+                    Button{
+                        print("Nao tem deck aqui")
+                    }label: {
+                        ZStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundColor(.white)
+                        .shadow(radius: 5)
+                        .frame(width: screenSize.width * 0.35, height: screenSize.height * 0.12)
+                        .padding(.all, 2)
+                    VStack {
+                        Image(systemName: "square.stack")
+                            .resizable()
+                            .frame(width: screenSize.width * 0.055, height: screenSize.height * 0.032)
+                            .foregroundColor(.black)
+                        Text("Practice Deck")
+                            .padding(.top, 6)
+                            .foregroundColor(.black)
+                    }
+                    .frame(width: screenSize.width * 0.35, height: screenSize.height * 0.12)
+                    .padding(.all, screenSize.width * 0.02)
+                        }
+                    }
+                    
                 }
                 
                 
