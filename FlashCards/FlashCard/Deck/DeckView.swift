@@ -50,8 +50,8 @@ struct DeckView: View {
                     VStack {
                         HStack(alignment: .center) {
                             VStack {
-                                CardPreview(cardType: .practiceCard)
-                                CardPreview(cardType: .newCard)
+                                CardPreview(cardType: .practiceCard, deck: deck)
+                                CardPreview(cardType: .newCard, deck: deck)
                             }
                             CardPreview(cardType: .informationCard, deck: deck)
                         }
@@ -59,13 +59,13 @@ struct DeckView: View {
                             HStack(alignment: .center) {
                                 if n % 2 != 0 {
                                     if n+1 < cloudkitManager.allFlashCards.count {
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n])
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n+1])
+                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
+                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n+1], deck: deck)
                                         //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
                                         //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n+1])
                                     } else {
                                         //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n])
+                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
                                         DeckEmptyView(width: screenSize.width * 0.35, height: screenSize.width * 0.26)
                                     }
                                 }
@@ -112,7 +112,7 @@ struct CardPreview: View {
     let screenSize: CGSize = UIScreen.main.bounds.size
     var cardType: CardType
     var flashcard: FlashCard?
-    var deck: Deck?
+    var deck: Deck
     var body: some View {
         ZStack {
             if cardType == .newCard {
@@ -141,58 +141,26 @@ struct CardPreview: View {
                     
                 }
             } else if cardType == .practiceCard {
-                
-                if deck != nil {
-                    NavigationLink(destination: SlideView(deck: deck!)){
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundColor(.white)
-                                .shadow(radius: 5)
-                                .frame(width: screenSize.width * 0.35, height: screenSize.height * 0.12)
-                                .padding(.all, 2)
-                            VStack {
-                                Image(systemName: "square.stack")
-                                    .resizable()
-                                    .frame(width: screenSize.width * 0.055, height: screenSize.height * 0.032)
-                                    .foregroundColor(.black)
-                                Text("Practice Deck")
-                                    .padding(.top, 6)
-                                    .foregroundColor(.black)
-                            }
+                NavigationLink(destination: SlideView(deck: deck)){
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(.white)
+                            .shadow(radius: 5)
                             .frame(width: screenSize.width * 0.35, height: screenSize.height * 0.12)
-                            .padding(.all, screenSize.width * 0.02)
+                            .padding(.all, 2)
+                        VStack {
+                            Image(systemName: "square.stack")
+                                .resizable()
+                                .frame(width: screenSize.width * 0.055, height: screenSize.height * 0.032)
+                                .foregroundColor(.black)
+                            Text("Practice Deck")
+                                .padding(.top, 6)
+                                .foregroundColor(.black)
                         }
-                        
-                        
-                    }
-                }
-                else {
-                    Button{
-                        print("Nao tem deck aqui")
-                    }label: {
-                        ZStack {
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundColor(.white)
-                        .shadow(radius: 5)
                         .frame(width: screenSize.width * 0.35, height: screenSize.height * 0.12)
-                        .padding(.all, 2)
-                    VStack {
-                        Image(systemName: "square.stack")
-                            .resizable()
-                            .frame(width: screenSize.width * 0.055, height: screenSize.height * 0.032)
-                            .foregroundColor(.black)
-                        Text("Practice Deck")
-                            .padding(.top, 6)
-                            .foregroundColor(.black)
+                        .padding(.all, screenSize.width * 0.02)
                     }
-                    .frame(width: screenSize.width * 0.35, height: screenSize.height * 0.12)
-                    .padding(.all, screenSize.width * 0.02)
-                        }
-                    }
-                    
                 }
-                
-                
             } else if cardType == .informationCard {
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundColor(.white)
@@ -213,10 +181,7 @@ struct CardPreview: View {
                                 .padding(.bottom, screenSize.width * 0.04)
                                 .padding(.top, screenSize.width * -0.04)
                         }
-                        //                        Text("High importance")
-                        //                            .font(.caption)
-                        //                            .padding(.bottom, screenSize.width * 0.07)
-                        Text("\(deck?.title ?? "Deck title here if to big ooooooooo")")
+                        Text("\(deck.title ?? "Deck title here if to big ooooooooo")")
                             .fixedSize(horizontal: false, vertical: true)
                             .lineLimit(2)
                             .padding(.vertical, screenSize.width * 0.01)
