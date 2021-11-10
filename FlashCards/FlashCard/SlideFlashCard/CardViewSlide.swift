@@ -14,7 +14,8 @@ struct CardViewSlide: View {
     private var card: FlashCard
     private var onRemove: (FlashCard) -> Void
     
-    
+    var currentCard: Int
+    var totalCard: Int
     
     private var thresholdPercentage: CGFloat = 0.20 // when the user has draged 35% the width of the screen in either direction
     
@@ -22,9 +23,11 @@ struct CardViewSlide: View {
         case easy, hard, none
     }
     
-    init(card: FlashCard, onRemove: @escaping (FlashCard) -> Void) {
+    init(card: FlashCard,totalCard: Int, currentCard: Int  , onRemove: @escaping (FlashCard) -> Void) {
         self.card = card
         self.onRemove = onRemove
+        self.totalCard = totalCard
+        self.currentCard = currentCard
         
     }
     
@@ -35,6 +38,9 @@ struct CardViewSlide: View {
     private func getGesturePercentage(_ geometry: GeometryProxy, from gesture: DragGesture.Value) -> CGFloat {
         gesture.translation.width / geometry.size.width
     }
+    
+    //private lazy var positonOnDeck: String =
+
     
     var body: some View {
         GeometryReader { geometry in
@@ -50,7 +56,7 @@ struct CardViewSlide: View {
                     //                        .clipped()
                     VStack {
                         HStack{
-                            Text("12/40")
+                            Text("\(currentCard)/\(totalCard)")
                                 .font(.caption)
                             
                             Spacer()
@@ -60,17 +66,20 @@ struct CardViewSlide: View {
                         }
                         .padding([.leading, .bottom, .trailing])
                         VStack(alignment: .center) {
-                            Text("\(self.card.frontSideText ?? "") PUDIM")
+                            Text(card.title ?? "Pudim")
                                 .font(.title)
                                 .bold()
                                 .foregroundColor(.gray)
                         }
                         VStack{
-                            Image("OPudim")
+                            Image("ÖPudim")
                                 .resizable()
                                 .scaledToFill()
                                 .cornerRadius(10)
                                 .frame(width: 200, height: 200)
+                        }
+                        VStack{
+                            Text(card.frontSideText ?? "um pudim feliz")
                         }
                         
                         HStack{
@@ -175,7 +184,7 @@ struct CardViewSlide: View {
 // 7
 struct CardViewSlide_Previews: PreviewProvider {
     static var previews: some View {
-        CardViewSlide(card: FlashCard.init(record: CKRecord(recordType: ""))) { _ in
+        CardViewSlide(card: FlashCard.init(record: CKRecord(recordType: "")), totalCard: 0, currentCard: 0) { _ in
             
         }
             .frame(height: 400)

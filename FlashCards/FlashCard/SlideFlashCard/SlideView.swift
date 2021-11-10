@@ -71,17 +71,22 @@ struct SlideView: View {
                 VStack(alignment: .center, spacing: 0.0) {
                     //DateView()
                     ZStack {
+                        //var n: Int = 0
                         ForEach.init(cloudkitManager.allFlashCards) { card in
-                            CardViewSlide(card: card) { _ in
-                                
-                            }
+                            
+                            CardViewSlide(card: card,totalCard: cloudkitManager.allFlashCards.count, currentCard: cloudkitManager.allFlashCards.firstIndex(of: card)! + 1, onRemove: { removedCard in
+                                // Remove that user from our array
+                                cloudkitManager.allFlashCards.removeAll { $0.id == removedCard.id }
+                               } )
                             .animation(.spring())
-                            .frame(width: self.getCardWidth(geometry, id: card.id.recordName), height: 500)
+                            .frame(width: 300, height: 500)
                             .offset(x: 0, y: self.getCardOffset(geometry, id: card.id.recordName))
+                            
+                            
                         }
-                    
+                        
                         //self.cards.removeAll { $0.id == removedUser.id }
-                 
+                        
                     }
                     Spacer()
                 }
