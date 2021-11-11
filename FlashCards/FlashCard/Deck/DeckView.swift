@@ -115,28 +115,32 @@ struct CardPreview: View {
     var body: some View {
         ZStack {
             if cardType == .newCard {
-                Button() {
-                    print("click")
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(.white)
-                            .shadow(radius: 5)
+                
+                NavigationLink(destination: SlideView(deck:  deck ?? Deck.init(record: CKRecord.init(recordType: "Deck")))) {
+                    Button() {
+                        print("click")
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundColor(.white)
+                                .shadow(radius: 5)
+                                .frame(width: screenSize.width * 0.35, height: screenSize.height * 0.12)
+                                .padding(.all, 2)
+                            VStack {
+                                Image(systemName: "plus")
+                                    .resizable()
+                                    .frame(width: screenSize.width * 0.06, height: screenSize.width * 0.05, alignment: .center)
+                                    .foregroundColor(.black)
+                                Text("New Card")
+                                    .padding(.top, screenSize.height * 0.01)
+                                    .foregroundColor(.black)
+                            }
                             .frame(width: screenSize.width * 0.35, height: screenSize.height * 0.12)
-                            .padding(.all, 2)
-                        VStack {
-                            Image(systemName: "plus")
-                                .resizable()
-                                .frame(width: screenSize.width * 0.06, height: screenSize.width * 0.05, alignment: .center)
-                                .foregroundColor(.black)
-                            Text("New Card")
-                                .padding(.top, screenSize.height * 0.01)
-                                .foregroundColor(.black)
+                            .padding(.all, screenSize.width * 0.01)
                         }
-                        .frame(width: screenSize.width * 0.35, height: screenSize.height * 0.12)
-                        .padding(.all, screenSize.width * 0.01)
+                        
                     }
-                    
+                        
                 }
             } else if cardType == .practiceCard {
                 Button() {
@@ -259,9 +263,9 @@ struct CardPreview: View {
     }
     
     struct DeckView_Previews: PreviewProvider {
-        @State static private var flashcardMock = FlashCard.init(myrecord: CKRecord.init(recordType: "FlashCard"), title: "", frontSideText: "front text", frontSideImage: nil, backSideText: "back text", backSideImage: nil, category: nil, frontSideAudio: nil, backSideAudio: nil, frontSideColor: nil, backSideColor: nil, hard: "")
+        @State static private var flashcardMock = FlashCard.init(myrecord: CKRecord.init(recordType: "FlashCard"), title: "", frontSideText: "front text", frontSideImage: nil, backSideText: "back text", backSideImage: nil, category: nil, frontSideAudio: nil, backSideAudio: nil, hard: "")
         
-        static private var deckmock = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: [CKRecord.Reference.init(record: flashcardMock.myrecord, action: .none)], title: "deck title hellou", category: "lk", reminderDate: Date(), lastView: Date(), hardFlashcards: 3, importance: 2)
+        static private var deckmock = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: [CKRecord.Reference.init(record: flashcardMock.myrecord, action: .none)], title: "deck title hellou", category: "lk", reminderDate: Date(), lastView: Date(), hardFlashcards: 3, importance: 2, themeColor: "white")
         static var previews: some View {
             DeckView(deck: deckmock)
         }

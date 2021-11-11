@@ -20,11 +20,9 @@ struct FlashCard: Hashable, Identifiable {
     var category: String?
     var frontSideAudio: CKAsset?
     var backSideAudio: CKAsset?
-    var frontSideColor: CKAsset?
-    var backSideColor: CKAsset?
     var hard: String?
     
-    init(myrecord: CKRecord, title: String?, frontSideText: String?, frontSideImage: CKAsset?, backSideText: String?, backSideImage: CKAsset?, category: String?, frontSideAudio: CKAsset?, backSideAudio: CKAsset?, frontSideColor: CKAsset?, backSideColor: CKAsset?, hard: String?) {
+    init(myrecord: CKRecord, title: String?, frontSideText: String?, frontSideImage: CKAsset?, backSideText: String?, backSideImage: CKAsset?, category: String?, frontSideAudio: CKAsset?, backSideAudio: CKAsset?, hard: String?) {
         self.id = myrecord.recordID
         self.myrecord = myrecord
         self.title = title
@@ -35,8 +33,6 @@ struct FlashCard: Hashable, Identifiable {
         self.category = category
         self.frontSideAudio = frontSideAudio
         self.backSideAudio = backSideAudio
-        self.frontSideColor = frontSideColor
-        self.backSideColor = backSideColor
         self.hard = hard
         
         
@@ -48,8 +44,6 @@ struct FlashCard: Hashable, Identifiable {
         myrecord["category"] = frontSideText
         myrecord["frontSideAudio"] = frontSideAudio
         myrecord["backSideAudio"] = backSideAudio
-        myrecord["frontSideColor"] = frontSideColor
-        myrecord["backSideColor"] = backSideColor
         myrecord["hard"] = hard
         
     }
@@ -65,8 +59,6 @@ struct FlashCard: Hashable, Identifiable {
         self.category = record["category"]
         self.frontSideAudio = record["frontSideAudio"]
         self.backSideAudio = record["backSideAudio"]
-        self.frontSideColor = myrecord["frontSideColor"]
-        self.backSideColor = myrecord["backSideColor"]
         self.hard = myrecord["hard"]
     }
     

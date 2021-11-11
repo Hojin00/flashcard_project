@@ -9,7 +9,7 @@ import SwiftUI
 import CloudKit
 
 struct SingleDeckView: View {
-    
+    @EnvironmentObject private var cloudkitManager: CloudKitManager
     let deck: Deck
     var flashcards: [FlashCard] = []
     var topCardColor: Color = Color.white
