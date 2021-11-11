@@ -38,6 +38,7 @@ struct EditDeckView: View {
                             .shadow(radius: 10)
                             .frame(width: UIScreen.main.bounds.width * 0.77, height: UIScreen.main.bounds.height * 0.67)
                             .padding(.top, UIScreen.main.bounds.height * 0.070)
+                        
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundColor(Color.white)
                             .shadow(radius: 10)
@@ -104,7 +105,7 @@ struct EditDeckView: View {
                                 Text("Theme color")
                                     .fontWeight(.bold)
                                 Spacer()
-                                Text("???")
+                                ThemePickerView()
                             }
                             .padding()
                         }

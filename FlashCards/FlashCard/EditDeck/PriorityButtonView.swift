@@ -9,21 +9,24 @@ import SwiftUI
 
 struct PriorityButtonView: View {
     
-    @State var selected: Bool
-    @Binding var selectedPriority: [Bool]
+    @Binding var selectedPriority: Int
     let buttonPriority: Int
     let symbol: String
     let text: String
     
     var body: some View {
         Button(action: {
-            selectedPriority = [false, false, false, false]
-            selectedPriority[buttonPriority] = true
-            selected = true
+            selectedPriority = buttonPriority
         }, label: {
             ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(.gray)
+                if selectedPriority == buttonPriority {
+                    RoundedRectangle(cornerRadius: 5)
+                        .foregroundColor(.blue)
+                        .frame(width: UIScreen.main.bounds.width * 0.1475, height: UIScreen.main.bounds.width * 0.1475)
+                }
+                RoundedRectangle(cornerRadius: 5)
+                    .foregroundColor(Color("lightGray"))
+                    .frame(width: UIScreen.main.bounds.width * 0.14, height: UIScreen.main.bounds.width * 0.14)
                 VStack {
                     Text("\(symbol)")
                     Text("\(text)")
@@ -37,8 +40,10 @@ struct PriorityButtonView: View {
 }
 
 struct PriorityButtonView_Previews: PreviewProvider {
-    @State static var selectedPriority: [Bool] = [false, false, false, false]
+    
+    @State static var selectedPriority: Int = 0
+    
     static var previews: some View {
-        PriorityButtonView(selected: false, selectedPriority: $selectedPriority, buttonPriority: 0, symbol: "-", text: "None")
+        PriorityButtonView(selectedPriority: $selectedPriority, buttonPriority: 0, symbol: "-", text: "None")
     }
 }

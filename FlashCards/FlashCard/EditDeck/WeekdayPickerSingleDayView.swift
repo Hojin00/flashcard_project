@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WeekdayPickerSingleDayView: View {
     
-    @State var isSelected: Bool
+    @State var textColor: Color = .black
     @Binding var selectedDays: [Bool]
     let title: String
     let dayNum: Int
@@ -17,14 +17,25 @@ struct WeekdayPickerSingleDayView: View {
     var body: some View {
         Button {
             selectedDays[dayNum].toggle()
-            isSelected.toggle()
+            if selectedDays[dayNum] {
+                textColor = .blue
+            } else {
+                textColor = .black
+            }
         } label: {
             ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(.gray)
+                if selectedDays[dayNum] {
+                    //selecionado
+                    RoundedRectangle(cornerRadius: 5)
+                        .foregroundColor(.blue)
+                        .frame(width: UIScreen.main.bounds.width * 0.085, height: UIScreen.main.bounds.height * 0.0333)
+                }
+                RoundedRectangle(cornerRadius: 5)
+                    .foregroundColor(Color("lightGray"))
+                    .frame(width: UIScreen.main.bounds.width * 0.08, height: UIScreen.main.bounds.height * 0.03)
                 Text("\(title)")
                     .font(.caption)
-                    .foregroundColor(.black)
+                    .foregroundColor(textColor)
             }
             .frame(width: UIScreen.main.bounds.width * 0.08, height: UIScreen.main.bounds.height * 0.03)
         }
@@ -37,6 +48,6 @@ struct WeekdayPickerSingleDayView_Previews: PreviewProvider {
     @State static var selectedDays: [Bool] = [false, false, false, false, false, false, false]
     
     static var previews: some View {
-        WeekdayPickerSingleDayView(isSelected: false, selectedDays: $selectedDays, title: "Mon", dayNum: 0)
+        WeekdayPickerSingleDayView(selectedDays: $selectedDays, title: "Mon", dayNum: 0)
     }
 }

@@ -9,29 +9,16 @@ import SwiftUI
 
 struct ThemePickerSingleThemeView: View {
     
-    @State var isSelected: Bool
     @Binding var selectedTheme: Int
-    @Binding var selectedThemes: [Bool]
     let themeColor: Color
     let themeNum: Int
     
     var body: some View {
         Button {
-            DispatchQueue.main.async {
-                if isSelected {
-                    selectedTheme = 0
-                    selectedThemes = [true, false, false, false, false, false, false]
-                    isSelected = false
-                } else {
-                    selectedTheme = themeNum
-                    selectedThemes = [false, false, false, false, false, false, false]
-                    selectedThemes[themeNum] = true
-                    isSelected = true
-                }
-            }
+            selectedTheme = themeNum
         } label: {
             ZStack {
-                if isSelected {
+                if selectedTheme == themeNum {
                     Circle()
                         .foregroundColor(.black)
                         .frame(width: UIScreen.main.bounds.width * 0.09, height: UIScreen.main.bounds.height * 0.09)
@@ -52,9 +39,8 @@ struct ThemePickerSingleThemeView: View {
 struct ThemePickerSingleThemeView_Previews: PreviewProvider {
     
     @State static var selectedTheme: Int = 0
-    @State static var selectedThemes: [Bool] = [true, false, false, false, false, false, false]
     
     static var previews: some View {
-        ThemePickerSingleThemeView(isSelected: false, selectedTheme: $selectedTheme, selectedThemes: $selectedThemes, themeColor: .green, themeNum: 1)
+        ThemePickerSingleThemeView(selectedTheme: $selectedTheme, themeColor: .green, themeNum: 1)
     }
 }

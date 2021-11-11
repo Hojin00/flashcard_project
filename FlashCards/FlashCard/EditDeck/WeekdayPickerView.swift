@@ -14,13 +14,13 @@ struct WeekdayPickerView: View {
     var body: some View {
         HStack {
             Spacer()
-            WeekdayPickerSingleDayView(isSelected: selectedDays[0], selectedDays: $selectedDays, title: "Mon", dayNum: 0)
-            WeekdayPickerSingleDayView(isSelected: selectedDays[1], selectedDays: $selectedDays, title: "Tue", dayNum: 1)
-            WeekdayPickerSingleDayView(isSelected: selectedDays[2], selectedDays: $selectedDays, title: "Wed", dayNum: 2)
-            WeekdayPickerSingleDayView(isSelected: selectedDays[3], selectedDays: $selectedDays, title: "Thu", dayNum: 3)
-            WeekdayPickerSingleDayView(isSelected: selectedDays[4], selectedDays: $selectedDays, title: "Fri", dayNum: 4)
-            WeekdayPickerSingleDayView(isSelected: selectedDays[5], selectedDays: $selectedDays, title: "Sat", dayNum: 5)
-            WeekdayPickerSingleDayView(isSelected: selectedDays[6], selectedDays: $selectedDays, title: "Sun", dayNum: 6)
+            WeekdayPickerSingleDayView(selectedDays: $selectedDays, title: "Mon", dayNum: 0)
+            WeekdayPickerSingleDayView(selectedDays: $selectedDays, title: "Tue", dayNum: 1)
+            WeekdayPickerSingleDayView(selectedDays: $selectedDays, title: "Wed", dayNum: 2)
+            WeekdayPickerSingleDayView(selectedDays: $selectedDays, title: "Thu", dayNum: 3)
+            WeekdayPickerSingleDayView(selectedDays: $selectedDays, title: "Fri", dayNum: 4)
+            WeekdayPickerSingleDayView(selectedDays: $selectedDays, title: "Sat", dayNum: 5)
+            WeekdayPickerSingleDayView(selectedDays: $selectedDays, title: "Sun", dayNum: 6)
             Spacer()
         }
     }

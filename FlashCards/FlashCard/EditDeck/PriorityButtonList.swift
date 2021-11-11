@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct PriorityButtonList: View {
-    
-    @State var selectedPriority: [Bool] = [true, false, false, false]
+
+    @State var selectedPriority: Int = 0
     
     var body: some View {
         HStack {
-            PriorityButtonView(selected: selectedPriority[0], selectedPriority: $selectedPriority, buttonPriority: 0, symbol: "-", text: "None")
-            PriorityButtonView(selected: selectedPriority[0], selectedPriority: $selectedPriority, buttonPriority: 0, symbol: "!", text: "Low")
-            PriorityButtonView(selected: selectedPriority[0], selectedPriority: $selectedPriority, buttonPriority: 0, symbol: "!!", text: "Medium")
-            PriorityButtonView(selected: selectedPriority[0], selectedPriority: $selectedPriority, buttonPriority: 0, symbol: "!!!", text: "High")
+            PriorityButtonView(selectedPriority: $selectedPriority, buttonPriority: 0, symbol: "-", text: "None")
+            PriorityButtonView(selectedPriority: $selectedPriority, buttonPriority: 1, symbol: "!", text: "Low")
+            PriorityButtonView(selectedPriority: $selectedPriority, buttonPriority: 2, symbol: "!!", text: "Medium")
+            PriorityButtonView(selectedPriority: $selectedPriority, buttonPriority: 3, symbol: "!!!", text: "High")
         }
     }
 }
