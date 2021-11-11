@@ -48,6 +48,9 @@
 		B499C986271768D500066FE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499C985271768D500066FE2 /* ContentView.swift */; };
 		B499C988271768D600066FE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C987271768D600066FE2 /* Assets.xcassets */; };
 		B499C98B271768D600066FE2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499C98A271768D600066FE2 /* Preview Assets.xcassets */; };
+		EC1FE1DF273C364D00FAAA74 /* CustomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1FE1DE273C364D00FAAA74 /* CustomModal.swift */; };
+		EC1FE1E1273D544C00FAAA74 /* CustomCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1FE1E0273D544C00FAAA74 /* CustomCorner.swift */; };
+		EC1FE1E3273D8F7300FAAA74 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1FE1E2273D8F7300FAAA74 /* TestView.swift */; };
 		ECF1155527359FAC005CCB8F /* EditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF1155427359FAC005CCB8F /* EditCardView.swift */; };
 		ECF115572735A22E005CCB8F /* EditCardSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF115562735A22D005CCB8F /* EditCardSideView.swift */; };
 /* End PBXBuildFile section */
@@ -97,6 +100,9 @@
 		B499C985271768D500066FE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B499C987271768D600066FE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B499C98A271768D600066FE2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EC1FE1DE273C364D00FAAA74 /* CustomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModal.swift; sourceTree = "<group>"; };
+		EC1FE1E0273D544C00FAAA74 /* CustomCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCorner.swift; sourceTree = "<group>"; };
+		EC1FE1E2273D8F7300FAAA74 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		ECF1155427359FAC005CCB8F /* EditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardView.swift; sourceTree = "<group>"; };
 		ECF115562735A22D005CCB8F /* EditCardSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardSideView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +130,7 @@
 		B467EE1227359C4C00559E65 /* FlashCard */ = {
 			isa = PBXGroup;
 			children = (
+				EC1FE1DD273C360C00FAAA74 /* MenuModal */,
 				ECF1155327359F8F005CCB8F /* EditCard */,
 				B467EE1327359C4C00559E65 /* Home */,
 				B467EE1627359C4C00559E65 /* Card */,
@@ -308,6 +315,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		EC1FE1DD273C360C00FAAA74 /* MenuModal */ = {
+			isa = PBXGroup;
+			children = (
+				EC1FE1DE273C364D00FAAA74 /* CustomModal.swift */,
+				EC1FE1E0273D544C00FAAA74 /* CustomCorner.swift */,
+				EC1FE1E2273D8F7300FAAA74 /* TestView.swift */,
+			);
+			path = MenuModal;
+			sourceTree = "<group>";
+		};
 		ECF1155327359F8F005CCB8F /* EditCard */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,6 +417,7 @@
 				B467EE3527359C4C00559E65 /* HorizontalScrollView.swift in Sources */,
 				B467EE3E27359C4C00559E65 /* WeekdayPickerSingleDayView.swift in Sources */,
 				B467EE4427359C4C00559E65 /* StandardButton.swift in Sources */,
+				EC1FE1DF273C364D00FAAA74 /* CustomModal.swift in Sources */,
 				B467EE3727359C4C00559E65 /* CardFlipView.swift in Sources */,
 				B467EE6627359C9E00559E65 /* Extensions.swift in Sources */,
 				B467EE4527359C4C00559E65 /* AudioButtonView.swift in Sources */,
@@ -418,6 +436,7 @@
 				B467EE6727359C9E00559E65 /* Helper.swift in Sources */,
 				B499C984271768D500066FE2 /* FlashCardsApp.swift in Sources */,
 				B467EE4327359C4C00559E65 /* CardStatusView.swift in Sources */,
+				EC1FE1E3273D8F7300FAAA74 /* TestView.swift in Sources */,
 				B467EE5F27359C6F00559E65 /* URLManager.swift in Sources */,
 				B467EE4A27359C4C00559E65 /* AllDecksView.swift in Sources */,
 				ECF115572735A22E005CCB8F /* EditCardSideView.swift in Sources */,
@@ -425,6 +444,7 @@
 				B467EE3927359C4C00559E65 /* CardView.swift in Sources */,
 				B467EE4027359C4C00559E65 /* WeekdayPickerView.swift in Sources */,
 				B467EE3B27359C4C00559E65 /* NotificationView.swift in Sources */,
+				EC1FE1E1273D544C00FAAA74 /* CustomCorner.swift in Sources */,
 				B467EE4927359C4C00559E65 /* SingleDeckView.swift in Sources */,
 				B467EE6027359C6F00559E65 /* ShareManager.swift in Sources */,
 			);
