@@ -12,6 +12,9 @@ struct EditDeckView: View {
     @State var text: String = ""
     @State var isAlarmOn: Bool = true
     @State var currentDate = Date()
+    @State var selectedPriority: Int = 0
+    @State var selectedDays: [Bool] = [false, false, false, false, false, false, false]
+    @State var selectedTheme: Int = 0
     
     var body: some View {
         ZStack {
@@ -38,7 +41,6 @@ struct EditDeckView: View {
                             .shadow(radius: 10)
                             .frame(width: UIScreen.main.bounds.width * 0.77, height: UIScreen.main.bounds.height * 0.67)
                             .padding(.top, UIScreen.main.bounds.height * 0.070)
-                        
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundColor(Color.white)
                             .shadow(radius: 10)
@@ -48,6 +50,8 @@ struct EditDeckView: View {
                             .foregroundColor(Color.white)
                             .shadow(radius: 10)
                             .frame(width: UIScreen.main.bounds.width * 0.92, height: UIScreen.main.bounds.height * 0.67)
+                            .clipShape(CustomCorner(corners: [.topLeft, .topRight], radius: 50))
+                            .foregroundColor(.green)
                         VStack {
                             HStack {
                                 Text("Title of the deck")
@@ -65,7 +69,7 @@ struct EditDeckView: View {
                                 Text("Priority")
                                     .fontWeight(.bold)
                                     .padding(.bottom, UIScreen.main.bounds.height * 0.04)
-                                PriorityButtonList()
+                                PriorityButtonList(selectedPriority: $selectedPriority)
                             }
                             Divider()
                                 .padding()
@@ -90,7 +94,7 @@ struct EditDeckView: View {
                                     .fontWeight(.bold)
                                     .padding(.leading)
                                 Spacer()
-                                WeekdayPickerView()
+                                WeekdayPickerView(selectedDays: $selectedDays)
                             }
                             .padding()
                             HStack {
@@ -105,7 +109,7 @@ struct EditDeckView: View {
                                 Text("Theme color")
                                     .fontWeight(.bold)
                                 Spacer()
-                                ThemePickerView()
+                                ThemePickerView(selectedTheme: $selectedTheme)
                             }
                             .padding()
                         }

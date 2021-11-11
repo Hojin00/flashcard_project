@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ThemePickerView: View {
     
-    @State var selectedTheme: Int = 0
-//    @State var selectedThemes: [Bool] = [true, false, false, false, false, false, false]
+    @Binding var selectedTheme: Int
     
     var body: some View {
         HStack {
@@ -22,7 +21,10 @@ struct ThemePickerView: View {
 }
 
 struct ThemePickerView_Previews: PreviewProvider {
+    
+    @State static var selectedTheme: Int = 0
+    
     static var previews: some View {
-        ThemePickerView()
+        ThemePickerView(selectedTheme: $selectedTheme)
     }
 }

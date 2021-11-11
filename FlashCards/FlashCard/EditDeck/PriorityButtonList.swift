@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PriorityButtonList: View {
 
-    @State var selectedPriority: Int = 0
+    @Binding var selectedPriority: Int
     
     var body: some View {
         HStack {
@@ -22,7 +22,10 @@ struct PriorityButtonList: View {
 }
 
 struct PriorityButtonList_Previews: PreviewProvider {
+    
+    @State static var selectedPriority: Int = 0
+    
     static var previews: some View {
-        PriorityButtonList()
+        PriorityButtonList(selectedPriority: $selectedPriority)
     }
 }
