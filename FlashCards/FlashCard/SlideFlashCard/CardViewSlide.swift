@@ -12,7 +12,7 @@ struct CardViewSlide: View {
     @State private var swipeStatus: EasyHard = .none
     
     private var card: FlashCard
-    private var onRemove: (FlashCard) -> Void
+    //private var onRemove: (FlashCard) -> Void
     
     var currentCard: Int
     var totalCard: Int
@@ -23,9 +23,9 @@ struct CardViewSlide: View {
         case easy, hard, none
     }
     
-    init(card: FlashCard,totalCard: Int, currentCard: Int  , onRemove: @escaping (FlashCard) -> Void) {
+    init(card: FlashCard,totalCard: Int, currentCard: Int) {
         self.card = card
-        self.onRemove = onRemove
+        //self.onRemove = onRemove
         self.totalCard = totalCard
         self.currentCard = currentCard
         
@@ -72,7 +72,7 @@ struct CardViewSlide: View {
                                 .foregroundColor(.gray)
                         }
                         VStack{
-                            Image("ÖPudim")
+                            Image("OPudim")
                                 .resizable()
                                 .scaledToFill()
                                 .cornerRadius(10)
@@ -169,7 +169,7 @@ struct CardViewSlide: View {
                     }.onEnded { value in
                         // determine snap distance > 0.5 aka half the width of the screen
                         if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
-                            self.onRemove(self.card)
+                            //self.onRemove(self.card)
                         } else {
                             self.translation = .zero
                         }
@@ -184,9 +184,7 @@ struct CardViewSlide: View {
 // 7
 struct CardViewSlide_Previews: PreviewProvider {
     static var previews: some View {
-        CardViewSlide(card: FlashCard.init(record: CKRecord(recordType: "")), totalCard: 0, currentCard: 0) { _ in
-            
-        }
+        CardViewSlide(card: FlashCard.init(record: CKRecord(recordType: "")), totalCard: 0, currentCard: 0)
             .frame(height: 400)
             .padding()
     }
