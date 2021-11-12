@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct EditDeckView: View {
     
@@ -15,6 +16,8 @@ struct EditDeckView: View {
     @State var selectedPriority: Int = 0
     @State var selectedDays: [Bool] = [false, false, false, false, false, false, false]
     @State var selectedTheme: Int = 0
+    let isNewDeck: Bool
+    var deck: Deck
     var themeColor: Color {
         switch selectedTheme {
         case 0:
@@ -34,6 +37,21 @@ struct EditDeckView: View {
         }
     }
     
+    init(deck: Deck?, isNewDeck: Bool) {
+        self.isNewDeck = isNewDeck
+        if let deck = deck {
+            self.deck = deck
+            self.text = deck.title!
+//            self.isAlarmOn = deck.
+//            self.currentDate = deck.reminderDate!
+//            self.selectedPriority = deck.priority
+//            self.selectedDays = deck.selectedDays
+//            self.selectedTheme = deck.theme
+        } else {
+            self.deck = Deck(record: CKRecord.init(recordType: "Deck"))
+        }
+    }
+    
     var body: some View {
         ZStack {
             Circle()
@@ -47,10 +65,6 @@ struct EditDeckView: View {
                     Text("Edit Deck")
                         .font(.title).bold()
                     Spacer()
-//                    NavigationLink(destination: HomeView()) {
-//                        Text("Cancel")
-//                            .foregroundColor(.black)
-//                    }
                 }
                 .padding(.horizontal, UIScreen.main.bounds.width * 0.27)
                     ZStack {
@@ -160,6 +174,6 @@ struct EditDeckView: View {
 
 struct EditDeckView_Previews: PreviewProvider {
     static var previews: some View {
-        EditDeckView()
+        EditDeckView(deck: nil, isNewDeck: true)
     }
 }
