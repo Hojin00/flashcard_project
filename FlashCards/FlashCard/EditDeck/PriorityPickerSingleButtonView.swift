@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PriorityButtonView: View {
+struct PrioritySingleButtonView: View {
     
     @Binding var selectedPriority: Int
     let buttonPriority: Int
@@ -33,6 +33,7 @@ struct PriorityButtonView: View {
                 }
                 .font(.subheadline)
                 .foregroundColor(.black)
+                
             }
             .frame(width: UIScreen.main.bounds.width * 0.15, height: UIScreen.main.bounds.width * 0.15)
         })
@@ -44,6 +45,6 @@ struct PriorityButtonView_Previews: PreviewProvider {
     @State static var selectedPriority: Int = 0
     
     static var previews: some View {
-        PriorityButtonView(selectedPriority: $selectedPriority, buttonPriority: 0, symbol: "-", text: "None")
+        PrioritySingleButtonView(selectedPriority: $selectedPriority, buttonPriority: 0, symbol: "-", text: "None")
     }
 }

@@ -13,9 +13,10 @@ struct ThemePickerView: View {
     
     var body: some View {
         HStack {
-            ThemePickerSingleThemeView(selectedTheme: $selectedTheme, themeColor: .red, themeNum: 1)
-            ThemePickerSingleThemeView(selectedTheme: $selectedTheme, themeColor: .green, themeNum: 2)
-            ThemePickerSingleThemeView(selectedTheme: $selectedTheme, themeColor: .blue, themeNum: 3)
+            ThemePickerSingleThemeView(selectedTheme: $selectedTheme, themeColor: Color("greenColor"), themeNum: 0)
+            ThemePickerSingleThemeView(selectedTheme: $selectedTheme, themeColor: Color("blueColor"), themeNum: 1)
+            ThemePickerSingleThemeView(selectedTheme: $selectedTheme, themeColor: Color("redColor"), themeNum: 2)
+            ThemePickerSingleThemeView(selectedTheme: $selectedTheme, themeColor: Color("yellowColor"), themeNum: 3)
         }
     }
 }

@@ -15,6 +15,24 @@ struct EditDeckView: View {
     @State var selectedPriority: Int = 0
     @State var selectedDays: [Bool] = [false, false, false, false, false, false, false]
     @State var selectedTheme: Int = 0
+    var themeColor: Color {
+        switch selectedTheme {
+        case 0:
+            return Color("greenColor")
+            
+        case 1:
+            return Color("blueColor")
+            
+        case 2:
+            return Color("redColor")
+            
+        case 3:
+            return Color("yellowColor")
+            
+        default:
+            return Color("greenColor")
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -50,8 +68,15 @@ struct EditDeckView: View {
                             .foregroundColor(Color.white)
                             .shadow(radius: 10)
                             .frame(width: UIScreen.main.bounds.width * 0.92, height: UIScreen.main.bounds.height * 0.67)
-                            .clipShape(CustomCorner(corners: [.topLeft, .topRight], radius: 50))
-                            .foregroundColor(.green)
+                            .border(themeColor)
+                        VStack {
+                            Rectangle()
+                                .frame(width: UIScreen.main.bounds.width * 0.92, height: UIScreen.main.bounds.height * 0.025)
+                                .clipShape(CustomCorner(corners: [.topLeft, .topRight], radius: 50))
+                                .foregroundColor(themeColor)
+                                .padding(.top, UIScreen.main.bounds.height * 0.04)
+                            Spacer()
+                        }
                         VStack {
                             HStack {
                                 Text("Title of the deck")
@@ -69,7 +94,7 @@ struct EditDeckView: View {
                                 Text("Priority")
                                     .fontWeight(.bold)
                                     .padding(.bottom, UIScreen.main.bounds.height * 0.04)
-                                PriorityButtonList(selectedPriority: $selectedPriority)
+                                PriorityPickerView(selectedPriority: $selectedPriority)
                             }
                             Divider()
                                 .padding()
