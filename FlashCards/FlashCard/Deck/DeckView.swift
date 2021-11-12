@@ -10,22 +10,16 @@ import CloudKit
 
 struct DeckView: View {
     
-    @EnvironmentObject private var cloudkitManager: CloudKitManager
+    //@EnvironmentObject private var cloudkitManager: CloudKitManager
     var deck: Deck
     let screenSize: CGSize = UIScreen.main.bounds.size
     @State private var searchText: String = ""
-    
+    @State private var flashcards: [FlashCard] = []
+    @State private var didLoadCards: Bool = false
     
     init(deck: Deck) {
         self.deck = deck
-        //        CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
-        //            switch Result {
-        //            case .success:
-        //                print("success")
-        //            default:
-        //                print("error")
-        //            }
-        //        }
+   
     }
     
     var body: some View {
@@ -55,17 +49,19 @@ struct DeckView: View {
                             }
                             CardPreview(cardType: .informationCard, deck: deck)
                         }
-                        ForEach(0..<cloudkitManager.allFlashCards.count) { n in
+                        //ForEach(0..<cloudkitManager.allFlashCards.count) { n in
+                        ForEach(Array(flashcards.enumerated()), id: \.element) { (n, element ) in
+                            
                             HStack(alignment: .center) {
                                 if n % 2 != 0 {
-                                    if n+1 < cloudkitManager.allFlashCards.count {
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n+1], deck: deck)
+                                    if n+1 < flashcards.count {
+                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n], deck: deck)
+                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n+1], deck: deck)
                                         //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
                                         //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n+1])
                                     } else {
                                         //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
+                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n], deck: deck)
                                         DeckEmptyView(width: screenSize.width * 0.35, height: screenSize.width * 0.26)
                                     }
                                 }
@@ -79,10 +75,13 @@ struct DeckView: View {
         }
         .frame(width: screenSize.width, height: screenSize.height)
         .onAppear() {
+//            guard !didLoadCards else{ return }
             CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
                 switch Result {
-                case .success:
-                    print("success")
+                case .success(let cards):
+                    self.flashcards = cards
+                    self.didLoadCards = true
+                    print("success da DeckView")
                 default:
                     print("error")
                 }
