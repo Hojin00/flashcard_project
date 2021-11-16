@@ -19,7 +19,7 @@ struct DeckView: View {
     
     init(deck: Deck) {
         self.deck = deck
-   
+        
     }
     
     var body: some View {
@@ -75,7 +75,7 @@ struct DeckView: View {
         }
         .frame(width: screenSize.width, height: screenSize.height)
         .onAppear() {
-//            guard !didLoadCards else{ return }
+            //            guard !didLoadCards else{ return }
             CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
                 switch Result {
                 case .success(let cards):
@@ -125,11 +125,11 @@ struct CardPreview: View {
                             .shadow(radius: 5)
                             .frame(width: screenSize.width * 0.35, height: screenSize.height * 0.12)
                             .padding(.all, screenSize.width * 0.01)
-                        }
-                        
                     }
-                        
+                    
                 }
+                
+                
             } else if cardType == .practiceCard {
                 NavigationLink(destination: SlideView(deck: deck)){
                     ZStack {
