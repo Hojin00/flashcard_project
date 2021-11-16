@@ -14,7 +14,8 @@ struct CardViewSlide: View {
     private var card: FlashCard
     private var onRemove: (FlashCard) -> Void
     
-    
+    var currentCard: Int
+    var totalCard: Int
     
     private var thresholdPercentage: CGFloat = 0.20 // when the user has draged 35% the width of the screen in either direction
     
@@ -22,9 +23,11 @@ struct CardViewSlide: View {
         case easy, hard, none
     }
     
-    init(card: FlashCard, onRemove: @escaping (FlashCard) -> Void) {
+    init(card: FlashCard,totalCard: Int, currentCard: Int , onRemove: @escaping (FlashCard) -> Void) {
         self.card = card
         self.onRemove = onRemove
+        self.totalCard = totalCard
+        self.currentCard = currentCard
         
     }
     
@@ -36,12 +39,14 @@ struct CardViewSlide: View {
         gesture.translation.width / geometry.size.width
     }
     
+
+    
     var body: some View {
-        GeometryReader { geometry in
-            
-            
+
+         GeometryReader { geometry in
             VStack {
                 ZStack(alignment: self.swipeStatus == .easy ? .topLeading : .topTrailing) {
+                    
                     
                     //                     Image(self.card.frontSideImage ?? "")
                     //                        .resizable()
@@ -50,17 +55,17 @@ struct CardViewSlide: View {
                     //                        .clipped()
                     VStack {
                         HStack{
-                            Text("12/40")
+                            Text("\(currentCard)/\(totalCard)")
                                 .font(.caption)
-                            
+
                             Spacer()
                             Text("High")
                                 .font(.caption)
-                            
+
                         }
                         .padding([.leading, .bottom, .trailing])
                         VStack(alignment: .center) {
-                            Text("\(self.card.frontSideText ?? "") PUDIM")
+                            Text(card.title ?? "Pudim")
                                 .font(.title)
                                 .bold()
                                 .foregroundColor(.gray)
@@ -72,11 +77,14 @@ struct CardViewSlide: View {
                                 .cornerRadius(10)
                                 .frame(width: 200, height: 200)
                         }
-                        
+                        VStack{
+                            Text(card.frontSideText ?? "um pudim feliz")
+                        }
+
                         HStack{
-                            
+
                             Button(){
-                                
+
                             }label: {
                                 RoundedRectangle(cornerRadius: 10)
                                     .frame(width: 100, height: 40)
@@ -102,12 +110,12 @@ struct CardViewSlide: View {
                     if self.swipeStatus == .easy {
                         Text("EASY")
                             .font(.headline)
-                        
+
                             .padding()
                             .background(Color.green)
                             .cornerRadius(10)
                             .foregroundColor(Color.white)
-                        
+
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.green, lineWidth: 3.0)
@@ -116,25 +124,22 @@ struct CardViewSlide: View {
                     } else if self.swipeStatus == .hard {
                         Text("HARD")
                             .font(.headline)
-                        
+
                             .padding()
                             .background(Color.red)
                             .cornerRadius(10)
                             .foregroundColor(Color.white)
-                        
+
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.red, lineWidth: 3.0)
                             ).padding(.top, 45)
                             .rotationEffect(Angle.degrees(45))
                     }
-                    
+
                     
                 }
-                
-                
-                
-                
+                     
                 
             }
             .padding(.bottom)
@@ -142,7 +147,7 @@ struct CardViewSlide: View {
             .cornerRadius(10)
             .shadow(radius: 5)
             .animation(.interactiveSpring())
-            .offset(x: self.translation.width, y: 0)
+           .offset(x: self.translation.width, y: 0)
             .rotationEffect(.degrees(Double(self.translation.width / geometry.size.width) * 25), anchor: .bottom)
             .gesture(
                 DragGesture()
@@ -175,9 +180,7 @@ struct CardViewSlide: View {
 // 7
 struct CardViewSlide_Previews: PreviewProvider {
     static var previews: some View {
-        CardViewSlide(card: FlashCard.init(record: CKRecord(recordType: ""))) { _ in
-            
-        }
+        CardViewSlide(card: FlashCard.init(record: CKRecord(recordType: "")), totalCard: 0, currentCard: 0, onRemove: { _ in})
             .frame(height: 400)
             .padding()
     }

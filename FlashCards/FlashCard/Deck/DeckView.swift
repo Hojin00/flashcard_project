@@ -10,28 +10,22 @@ import CloudKit
 
 struct DeckView: View {
     
-    @EnvironmentObject private var cloudkitManager: CloudKitManager
+    //@EnvironmentObject private var cloudkitManager: CloudKitManager
     var deck: Deck
     let screenSize: CGSize = UIScreen.main.bounds.size
     @State private var searchText: String = ""
-    
+    @State private var flashcards: [FlashCard] = []
+    @State private var didLoadCards: Bool = false
     
     init(deck: Deck) {
         self.deck = deck
-//        CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
-//            switch Result {
-//            case .success:
-//                print("success")
-//            default:
-//                print("error")
-//            }
-//        }
+   
     }
     
     var body: some View {
         ZStack {
             Circle()
-                //.ignoresSafeArea()
+            //.ignoresSafeArea()
                 .frame(width: screenSize.width * 1.4, height: screenSize.width * 1.4)
                 .padding(.top, screenSize.width * -1.3)
                 .foregroundColor(.gray)
@@ -50,22 +44,24 @@ struct DeckView: View {
                     VStack {
                         HStack(alignment: .center) {
                             VStack {
-                                CardPreview(cardType: .practiceCard)
-                                CardPreview(cardType: .newCard)
+                                CardPreview(cardType: .practiceCard, deck: deck)
+                                CardPreview(cardType: .newCard, deck: deck)
                             }
                             CardPreview(cardType: .informationCard, deck: deck)
                         }
-                        ForEach(0..<cloudkitManager.allFlashCards.count) { n in
+                        //ForEach(0..<cloudkitManager.allFlashCards.count) { n in
+                        ForEach(Array(flashcards.enumerated()), id: \.element) { (n, element ) in
+                            
                             HStack(alignment: .center) {
                                 if n % 2 != 0 {
-                                    if n+1 < cloudkitManager.allFlashCards.count {
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n])
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n+1])
-//                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
-//                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n+1])
+                                    if n+1 < flashcards.count {
+                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n], deck: deck)
+                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n+1], deck: deck)
+                                        //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
+                                        //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n+1])
                                     } else {
-//                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n])
+                                        //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
+                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n], deck: deck)
                                         DeckEmptyView(width: screenSize.width * 0.35, height: screenSize.width * 0.26)
                                     }
                                 }
@@ -79,10 +75,13 @@ struct DeckView: View {
         }
         .frame(width: screenSize.width, height: screenSize.height)
         .onAppear() {
+//            guard !didLoadCards else{ return }
             CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
                 switch Result {
-                case .success:
-                    print("success")
+                case .success(let cards):
+                    self.flashcards = cards
+                    self.didLoadCards = true
+                    print("success da DeckView")
                 default:
                     print("error")
                 }
@@ -108,33 +107,22 @@ struct DeckEmptyView: View {
 }
 
 struct CardPreview: View {
+    @State private var presentAlert = false
     let screenSize: CGSize = UIScreen.main.bounds.size
     var cardType: CardType
     var flashcard: FlashCard?
-    var deck: Deck?
+    var deck: Deck
     var body: some View {
         ZStack {
             if cardType == .newCard {
                 
-                NavigationLink(destination: SlideView(deck:  deck ?? Deck.init(record: CKRecord.init(recordType: "Deck")))) {
-                    Button() {
-                        print("click")
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundColor(.white)
-                                .shadow(radius: 5)
-                                .frame(width: screenSize.width * 0.35, height: screenSize.height * 0.12)
-                                .padding(.all, 2)
-                            VStack {
-                                Image(systemName: "plus")
-                                    .resizable()
-                                    .frame(width: screenSize.width * 0.06, height: screenSize.width * 0.05, alignment: .center)
-                                    .foregroundColor(.black)
-                                Text("New Card")
-                                    .padding(.top, screenSize.height * 0.01)
-                                    .foregroundColor(.black)
-                            }
+                Button() {
+                    
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(.white)
+                            .shadow(radius: 5)
                             .frame(width: screenSize.width * 0.35, height: screenSize.height * 0.12)
                             .padding(.all, screenSize.width * 0.01)
                         }
@@ -143,9 +131,7 @@ struct CardPreview: View {
                         
                 }
             } else if cardType == .practiceCard {
-                Button() {
-                    print("clock")
-                } label: {
+                NavigationLink(destination: SlideView(deck: deck)){
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(.white)
@@ -185,10 +171,7 @@ struct CardPreview: View {
                                 .padding(.bottom, screenSize.width * 0.04)
                                 .padding(.top, screenSize.width * -0.04)
                         }
-//                        Text("High importance")
-//                            .font(.caption)
-//                            .padding(.bottom, screenSize.width * 0.07)
-                        Text("\(deck?.title ?? "Deck title here if to big ooooooooo")")
+                        Text("\(deck.title ?? "Deck title here if to big ooooooooo")")
                             .fixedSize(horizontal: false, vertical: true)
                             .lineLimit(2)
                             .padding(.vertical, screenSize.width * 0.01)
@@ -257,16 +240,8 @@ struct CardPreview: View {
         }
     }
 }
-    
-    enum CardType {
-        case newCard, practiceCard, normalCard, informationCard
-    }
-    
-    struct DeckView_Previews: PreviewProvider {
-        @State static private var flashcardMock = FlashCard.init(myrecord: CKRecord.init(recordType: "FlashCard"), title: "", frontSideText: "front text", frontSideImage: nil, backSideText: "back text", backSideImage: nil, category: nil, frontSideAudio: nil, backSideAudio: nil, hard: "")
-        
-        static private var deckmock = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: [CKRecord.Reference.init(record: flashcardMock.myrecord, action: .none)], title: "deck title hellou", category: "lk", reminderDate: Date(), lastView: Date(), hardFlashcards: 3, importance: 2, themeColor: "white")
-        static var previews: some View {
-            DeckView(deck: deckmock)
-        }
-    }
+
+enum CardType {
+    case newCard, practiceCard, normalCard, informationCard
+}
+

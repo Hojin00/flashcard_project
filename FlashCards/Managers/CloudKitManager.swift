@@ -429,10 +429,7 @@ class CloudKitManager: ObservableObject {
         //TODO
         //when no deck id encountered, print("no deck id exists")
         
-        let predicate = NSPredicate(format: "recordID == %@", argumentArray: [deckID])
-        let query = CKQuery(recordType: "Deck", predicate: predicate)
-
-        self.publicDB.perform(query, inZoneWith: nil) { results, error in
+        self.publicDB.fetch(withRecordID: deckID) { record, error in
 
             if let error = error {
                 DispatchQueue.main.async {
@@ -441,7 +438,9 @@ class CloudKitManager: ObservableObject {
                 return
             }
 
-            guard let results = results else {
+
+            
+            guard let record = record else{
                 DispatchQueue.main.async {
                     let error = NSError(
                         domain: "hojinRyu.FlashCard", code: -1,
@@ -449,31 +448,32 @@ class CloudKitManager: ObservableObject {
                     completion(.failure(error))
                 }
                 return
+                
             }
-
-            let deck = results.map{ Deck.init(record: $0) }
+            let deck = Deck.init(record: record)
+            let cardIDs = deck.flashcards?.map({$0.recordID}) ?? []
             
-            
-            for d in deck {
-                for f in d.flashcards ?? [] {
-                    
-                    self.fetchDeckFlashcards(flashcardID: f.recordID) { Result in
-                        switch Result {
-                        case .success(let flashcards):
-                            completionQueue.async {
-                                completion(.success(flashcards))
-                                self.allFlashCards = flashcards
-                                // ta printando 3vezes
-//                                print("here: ", self.allFlashCards.count)
-//                                print("all: ", self.allFlashCards)
-                            }
-                        default:
-                            print(error?.localizedDescription)
-                            print("no flashcards in deck")
-                        }
+            let operation = CKFetchRecordsOperation(recordIDs: cardIDs)
+            operation.fetchRecordsCompletionBlock = {recordMap , error in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
                     }
+                    return
+                }
+                let cards = (cardIDs).compactMap { cardReference -> FlashCard? in
+                    if let cardRecord = recordMap?[cardReference]{
+                        return FlashCard.init(record: cardRecord)
+                    }
+                    return nil
+                }
+                DispatchQueue.main.async {
+                    completion(.success(cards))
+                    self.allFlashCards = cards
                 }
             }
+            self.publicDB.add(operation)
+            
         }
     }
     

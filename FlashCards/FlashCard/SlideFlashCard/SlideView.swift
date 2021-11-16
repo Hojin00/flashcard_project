@@ -12,31 +12,28 @@ import CloudKit
 
 
 struct SlideView: View {
+    let screenSize: CGSize = UIScreen.main.bounds.size
     
-    @EnvironmentObject private var cloudkitManager: CloudKitManager
+    // @EnvironmentObject private var cloudkitManager: CloudKitManager
+    @State private var flashcards:[FlashCard] = []
+    @State private var totalCards:Int = 0
     /// List of users EXEMPLO TROCAR DEPOIS POR FLASH CARD
     var deck: Deck
     init(deck: Deck){
         self.deck = deck
-        CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
-            switch Result {
-            case .success:
-                print("Uhul")
-                break
-            default:
-                print("failed")
-                break
-            }
-        }
     }
+    
+    //    init(flashcards: [FlashCard]){
+    //        self._flashcards = State.init(initialValue: flashcards)
+    //    }
     
     /// Return the CardViews width for the given offset in the array
     /// - Parameters:
     ///   - geometry: The geometry proxy of the parent
     ///   - id: The ID of the current user
     private func getCardWidth(_ geometry: GeometryProxy, id: String) -> CGFloat {
-        guard let index = cloudkitManager.allFlashCards.firstIndex(where: {$0.id.recordName == id}) else {return 0}
-        let offset: CGFloat = CGFloat((deck.flashcards ?? []).count - 1 - index)
+        guard let index = flashcards.firstIndex(where: {$0.id.recordName == id}) else {return 0}
+        let offset: CGFloat = CGFloat((flashcards).count - 1 - index)
         return geometry.size.width - offset
     }
     //    private func getCardHeight(_ geometry: GeometryProxy, id: Int) -> CGFloat {
@@ -49,50 +46,73 @@ struct SlideView: View {
     ///   - geometry: The geometry proxy of the parent
     ///   - id: The ID of the current user
     private func getCardOffset(_ geometry: GeometryProxy, id: String) -> CGFloat {
-        guard let index = cloudkitManager.allFlashCards.firstIndex(where: {$0.id.recordName == id}) else {return 0}
-        return  CGFloat((deck.flashcards ?? []).count - 5 - index) * -10
+        guard let index = flashcards.firstIndex(where: {$0.id.recordName == id}) else {return 0}
+        print(id, index)
+        return  CGFloat((flashcards).count - index) * -10
     }
     
- 
+    
     
     
     
     
     var body: some View {
-        VStack {
+        print(flashcards.count)
+        return VStack(alignment: .trailing) {
             GeometryReader { geometry in
-                LinearGradient(gradient: Gradient(colors: [Color.init(#colorLiteral(red: 0.1764705926, green: 1, blue: 0.5607843399, alpha: 1)), Color.init(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1))]), startPoint: .bottom, endPoint: .top)
+                
+                LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]), startPoint: .bottom, endPoint: .top)
                     .frame(width: geometry.size.width * 1.5, height: geometry.size.height)
                     .background(Color.blue)
                     .clipShape(Circle())
                     .offset(x: -geometry.size.width / 4, y: -geometry.size.height / 2)
                 
                 
-                VStack(alignment: .center, spacing: 0.0) {
+                VStack(alignment: .center) {
                     //DateView()
                     ZStack {
-                        ForEach.init(cloudkitManager.allFlashCards) { card in
-                            CardViewSlide(card: card) { _ in
-                                
-                            }
-                            .animation(.spring())
-                            .frame(width: self.getCardWidth(geometry, id: card.id.recordName), height: 500)
-                            .offset(x: 0, y: self.getCardOffset(geometry, id: card.id.recordName))
+                        //var n: Int = 0
+                        ForEach(flashcards) { card in
+                            //CardView{
+                            //Text("card")
+                            
+                                CardViewSlide(card: card,totalCard: totalCards, currentCard: totalCards - flashcards.firstIndex(of: card)!, onRemove: { card in
+                                    flashcards.removeAll { $0 == card }
+                                })
+                                    .animation(.spring())
+                                    .frame(width: 300, height: 500)
+                                    .offset(x: geometry.size.width / 2 - 150, y: self.getCardOffset(geometry, id: card.id.recordName))
+                            
+                            
+                            //                            } back: {
+                            //                                Text("aloha")
+                            //                            }
+   
                         }
-                    
-                        //self.cards.removeAll { $0.id == removedUser.id }
-                 
+ 
                     }
-                    Spacer()
+                    //.padding()
+                    //Spacer()
                 }
             }
+            
         }
-        .padding()
+        //.padding()
         .onAppear() {
             CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
                 switch Result {
-                case .success:
-                    print("Uhul")
+                case .success(let cards):
+                    var uniqueCards: Set<FlashCard> = []
+                    self.flashcards = cards.filter({ card in
+                        if uniqueCards.contains(card){
+                            return false
+                        }else {
+                            uniqueCards.insert(card)
+                            return true
+                        }
+                    })
+                    self.totalCards = self.flashcards.count
+                    print("Uhul da slide")
                     break
                 default:
                     print("failed")
