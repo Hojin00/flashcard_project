@@ -139,7 +139,7 @@ struct HomeView: View {
                                             }
                                         }
                                     }
-                                    NavigationLink(destination: EditDeckView()) {
+                                    NavigationLink(destination: EditDeckView(deck: nil, isNewDeck: true)) {
                                         ZStack {
                                             Image("buttonNewDeck")
                                                 .frame(width: 23, height: 24)
