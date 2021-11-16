@@ -42,8 +42,12 @@ struct EditDeckView: View {
         if let deck = deck {
             self.deck = deck
             self.text = deck.title!
-//            self.isAlarmOn = deck.
-//            self.currentDate = deck.reminderDate!
+            if let reminderDate = deck.reminderDate {
+                self.currentDate = reminderDate
+                self.isAlarmOn = true
+            } else {
+                self.isAlarmOn = false
+            }
 //            self.selectedPriority = deck.priority
 //            self.selectedDays = deck.selectedDays
 //            self.selectedTheme = deck.theme
@@ -156,6 +160,11 @@ struct EditDeckView: View {
                     }
                 Spacer()
                 Button {
+                    if isNewDeck {
+                        
+                    } else {
+                        
+                    }
                     // todo
                 } label: {
                     ZStack {
