@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SafariServices
 
 @main
 struct FlashCardsApp: App {
@@ -15,23 +16,16 @@ struct FlashCardsApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .onOpenURL { url in
-                    if let scheme = url.scheme,
-                       scheme.localizedCaseInsensitiveCompare("com.FlashCard") == .orderedSame,
-                       let view = url.host {
-                        
-                        var parameters: [String: String] = [:]
-                        URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.forEach {
-                            parameters[$0.name] = $0.value
-                        }
-                        print("para", parameters)
-                        sharing += "://"
-                        sharing += view + "/"
-                        
-                        print(sharing)
-                    }
-                }
                 .environmentObject(cloudkitManager)
+            
+        }
+    }
+    
+    func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
+        if didLoadSuccessfully == true {
+            print("succ")
+        } else {
+            print("fail")
         }
     }
 }

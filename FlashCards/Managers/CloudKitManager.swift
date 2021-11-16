@@ -9,6 +9,7 @@ import Foundation
 import CloudKit
 import SwiftUI
 import UIKit
+import AVFoundation
 
 class CloudKitManager: ObservableObject {
     
@@ -18,6 +19,7 @@ class CloudKitManager: ObservableObject {
 
     @Published var decksCount = 0
     @Published var allDecks: [Deck] = []
+    private var allHadestDecks: [Deck] = []
     @Published var allImportantDecks: [Deck] = []
     @Published var allFlashCards: [FlashCard] = []
     
@@ -238,99 +240,104 @@ class CloudKitManager: ObservableObject {
     }
     func fetchNextDeckSortBy(sortType: SortBy, completionQueue: DispatchQueue = .main, completion: @escaping (Result<Void, Error>) -> Void) {
         
-        guard let allDecksCursor = allDecksCursor else {
-            print("no cursor")
-            return
-        }
-
-        let queryOperation = CKQueryOperation(cursor: allDecksCursor)
         switch sortType {
-        case .lastSeen:
+        
+        case .importanceAlphabet:
+            
+            guard let allImportantDecksCursor = allImportantDecksCursor else {
+                return
+            }
+            
+            
+            let queryOperation = CKQueryOperation(cursor: allImportantDecksCursor)
             queryOperation.resultsLimit = 1
-        case .lastUpdated:
-            queryOperation.resultsLimit = 2
-        case .alphabet:
-            queryOperation.resultsLimit = 3
+            
+            var decksArray: [Deck] = []
+            
+            queryOperation.recordFetchedBlock = { record in
+                let deck = Deck.init(record: record)
+                
+                decksArray.append(deck)
+                
+            }
+            
+            queryOperation.queryCompletionBlock = { cursor, error in
+                completionQueue.async {
+                    DispatchQueue.main.async {
+                        self.allImportantDecks += decksArray
+                        self.allImportantDecksCursor = cursor
+                    }
+                    
+                    
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(()))
+                    }
+                }
+            }
+            publicDB.add(queryOperation)
+            
         default:
-            print("no sortDescriptors")
-        }
-        
-        
-        
-        queryOperation.recordFetchedBlock = { record in
-            let deck = Deck.init(record: record)
             
+            if sortType == .hadest {
+                DispatchQueue.main.async {
+                    self.allDecks.append(self.allHadestDecks[0])
+                    self.allHadestDecks.remove(at: 0)
+                }
+            } else {
+                
+                guard let allDecksCursor = allDecksCursor else {
+                    print("no cursor")
+                    return
+                }
+                
+                let queryOperation = CKQueryOperation(cursor: allDecksCursor)
+                
+                queryOperation.resultsLimit = 1
+                
+                var decksArray: [Deck] = []
+                
+                queryOperation.recordFetchedBlock = { record in
+                    let deck = Deck.init(record: record)
+                    
+                    decksArray.append(deck)
+                    
+                }
+                
+                queryOperation.queryCompletionBlock = { cursor, error in
+                    completionQueue.async {
+                        DispatchQueue.main.async {
+                            switch sortType {
+                            case .hadest:
+                                self.allDecks.append(self.allHadestDecks[0])
+                                self.allHadestDecks.remove(at: 0)
+                                self.allDecksCursor = cursor
+                            default:
+                                self.allDecks += decksArray
+                                self.allDecksCursor = cursor
+                            }
+                        }
+                        if let error = error {
+                            completion(.failure(error))
+                        } else {
+                            completion(.success(()))
+                        }
+                    }
+                }
+                publicDB.add(queryOperation)
+            }
             
-            DispatchQueue.main.async {
-                
-                self.allDecks.append(deck)
-                switch sortType {
-                case .hadest:
-                    self.allDecks = self.allDecks.sorted(by: { ($0.flashcards ?? []).count > ($1.flashcards ?? []).count })
-                default:
-                    print("sortType")
-                }
-            }
         }
-    
-        
-        queryOperation.queryCompletionBlock = { cursor, error in
-            completionQueue.async {
-                
-                self.allDecksCursor = cursor
-                
-                if let error = error {
-                    completion(.failure(error))
-                } else {
-                    completion(.success(()))
-                }
-            }
-        }
-        
-        publicDB.add(queryOperation)
-
-//        self.publicDB.perform(query, inZoneWith: nil) { results, error in
-//
-//            if let error = error {
-//                DispatchQueue.main.async {
-//                    completion(.failure(error))
-//                }
-//                return
-//            }
-//
-//            guard let results = results else {
-//                DispatchQueue.main.async {
-//                    let error = NSError(
-//                        domain: "hojinRyu.FlashCard", code: -1,
-//                        userInfo: [NSLocalizedDescriptionKey: "Could not download notes"])
-//                    completion(.failure(error))
-//                }
-//                return
-//            }
-//
-//            let deck = results.map{ Deck.init(record: $0) }
-//
-//
-//            completionQueue.async {
-//
-//                completion(.success(deck))
-//
-//                switch sortType {
-//                case .hadest:
-//                    self.allDecks = deck.sorted(by: { ($0.flashcards ?? []).count > ($1.flashcards ?? []).count })
-//                case .importanceAlphabet:
-//                    self.allDecks = deck
-//                default:
-//                    self.allDecks = deck
-//                }
-//            }
-//        }
         
     }
     
     //MARK: - Fetch All Decks with sortby
     func fetchDeckSortBy(sortType: SortBy, completionQueue: DispatchQueue = .main, completion: @escaping (Result<Void, Error>) -> Void) {
         
+        if allDecksCursor != nil {
+            allDecksCursor = nil
+        }
         
         let predicate = NSPredicate(value: true)
         
@@ -343,30 +350,30 @@ class CloudKitManager: ObservableObject {
         switch sortType {
         case .lastSeen:
             query.sortDescriptors = sortType.getSortBy(withAscending: false)
+            
         case .lastUpdated:
             query.sortDescriptors = sortType.getSortBy(withAscending: false)
+            
         case .alphabet:
             query.sortDescriptors = sortType.getSortBy(withAscending: true)
+            
         case .hardest:
             query.sortDescriptors = sortType.getSortBy(withAscending: false)
+            
         case .importance:
-            query.sortDescriptors = sortType.getSortBy(withAscending: false)
+            query.sortDescriptors = sortType.getSortBy(withAscending: false) // x
+            
         case .importanceAlphabet:
             query.sortDescriptors = sortType.getSortBy(withAscending: false)
+            
         default:
             print("no sortDescriptors")
         }
         
         let queryOperation = CKQueryOperation(query: query)
-        switch sortType {
-        case .lastSeen:
+        
+        if sortType != .hadest {
             queryOperation.resultsLimit = 1
-        case .lastUpdated:
-            queryOperation.resultsLimit = 2
-        case .alphabet:
-            queryOperation.resultsLimit = 3
-        default:
-            print("no resultsLimit")
         }
         
         var fetchedDecks: [Deck] = []
@@ -376,76 +383,45 @@ class CloudKitManager: ObservableObject {
             let deck = Deck.init(record: record)
             fetchedDecks.append(deck)
             
-            DispatchQueue.main.async {
-                self.allDecks = []
-                switch sortType {
-                case .hadest:
-                    self.allDecks = fetchedDecks.sorted(by: { ($0.flashcards ?? []).count > ($1.flashcards ?? []).count })
-                case .importanceAlphabet:
-                    self.allDecks = fetchedDecks
-                default:
-                    self.allDecks = fetchedDecks
-                }
-            }
         }
-    
         
         queryOperation.queryCompletionBlock = { cursor, error in
             
             completionQueue.async {
                 
-                self.allDecksCursor = cursor
-                
-                
+                DispatchQueue.main.async {
+                    
+                    switch sortType {
+                    case .hadest:
+                        self.allDecks = []
+                        self.allHadestDecks = []
+                        self.allHadestDecks = fetchedDecks.sorted(by: { ($0.flashcards ?? []).count > ($1.flashcards ?? []).count })
+                        self.allDecks.append(self.allHadestDecks[0])
+                        self.allHadestDecks.remove(at: 0)
+                        self.allDecksCursor = cursor
+                    case .importanceAlphabet:
+                        self.allImportantDecks = []
+                        self.allImportantDecks += fetchedDecks
+                        self.allImportantDecksCursor = cursor
+                    default:
+                        self.allDecks = []
+                        self.allDecks += fetchedDecks
+                        self.allDecksCursor = cursor
+                    }
+                    
+                }
                 if let error = error {
                     completion(.failure(error))
                 } else {
                     completion(.success(()))
                 }
-                
             }
         }
         
         publicDB.add(queryOperation)
-
-//        self.publicDB.perform(query, inZoneWith: nil) { results, error in
-//
-//            if let error = error {
-//                DispatchQueue.main.async {
-//                    completion(.failure(error))
-//                }
-//                return
-//            }
-//
-//            guard let results = results else {
-//                DispatchQueue.main.async {
-//                    let error = NSError(
-//                        domain: "hojinRyu.FlashCard", code: -1,
-//                        userInfo: [NSLocalizedDescriptionKey: "Could not download notes"])
-//                    completion(.failure(error))
-//                }
-//                return
-//            }
-//
-//            let deck = results.map{ Deck.init(record: $0) }
-//
-//
-//            completionQueue.async {
-//
-//                completion(.success(deck))
-//
-//                switch sortType {
-//                case .hadest:
-//                    self.allDecks = deck.sorted(by: { ($0.flashcards ?? []).count > ($1.flashcards ?? []).count })
-//                case .importanceAlphabet:
-//                    self.allDecks = deck
-//                default:
-//                    self.allDecks = deck
-//                }
-//            }
-//        }
         
     }
+
     
     //MARK: - Fetch All Flashcards of a Deck
     
@@ -487,7 +463,7 @@ class CloudKitManager: ObservableObject {
                             completionQueue.async {
                                 completion(.success(flashcards))
                                 self.allFlashCards = flashcards
-                                // willian: ta printando 3vezes aqui
+                                // ta printando 3vezes
 //                                print("here: ", self.allFlashCards.count)
 //                                print("all: ", self.allFlashCards)
                             }

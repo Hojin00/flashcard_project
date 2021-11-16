@@ -17,6 +17,7 @@ struct AudioButtonView: View {
     let auxRecord3 = CKRecord.init(recordType: "FlashCard")
     let auxRecord2 = CKRecord.init(recordType: "Deck")
     
+    
     @State var FlashCardReferenceList = [CKRecord.Reference]()
     @State var flashCardList = [FlashCard]()
     @State var auxDeck: Deck?
@@ -118,15 +119,96 @@ struct AudioButtonView: View {
                     
                 }
                 Button("create deck3") {
-                    cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.lastSeen) { Result in
-                        switch Result {
-                        case .success(_):
-                            print("success flash")
-                            
-                        case .failure:
-                            print("fail")
-                        }
-                    }
+                    auxDeck = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck!.myrecord)
+                    
+                    let auxDeck2 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck2.myrecord)
+                    
+                    let auxDeck3 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck3.myrecord)
+                    
+                    let auxDeck4 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck4.myrecord)
+                    
+                    let auxDeck5 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck5.myrecord)
+                    
+                    let auxDeck6 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck6.myrecord)
+                    
+                    let auxDeck7 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck7.myrecord)
+                    
+                    let auxDeck8 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck8.myrecord)
+                    
+                    let auxDeck9 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck9.myrecord)
+                    
+                    let auxDeck10 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck10.myrecord)
+                    
+                    let auxDeck11 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck11.myrecord)
+                    
+                    let auxDeck12 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck12.myrecord)
+                    
+                    let auxDeck13 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck13.myrecord)
+                    
+                    let auxDeck14 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck14.myrecord)
+                    
+                    let auxDeck15 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck15.myrecord)
+                    
+                    let auxDeck16 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck16.myrecord)
+                    
+                    let auxDeck17 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck17.myrecord)
+                    
+                    let auxDeck18 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck18.myrecord)
+                    
+                    let auxDeck19 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck19.myrecord)
+                    
+                    let auxDeck20 = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+                    
+                    CloudKitManager.shared.createDeck(deck: auxDeck20.myrecord)
+                    
+                    
+//                    cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.lastSeen) { Result in
+//                        switch Result {
+//                        case .success(_):
+//                            print("success flash")
+//
+//                        case .failure:
+//                            print("fail")
+//                        }
+//                    }
 //                    let auxDeck = Deck.init(myrecord: auxRecord2, flashcards: FlashCardReferenceList, title: "44444", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 5, importance: 1, themeColor: "white")
 //
 //                    CloudKitManager.shared.createDeck(deck: auxDeck.myrecord)
