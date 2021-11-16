@@ -75,6 +75,7 @@ struct SingleDeckView: View {
                             .font(.caption)
                         Text("77% easily")
                             .font(.caption)
+                            .padding(.bottom)
                         Spacer()
                         HStack {
                             Spacer()
