@@ -55,20 +55,26 @@ struct DeckView: View {
                                 CardPreview(cardType: .practiceCard)
                                 CardPreview(cardType: .newCard)
                             }
+                            .padding(.horizontal)
                             CardPreview(cardType: .informationCard, deck: deck)
+                                .padding(.horizontal)
                         }
                         ForEach(1..<6) { n in
                             HStack(alignment: .center) {
                                 if n % 2 != 0 {
                                     if n+1 < 6 {
                                         CardPreview(cardType: .informationCard, deck: deck)
+                                            .padding(.horizontal)
                                         CardPreview(cardType: .informationCard, deck: deck)
+                                            .padding(.horizontal)
 //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
 //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n+1])
                                     } else {
 //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
                                         CardPreview(cardType: .informationCard, deck: deck)
+                                            .padding(.horizontal)
                                         DeckEmptyView(width: screenSize.width * 0.35, height: screenSize.width * 0.26)
+                                            .padding(.horizontal)
                                     }
                                 }
                             }
