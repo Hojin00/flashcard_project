@@ -113,9 +113,7 @@ struct CardPreview: View {
     var body: some View {
         ZStack {
             if cardType == .newCard {
-                Button() {
-                    print("click")
-                } label: {
+                NavigationLink(destination: NewCardView()) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(.white)
