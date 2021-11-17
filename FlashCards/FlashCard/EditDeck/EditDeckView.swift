@@ -41,7 +41,7 @@ struct EditDeckView: View {
         self.isNewDeck = isNewDeck
         if let deck = deck {
             self.deck = deck
-            self.text = deck.title!
+            self.text = deck.title ?? "No title"
             if let reminderDate = deck.reminderDate {
                 self.currentDate = reminderDate
                 self.isAlarmOn = true
