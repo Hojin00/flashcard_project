@@ -181,7 +181,7 @@ struct CardViewSlide: View {
 struct CardViewSlide_Previews: PreviewProvider {
     static var previews: some View {
         CardViewSlide(card: FlashCard.init(record: CKRecord(recordType: "")), totalCard: 0, currentCard: 0, onRemove: { _ in})
-            .frame(height: 400)
+            //.frame(height: 400)
             .padding()
     }
 }
