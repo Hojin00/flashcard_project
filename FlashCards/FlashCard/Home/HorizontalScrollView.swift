@@ -26,7 +26,8 @@ struct HorizontalScrollView: View {
             let damping: CGFloat = 4.5
             let percentage = abs(distance / (screenSize.width / 2) / damping - 1)
             
-            ZStack {
+            //ScrollView(.horizontal,showsIndicators: false) {
+            ZStack{
                 NavigationLink(destination: DeckView(deck: deck)) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)

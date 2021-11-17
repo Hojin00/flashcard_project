@@ -18,8 +18,9 @@ struct Deck: Hashable, Identifiable {
     var lastView: Date?
     var hardFlashcards: Int?
     var importance: Int?
+    var themeColor: String?
 
-    init(myrecord: CKRecord, flashcards: [CKRecord.Reference]?, title: String?, category: String?, reminderDate: Date?, lastView: Date?, hardFlashcards: Int?, importance: Int?) {
+    init(myrecord: CKRecord, flashcards: [CKRecord.Reference]?, title: String?, category: String?, reminderDate: Date?, lastView: Date?, hardFlashcards: Int?, importance: Int?, themeColor: String?) {
         self.id = myrecord.recordID
         self.myrecord = myrecord
         self.flashcards = flashcards
@@ -29,6 +30,7 @@ struct Deck: Hashable, Identifiable {
         self.lastView = lastView
         self.hardFlashcards = hardFlashcards
         self.importance = importance
+        self.themeColor = themeColor
 
         myrecord["flashCardList"] = flashcards
         myrecord["title"] = title
@@ -37,6 +39,7 @@ struct Deck: Hashable, Identifiable {
         myrecord["lastView"] = lastView
         myrecord["hardFlashcards"] = hardFlashcards
         myrecord["importance"] = importance
+        myrecord["themeColor"] = themeColor
 
     }
 
@@ -50,6 +53,7 @@ struct Deck: Hashable, Identifiable {
         self.lastView = record["lastView"]
         self.hardFlashcards = record["hardFlashcards"]
         self.importance = record["importance"]
+        self.themeColor = record["themeColor"]
     }
 }
 

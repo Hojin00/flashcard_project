@@ -9,7 +9,7 @@ import SwiftUI
 import CloudKit
 
 struct SingleDeckView: View {
-    
+    @EnvironmentObject private var cloudkitManager: CloudKitManager
     let deck: Deck
     var flashcards: [FlashCard] = []
     var topCardColor: Color = Color.white
@@ -18,26 +18,26 @@ struct SingleDeckView: View {
     
     init(deck: Deck) {
         self.deck = deck
-        self.flashcards = getFlashcards()
+        //self.flashcards = getFlashcards()
         //        self.topCardColor = flashcards[0].frontSideColor as! Color
         //        self.middleCardColor = flashcards[1].frontSideColor as! Color
         //        self.bottomCardColor = flashcards[2].frontSideColor as! Color
     }
     
-    func getFlashcards() -> [FlashCard] {
-        var list: [FlashCard] = []
-        CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
-            switch Result {
-            case .success(let rr):
-                list = rr
-                break
-            default:
-                print("no flashcards in deck")
-                break
-            }
-        }
-        return list
-    }
+//    func getFlashcards() -> [FlashCard] {
+//        var list: [FlashCard] = []
+//        CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
+//            switch Result {
+//            case .success(let rr):
+//                list = rr
+//                break
+//            default:
+//                print("no flashcards in deck")
+//                break
+//            }
+//        }
+//        return list
+//    }
     
     var body: some View {
         ZStack {

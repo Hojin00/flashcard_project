@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 import CloudKit
 
-struct FlashCard: Hashable {
+struct FlashCard: Hashable, Identifiable {
+    let id: CKRecord.ID
     var myrecord: CKRecord
     var title: String?
     var frontSideText: String?
@@ -19,12 +20,10 @@ struct FlashCard: Hashable {
     var category: String?
     var frontSideAudio: CKAsset?
     var backSideAudio: CKAsset?
-    var frontSideColor: CKAsset?
-    var backSideColor: CKAsset?
     var hard: String?
     
-    init(myrecord: CKRecord, title: String?, frontSideText: String?, frontSideImage: CKAsset?, backSideText: String?, backSideImage: CKAsset?, category: String?, frontSideAudio: CKAsset?, backSideAudio: CKAsset?, frontSideColor: CKAsset?, backSideColor: CKAsset?, hard: String?) {
-        
+    init(myrecord: CKRecord, title: String?, frontSideText: String?, frontSideImage: CKAsset?, backSideText: String?, backSideImage: CKAsset?, category: String?, frontSideAudio: CKAsset?, backSideAudio: CKAsset?, hard: String?) {
+        self.id = myrecord.recordID
         self.myrecord = myrecord
         self.title = title
         self.frontSideText = frontSideText
@@ -34,9 +33,8 @@ struct FlashCard: Hashable {
         self.category = category
         self.frontSideAudio = frontSideAudio
         self.backSideAudio = backSideAudio
-        self.frontSideColor = frontSideColor
-        self.backSideColor = backSideColor
         self.hard = hard
+        
         
         myrecord["title"] = title
         myrecord["frontSideText"] = frontSideText
@@ -46,13 +44,12 @@ struct FlashCard: Hashable {
         myrecord["category"] = frontSideText
         myrecord["frontSideAudio"] = frontSideAudio
         myrecord["backSideAudio"] = backSideAudio
-        myrecord["frontSideColor"] = frontSideColor
-        myrecord["backSideColor"] = backSideColor
         myrecord["hard"] = hard
         
     }
     
     init(record: CKRecord) {
+        self.id = record.recordID
         self.myrecord = record
         self.title = record["title"]
         self.frontSideText = record["frontSideText"]
@@ -62,12 +59,10 @@ struct FlashCard: Hashable {
         self.category = record["category"]
         self.frontSideAudio = record["frontSideAudio"]
         self.backSideAudio = record["backSideAudio"]
-        self.frontSideColor = myrecord["frontSideColor"]
-        self.backSideColor = myrecord["backSideColor"]
         self.hard = myrecord["hard"]
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(myrecord.recordID)
+        hasher.combine(id)
     }
 }

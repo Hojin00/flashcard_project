@@ -9,15 +9,24 @@ import Foundation
 import CloudKit
 import SwiftUI
 import UIKit
+import AVFoundation
 
 class CloudKitManager: ObservableObject {
     
-    let publicDB = CKContainer.default().publicCloudDatabase
+    private let publicDB = CKContainer.default().publicCloudDatabase
     
     static let shared: CloudKitManager = CloudKitManager()
-    
+
+    @Published var decksCount = 0
     @Published var allDecks: [Deck] = []
-    @Published var allDecksImportant: [Deck] = []
+    private var allHadestDecks: [Deck] = []
+    @Published var allImportantDecks: [Deck] = []
+    @Published var allFlashCards: [FlashCard] = []
+    
+    
+    private var allDecksCursor:CKQueryOperation.Cursor?
+    private var allImportantDecksCursor:CKQueryOperation.Cursor?
+    private var allFlashCardsCursor:CKQueryOperation.Cursor?
     
     // MARK: TODO
     // duplicate FlashCard
@@ -229,77 +238,198 @@ class CloudKitManager: ObservableObject {
             }
         }
     }
+    func fetchNextDeckSortBy(sortType: SortBy, completionQueue: DispatchQueue = .main, completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        switch sortType {
+        
+        case .importanceAlphabet:
+            
+            guard let allImportantDecksCursor = allImportantDecksCursor else {
+                return
+            }
+            
+            
+            let queryOperation = CKQueryOperation(cursor: allImportantDecksCursor)
+            queryOperation.resultsLimit = 10
+            
+            var decksArray: [Deck] = []
+            
+            queryOperation.recordFetchedBlock = { record in
+                let deck = Deck.init(record: record)
+                
+                decksArray.append(deck)
+                
+            }
+            
+            queryOperation.queryCompletionBlock = { cursor, error in
+                completionQueue.async {
+                    DispatchQueue.main.async {
+                        self.allImportantDecks += decksArray
+                        self.allImportantDecksCursor = cursor
+                    }
+                    
+                    
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(()))
+                    }
+                }
+            }
+            publicDB.add(queryOperation)
+            
+        default:
+            
+            if sortType == .hadest {
+                DispatchQueue.main.async {
+                    self.allDecks.append(self.allHadestDecks[0])
+                    self.allHadestDecks.remove(at: 0)
+                }
+            } else {
+                
+                guard let allDecksCursor = allDecksCursor else {
+                    print("no cursor")
+                    return
+                }
+                
+                let queryOperation = CKQueryOperation(cursor: allDecksCursor)
+                
+                queryOperation.resultsLimit = 10
+                
+                var decksArray: [Deck] = []
+                
+                queryOperation.recordFetchedBlock = { record in
+                    let deck = Deck.init(record: record)
+                    
+                    decksArray.append(deck)
+                    
+                }
+                
+                queryOperation.queryCompletionBlock = { cursor, error in
+                    completionQueue.async {
+                        DispatchQueue.main.async {
+                            switch sortType {
+                            case .hadest:
+                                self.allDecks.append(self.allHadestDecks[0])
+                                self.allHadestDecks.remove(at: 0)
+                                self.allDecksCursor = cursor
+                            default:
+                                self.allDecks += decksArray
+                                self.allDecksCursor = cursor
+                            }
+                        }
+                        if let error = error {
+                            completion(.failure(error))
+                        } else {
+                            completion(.success(()))
+                        }
+                    }
+                }
+                publicDB.add(queryOperation)
+            }
+            
+        }
+        
+    }
     
     //MARK: - Fetch All Decks with sortby
-    func fetchDeckSortBy(sortType: SortBy, completionQueue: DispatchQueue = .main, completion: @escaping (Result<[Deck], Error>) -> Void) {
+    func fetchDeckSortBy(sortType: SortBy, completionQueue: DispatchQueue = .main, completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        if allDecksCursor != nil {
+            allDecksCursor = nil
+        }
+        
         let predicate = NSPredicate(value: true)
+        
+        // Using CKQueryOperation, the records will come in via the closure one at a time.
+        // Store results in a temporary array for returning after completion.
+        
+        
         let query = CKQuery(recordType: "Deck", predicate: predicate)
-
+        
         switch sortType {
         case .lastSeen:
             query.sortDescriptors = sortType.getSortBy(withAscending: false)
+            
         case .lastUpdated:
             query.sortDescriptors = sortType.getSortBy(withAscending: false)
+            
         case .alphabet:
             query.sortDescriptors = sortType.getSortBy(withAscending: true)
+            
         case .hardest:
             query.sortDescriptors = sortType.getSortBy(withAscending: false)
+            
         case .importance:
-            query.sortDescriptors = sortType.getSortBy(withAscending: false)
+            query.sortDescriptors = sortType.getSortBy(withAscending: false) // x
+            
         case .importanceAlphabet:
             query.sortDescriptors = sortType.getSortBy(withAscending: false)
+            
         default:
             print("no sortDescriptors")
         }
         
-
-        self.publicDB.perform(query, inZoneWith: nil) { results, error in
-
-            if let error = error {
-                DispatchQueue.main.async {
-                    completion(.failure(error))
-                }
-                return
-            }
-
-            guard let results = results else {
-                DispatchQueue.main.async {
-                    let error = NSError(
-                        domain: "hojinRyu.FlashCard", code: -1,
-                        userInfo: [NSLocalizedDescriptionKey: "Could not download notes"])
-                    completion(.failure(error))
-                }
-                return
-            }
-
-            let deck = results.map{ Deck.init(record: $0) }
+        let queryOperation = CKQueryOperation(query: query)
+        
+        if sortType != .hadest {
+            queryOperation.resultsLimit = 10
+        }
+        
+        var fetchedDecks: [Deck] = []
+        
+        
+        queryOperation.recordFetchedBlock = { record in
+            let deck = Deck.init(record: record)
+            fetchedDecks.append(deck)
             
+        }
+        
+        queryOperation.queryCompletionBlock = { cursor, error in
             
             completionQueue.async {
-
-                completion(.success(deck))
                 
-                switch sortType {
-                case .hadest:
-                    self.allDecks = deck.sorted(by: { ($0.flashcards ?? []).count > ($1.flashcards ?? []).count })
-                case .importanceAlphabet:
-                    self.allDecksImportant = deck
-                default:
-                    self.allDecks = deck
+                DispatchQueue.main.async {
+                    
+                    switch sortType {
+                    case .hadest:
+                        self.allDecks = []
+                        self.allHadestDecks = []
+                        self.allHadestDecks = fetchedDecks.sorted(by: { ($0.flashcards ?? []).count > ($1.flashcards ?? []).count })
+                        self.allDecks.append(self.allHadestDecks[0])
+                        self.allHadestDecks.remove(at: 0)
+                        self.allDecksCursor = cursor
+                    case .importanceAlphabet:
+                        self.allImportantDecks = []
+                        self.allImportantDecks += fetchedDecks
+                        self.allImportantDecksCursor = cursor
+                    default:
+                        self.allDecks = []
+                        self.allDecks += fetchedDecks
+                        self.allDecksCursor = cursor
+                    }
+                    
+                }
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
                 }
             }
         }
+        
+        publicDB.add(queryOperation)
+        
     }
+
     
     //MARK: - Fetch All Flashcards of a Deck
     
     func fetchDeck(deckID: CKRecord.ID, completionQueue: DispatchQueue = .main, completion: @escaping (Result<[FlashCard], Error>) -> Void) {
         //TODO
         //when no deck id encountered, print("no deck id exists")
-        let predicate = NSPredicate(format: "recordID == %@", argumentArray: [deckID])
-        let query = CKQuery(recordType: "Deck", predicate: predicate)
-
-        self.publicDB.perform(query, inZoneWith: nil) { results, error in
+        
+        self.publicDB.fetch(withRecordID: deckID) { record, error in
 
             if let error = error {
                 DispatchQueue.main.async {
@@ -308,7 +438,9 @@ class CloudKitManager: ObservableObject {
                 return
             }
 
-            guard let results = results else {
+
+            
+            guard let record = record else{
                 DispatchQueue.main.async {
                     let error = NSError(
                         domain: "hojinRyu.FlashCard", code: -1,
@@ -316,26 +448,32 @@ class CloudKitManager: ObservableObject {
                     completion(.failure(error))
                 }
                 return
+                
             }
-
-            let deck = results.map{ Deck.init(record: $0) }
+            let deck = Deck.init(record: record)
+            let cardIDs = deck.flashcards?.map({$0.recordID}) ?? []
             
-            
-            for d in deck {
-                for f in d.flashcards ?? [] {
-                    
-                    self.fetchDeckFlashcards(flashcardID: f.recordID) { Result in
-                        switch Result {
-                        case .success(let flashcards):
-                            completionQueue.async {
-                                completion(.success(flashcards))
-                            }
-                        default:
-                            print("no flashcards in deck")
-                        }
+            let operation = CKFetchRecordsOperation(recordIDs: cardIDs)
+            operation.fetchRecordsCompletionBlock = {recordMap , error in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
                     }
+                    return
+                }
+                let cards = (cardIDs).compactMap { cardReference -> FlashCard? in
+                    if let cardRecord = recordMap?[cardReference]{
+                        return FlashCard.init(record: cardRecord)
+                    }
+                    return nil
+                }
+                DispatchQueue.main.async {
+                    completion(.success(cards))
+                    self.allFlashCards = cards
                 }
             }
+            self.publicDB.add(operation)
+            
         }
     }
     
