@@ -80,8 +80,8 @@ struct SlideView: View {
                                     flashcards.removeAll { $0 == card }
                                 })
                                     .animation(.spring())
-                                    .frame(width: 300, height: 500)
-                                    .offset(x: geometry.size.width / 2 - 150, y: self.getCardOffset(geometry, id: card.id.recordName))
+                                    .frame(width: 350, height: 600)
+                                    .offset(x: geometry.size.width / 4 - 25, y: self.getCardOffset(geometry, id: card.id.recordName))
                             
                             
                             //                            } back: {
@@ -91,6 +91,7 @@ struct SlideView: View {
                         }
  
                     }
+                    
                     //.padding()
                     //Spacer()
                 }

@@ -17,7 +17,7 @@ struct CardViewSlide: View {
     var currentCard: Int
     var totalCard: Int
     
-    private var thresholdPercentage: CGFloat = 0.20 // when the user has draged 35% the width of the screen in either direction
+    private var thresholdPercentage: CGFloat = 0.20 // when the user has draged 20% the width of the screen in either direction
     
     private enum EasyHard: Int {
         case easy, hard, none
@@ -75,7 +75,7 @@ struct CardViewSlide: View {
                                 .resizable()
                                 .scaledToFill()
                                 .cornerRadius(10)
-                                .frame(width: 200, height: 200)
+                                .frame(width: 100, height: 100)
                         }
                         VStack{
                             Text(card.frontSideText ?? "um pudim feliz")
@@ -140,7 +140,7 @@ struct CardViewSlide: View {
                     
                 }
                      
-                
+                Spacer()
             }
             .padding(.bottom)
             .background(Color.white)
@@ -163,7 +163,7 @@ struct CardViewSlide: View {
                         }
                         
                     }.onEnded { value in
-                        // determine snap distance > 0.5 aka half the width of the screen
+                        // determine snap distance > 0.2 aka half the width of the screen
                         if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
                             self.onRemove(self.card)
                         } else {
