@@ -250,7 +250,7 @@ class CloudKitManager: ObservableObject {
             
             
             let queryOperation = CKQueryOperation(cursor: allImportantDecksCursor)
-            queryOperation.resultsLimit = 1
+            queryOperation.resultsLimit = 10
             
             var decksArray: [Deck] = []
             
@@ -294,7 +294,7 @@ class CloudKitManager: ObservableObject {
                 
                 let queryOperation = CKQueryOperation(cursor: allDecksCursor)
                 
-                queryOperation.resultsLimit = 1
+                queryOperation.resultsLimit = 10
                 
                 var decksArray: [Deck] = []
                 
@@ -373,7 +373,7 @@ class CloudKitManager: ObservableObject {
         let queryOperation = CKQueryOperation(query: query)
         
         if sortType != .hadest {
-            queryOperation.resultsLimit = 1
+            queryOperation.resultsLimit = 10
         }
         
         var fetchedDecks: [Deck] = []

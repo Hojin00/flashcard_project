@@ -95,19 +95,6 @@ struct HorizontalScrollView: View {
             }
             .scaleEffect(percentage)
         }
-        //        .onAppear() {
-        //
-        //            CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.importanceAlphabet) { Result in
-        //
-        //                switch Result {
-        //                case .success:
-        //                    print("success importance")
-        //                case .failure:
-        //                    print("no last seen")
-        //                }
-        //            }
-        //
-        //        }
         .frame(width: width)
         .frame(maxHeight: .infinity)
         //.background(Color.yellow)
