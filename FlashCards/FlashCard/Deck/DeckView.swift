@@ -57,16 +57,16 @@ struct DeckView: View {
                             HStack(alignment: .center) {
                                 if n % 2 != 0 {
                                     /*if n+1 < 6 {
-                                        CardPreview(cardType: .informationCard, deck: deck)
-                                            .padding(.horizontal)
-                                        CardPreview(cardType: .informationCard, deck: deck)
-                                            .padding(.horizontal)
-//                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
-//                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n+1])
-                                    } else {
-//                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
-                                        CardPreview(cardType: .informationCard, deck: deck)
-                                            .padding(.horizontal)*/
+                                     CardPreview(cardType: .informationCard, deck: deck)
+                                     .padding(.horizontal)
+                                     CardPreview(cardType: .informationCard, deck: deck)
+                                     .padding(.horizontal)
+                                     //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
+                                     //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n+1])
+                                     } else {
+                                     //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
+                                     CardPreview(cardType: .informationCard, deck: deck)
+                                     .padding(.horizontal)*/
                                     if n+1 < cloudkitManager.allFlashCards.count {
                                         CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
                                         CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n+1], deck: deck)
@@ -137,7 +137,17 @@ struct CardPreview: View {
                             .shadow(radius: 5)
                             .frame(width: screenSize.width * 0.35, height: screenSize.height * 0.12)
                             .padding(.all, screenSize.width * 0.01)
+                        VStack {
+                            Image(systemName: "plus")
+                                .resizable()
+                                .frame(width: screenSize.width * 0.06, height: screenSize.width * 0.05, alignment: .center)
+                                .foregroundColor(.black)
+                            Text("New Card")
+                                .padding(.top, screenSize.height * 0.01)
+                                .foregroundColor(.black)
+                        }
                     }
+                    
                     
                 }
                 

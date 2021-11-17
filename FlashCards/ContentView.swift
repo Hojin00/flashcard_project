@@ -12,8 +12,12 @@ import UIKit
 struct ContentView: View {
 
     var body: some View {
-
-        HomeView()
+        NavigationView{
+            HomeView()
+                .navigationBarHidden(true)
+                //.edgesIgnoringSafeArea([.top ,.bottom])
+        }
+        
     }
 }
 
