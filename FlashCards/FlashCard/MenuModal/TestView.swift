@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct TestView: View {
     
@@ -17,7 +18,7 @@ struct TestView: View {
                 Button("show modal") {
                     showModal = true
                 }
-                CustomModalView(isShowing: $showModal)
+                CustomModalView(isShowing: $showModal, deck: Deck.init(record: CKRecord.init(recordType: "Deck")))
             }
         }
         

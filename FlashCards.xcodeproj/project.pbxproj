@@ -51,6 +51,7 @@
 		EC1FE1DF273C364D00FAAA74 /* CustomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1FE1DE273C364D00FAAA74 /* CustomModal.swift */; };
 		EC1FE1E1273D544C00FAAA74 /* CustomCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1FE1E0273D544C00FAAA74 /* CustomCorner.swift */; };
 		EC1FE1E3273D8F7300FAAA74 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1FE1E2273D8F7300FAAA74 /* TestView.swift */; };
+		EC1FE1E527455DF400FAAA74 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1FE1E427455DF400FAAA74 /* CustomButton.swift */; };
 		ECF1155527359FAC005CCB8F /* EditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF1155427359FAC005CCB8F /* EditCardView.swift */; };
 		ECF115572735A22E005CCB8F /* EditCardSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF115562735A22D005CCB8F /* EditCardSideView.swift */; };
 /* End PBXBuildFile section */
@@ -103,6 +104,7 @@
 		EC1FE1DE273C364D00FAAA74 /* CustomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModal.swift; sourceTree = "<group>"; };
 		EC1FE1E0273D544C00FAAA74 /* CustomCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCorner.swift; sourceTree = "<group>"; };
 		EC1FE1E2273D8F7300FAAA74 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		EC1FE1E427455DF400FAAA74 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		ECF1155427359FAC005CCB8F /* EditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardView.swift; sourceTree = "<group>"; };
 		ECF115562735A22D005CCB8F /* EditCardSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardSideView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -321,6 +323,7 @@
 				EC1FE1DE273C364D00FAAA74 /* CustomModal.swift */,
 				EC1FE1E0273D544C00FAAA74 /* CustomCorner.swift */,
 				EC1FE1E2273D8F7300FAAA74 /* TestView.swift */,
+				EC1FE1E427455DF400FAAA74 /* CustomButton.swift */,
 			);
 			path = MenuModal;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				B467EE3927359C4C00559E65 /* CardView.swift in Sources */,
 				B467EE4027359C4C00559E65 /* WeekdayPickerView.swift in Sources */,
 				B467EE3B27359C4C00559E65 /* NotificationView.swift in Sources */,
+				EC1FE1E527455DF400FAAA74 /* CustomButton.swift in Sources */,
 				EC1FE1E1273D544C00FAAA74 /* CustomCorner.swift in Sources */,
 				B467EE4927359C4C00559E65 /* SingleDeckView.swift in Sources */,
 				B467EE6027359C6F00559E65 /* ShareManager.swift in Sources */,
