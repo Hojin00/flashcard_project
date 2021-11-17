@@ -90,22 +90,9 @@ struct CardViewSlide: View {
                                     .frame(width: 100, height: 40)
                                     .foregroundColor(Color(hue: 0.293, saturation: 0.792, brightness: 0.891))
                             }
-//                            Circle()
-//                                .foregroundColor(Color.red)
-//
-//                                .frame(width: 130, height: 130)
-//                                .background(Color.blue)
-//                                .clipShape(Circle())
-//                                .offset(x: -170, y: 60)
-//
-//                            Circle()
-//                                .foregroundColor(Color.green)
-//                                .frame(width: 130, height: 130)
-//                                .background(Color.blue)
-//                                .clipShape(Circle())
-//                                .offset(x: 170, y: 60)
+                            
                         }
-//                        LinearGradient(gradient: Gradient(colors: [Color.init(#colorLiteral(red: 0.1764705926, green: 1, blue: 0.5607843399, alpha: 1)), Color.init(#colorLiteral(red: 0.9601020217, green: 0.9646142125, blue: 0.9777105451, alpha: 0))]), startPoint: .bottom, endPoint: .top)
+
                     }
                     if self.swipeStatus == .easy {
                         Text("EASY")

@@ -81,7 +81,7 @@ struct SlideView: View {
                                 })
                                     .animation(.spring())
                                     .frame(width: 350, height: 600)
-                                    .offset(x: geometry.size.width / 4 - 25, y: self.getCardOffset(geometry, id: card.id.recordName))
+                                    .offset(x: geometry.size.width / 4 - 55, y: self.getCardOffset(geometry, id: card.id.recordName))
                             
                             
                             //                            } back: {
