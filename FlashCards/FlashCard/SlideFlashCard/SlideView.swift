@@ -99,7 +99,7 @@ struct SlideView: View {
         }
         //.padding()
         .onAppear() {
-            CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
+            CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID, completionOnly: true) { Result in
                 switch Result {
                 case .success(let cards):
                     var uniqueCards: Set<FlashCard> = []

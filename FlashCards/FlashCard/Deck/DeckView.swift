@@ -24,6 +24,8 @@ struct DeckView: View {
     
     var body: some View {
         ZStack {
+            
+            
             Circle()
             //.ignoresSafeArea()
                 .frame(width: screenSize.width * 1.4, height: screenSize.width * 1.4)
@@ -38,52 +40,44 @@ struct DeckView: View {
                         .padding(.leading, screenSize.width * 0.2)
                     Spacer()
                 }
-                SearchBar(text: $searchText)
-                    .frame(width: screenSize.width * 0.95, height: screenSize.height * 0.05, alignment: .center)
-                ScrollView(showsIndicators: false) {
-                    VStack {
-                        HStack(alignment: .center) {
-                            VStack {
-                                CardPreview(cardType: .practiceCard, deck: deck)
-                                CardPreview(cardType: .newCard, deck: deck)
-                            }
-                            .padding(.horizontal)
-                            CardPreview(cardType: .informationCard, deck: deck)
-                                .padding(.horizontal)
-                        }
-                        //ForEach(0..<cloudkitManager.allFlashCards.count) { n in
-                        ForEach(0..<cloudkitManager.allFlashCards.count) { n in
-                            
+                if !didLoadCards {
+                    ProgressView()
+                } else{
+                    SearchBar(text: $searchText)
+                        .frame(width: screenSize.width * 0.95, height: screenSize.height * 0.05, alignment: .center)
+                    ScrollView(showsIndicators: false) {
+                        VStack {
                             HStack(alignment: .center) {
-                                if n % 2 != 0 {
-                                    /*if n+1 < 6 {
-                                     CardPreview(cardType: .informationCard, deck: deck)
-                                     .padding(.horizontal)
-                                     CardPreview(cardType: .informationCard, deck: deck)
-                                     .padding(.horizontal)
-                                     //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
-                                     //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n+1])
-                                     } else {
-                                     //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
-                                     CardPreview(cardType: .informationCard, deck: deck)
-                                     .padding(.horizontal)*/
-                                    if n+1 < cloudkitManager.allFlashCards.count {
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n+1], deck: deck)
-                                        //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
-                                        //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n+1])
-                                    } else {
-                                        //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
-                                        DeckEmptyView(width: screenSize.width * 0.35, height: screenSize.width * 0.26)
-                                            .padding(.horizontal)
+                                VStack {
+                                    CardPreview(cardType: .practiceCard, deck: deck)
+                                    CardPreview(cardType: .newCard, deck: deck)
+                                }
+                                .padding(.horizontal)
+                                CardPreview(cardType: .informationCard, deck: deck)
+                                    .padding(.horizontal)
+                            }
+                            ForEach(0..<cloudkitManager.allFlashCards.count) { n in
+                                HStack(alignment: .center) {
+                                    if n % 2 != 0 {
+                                        
+                                        if n+1 < cloudkitManager.allFlashCards.count {
+                                            CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
+                                            CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n+1], deck: deck)
+                                            
+                                        } else {
+                                            
+                                            CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
+                                            DeckEmptyView(width: screenSize.width * 0.35, height: screenSize.width * 0.26)
+                                                .padding(.horizontal)
+                                        }
                                     }
                                 }
+                                .padding(.bottom, screenSize.width * 0.01)
                             }
-                            .padding(.bottom, screenSize.width * 0.01)
                         }
                     }
                 }
+                
             }
             .padding()
         }
@@ -122,6 +116,7 @@ struct DeckEmptyView: View {
 }
 
 struct CardPreview: View {
+    
     @State private var presentAlert = false
     let screenSize: CGSize = UIScreen.main.bounds.size
     var cardType: CardType
@@ -129,6 +124,7 @@ struct CardPreview: View {
     var deck: Deck
     var body: some View {
         ZStack {
+            
             if cardType == .newCard {
                 NavigationLink(destination: NewCardView()) {
                     ZStack {
@@ -173,6 +169,7 @@ struct CardPreview: View {
                         .padding(.all, screenSize.width * 0.02)
                     }
                 }
+                
             } else if cardType == .informationCard {
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundColor(.white)
