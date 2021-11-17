@@ -6,12 +6,55 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct EditDeckView: View {
     
     @State var text: String = ""
     @State var isAlarmOn: Bool = true
     @State var currentDate = Date()
+    @State var selectedPriority: Int = 0
+    @State var selectedDays: [Bool] = [false, false, false, false, false, false, false]
+    @State var selectedTheme: Int = 0
+    let isNewDeck: Bool
+    var deck: Deck
+    var themeColor: Color {
+        switch selectedTheme {
+        case 0:
+            return Color("greenColor")
+            
+        case 1:
+            return Color("blueColor")
+            
+        case 2:
+            return Color("redColor")
+            
+        case 3:
+            return Color("yellowColor")
+            
+        default:
+            return Color("greenColor")
+        }
+    }
+    
+    init(deck: Deck?, isNewDeck: Bool) {
+        self.isNewDeck = isNewDeck
+        if let deck = deck {
+            self.deck = deck
+            self.text = deck.title!
+            if let reminderDate = deck.reminderDate {
+                self.currentDate = reminderDate
+                self.isAlarmOn = true
+            } else {
+                self.isAlarmOn = false
+            }
+//            self.selectedPriority = deck.priority
+//            self.selectedDays = deck.selectedDays
+//            self.selectedTheme = deck.theme
+        } else {
+            self.deck = Deck(record: CKRecord.init(recordType: "Deck"))
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -26,10 +69,6 @@ struct EditDeckView: View {
                     Text("Edit Deck")
                         .font(.title).bold()
                     Spacer()
-//                    NavigationLink(destination: HomeView()) {
-//                        Text("Cancel")
-//                            .foregroundColor(.black)
-//                    }
                 }
                 .padding(.horizontal, UIScreen.main.bounds.width * 0.27)
                     ZStack {
@@ -47,6 +86,15 @@ struct EditDeckView: View {
                             .foregroundColor(Color.white)
                             .shadow(radius: 10)
                             .frame(width: UIScreen.main.bounds.width * 0.92, height: UIScreen.main.bounds.height * 0.67)
+                            .border(themeColor)
+                        VStack {
+                            Rectangle()
+                                .frame(width: UIScreen.main.bounds.width * 0.92, height: UIScreen.main.bounds.height * 0.025)
+                                .clipShape(CustomCorner(corners: [.topLeft, .topRight], radius: 50))
+                                .foregroundColor(themeColor)
+                                .padding(.top, UIScreen.main.bounds.height * 0.04)
+                            Spacer()
+                        }
                         VStack {
                             HStack {
                                 Text("Title of the deck")
@@ -64,7 +112,7 @@ struct EditDeckView: View {
                                 Text("Priority")
                                     .fontWeight(.bold)
                                     .padding(.bottom, UIScreen.main.bounds.height * 0.04)
-                                PriorityButtonList()
+                                PriorityPickerView(selectedPriority: $selectedPriority)
                             }
                             Divider()
                                 .padding()
@@ -89,7 +137,7 @@ struct EditDeckView: View {
                                     .fontWeight(.bold)
                                     .padding(.leading)
                                 Spacer()
-                                WeekdayPickerView()
+                                WeekdayPickerView(selectedDays: $selectedDays)
                             }
                             .padding()
                             HStack {
@@ -104,7 +152,7 @@ struct EditDeckView: View {
                                 Text("Theme color")
                                     .fontWeight(.bold)
                                 Spacer()
-                                Text("???")
+                                ThemePickerView(selectedTheme: $selectedTheme)
                             }
                             .padding()
                         }
@@ -112,6 +160,11 @@ struct EditDeckView: View {
                     }
                 Spacer()
                 Button {
+                    if isNewDeck {
+                        
+                    } else {
+                        
+                    }
                     // todo
                 } label: {
                     ZStack {
@@ -130,6 +183,6 @@ struct EditDeckView: View {
 
 struct EditDeckView_Previews: PreviewProvider {
     static var previews: some View {
-        EditDeckView()
+        EditDeckView(deck: nil, isNewDeck: true)
     }
 }

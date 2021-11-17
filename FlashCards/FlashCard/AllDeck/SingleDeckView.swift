@@ -41,7 +41,7 @@ struct SingleDeckView: View {
     
     var body: some View {
         ZStack {
-            NavigationLink(destination: DeckView(deck: deck)) {
+            NavigationLink(destination: EditDeckView(deck: deck, isNewDeck: false)) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(bottomCardColor)
