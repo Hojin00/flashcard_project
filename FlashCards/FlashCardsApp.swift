@@ -17,15 +17,27 @@ struct FlashCardsApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(cloudkitManager)
-            
-        }
-    }
-    
-    func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
-        if didLoadSuccessfully == true {
-            print("succ")
-        } else {
-            print("fail")
+                .onOpenURL { url in
+                    if let scheme = url.scheme,
+                       scheme.localizedCaseInsensitiveCompare("com.FlashCard") == .orderedSame,
+                       let view = url.host {
+                        
+                        var parameters: [String: String] = [:]
+                        URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.forEach {
+                            parameters[$0.name] = $0.value
+                        }
+                        print("para", parameters)
+                        sharing += "://"
+                        sharing += view + "/"
+                        
+                        print(sharing)
+                        
+//                        let deeplinker = Deeplinker()
+//                        guard let deeplink = deeplinker.manage(url: url) else { return }
+                        
+                        
+                    }
+                }
         }
     }
 }

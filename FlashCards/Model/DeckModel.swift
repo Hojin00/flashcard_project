@@ -6,7 +6,31 @@
 //
 
 import Foundation
+import SwiftUI
 import CloudKit
+
+enum ThemeColor: String {
+    case blue
+    case red
+    case green
+    case yellow
+    
+    var id: String { self.rawValue }
+    
+    func getThemeColor() -> Color {
+        switch self {
+        case .blue:
+            return Color("blueColor")
+        case .red:
+            return Color("redColor")
+        case .green:
+            return Color("greenColor")
+        case .yellow:
+            return Color("yellowColor")
+        }
+    }
+}
+
 
 struct Deck: Hashable, Identifiable {
     var id: CKRecord.ID

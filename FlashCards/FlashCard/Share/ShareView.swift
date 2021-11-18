@@ -19,7 +19,7 @@ struct ShareView: View {
         .sheet(isPresented: $showDetails, onDismiss: {
             print("Dismiss")
         }, content: {
-            ActivityViewController(activityItems: [URL(string: "com.FlashCard://Deck?id=Ab312345bb")!], applicationActivities: nil)
+            ActivityViewController(activityItems: [URL(string: "com.FlashCard://Deck?id=AbCd1234")!], applicationActivities: nil)
         })
     }
 }
