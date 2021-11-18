@@ -10,8 +10,12 @@ import CloudKit
 
 struct CustomModalView: View {
     
+    @EnvironmentObject private var cloudKitManager: CloudKitManager
     @Binding var isShowing: Bool
     @State private var isDragging = false
+    @State var isPresented = false
+    
+    
     
     var deck: Deck
     
@@ -56,16 +60,14 @@ struct CustomModalView: View {
                             .scaleEffect(0.5, anchor: UnitPoint(x: UIScreen.main.bounds.width * -0.0033, y: UIScreen.main.bounds.height * 0.0009))
                             .frame(width: UIScreen.main.bounds.width * 0.2/50, height: UIScreen.main.bounds.height * 0.15/50)
                     }
-                    
                     HStack {
                         Spacer()
                         
                         VStack(alignment: .leading, spacing: 12) {
-                            //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -> 40 caracteres
                             Text(deck.title != nil ? deck.title! : "Deck title goes here if too big aaaaaaaaaaaaaa")
                                 .lineLimit(1)
                                 
-                            Text("\(deck.flashcards != nil ? String(deck.flashcards!.count) : "100") cards")
+                            Text("\(deck.flashcards != nil ? String(cloudKitManager.allFlashCards.count) : "100") cards")
                             Spacer()
                         }
                         .padding(.leading, UIScreen.main.bounds.width * 0.23)
@@ -90,7 +92,6 @@ struct CustomModalView: View {
                         }
                         Spacer()
                     }
-                    
                     Divider()
                     Button {
                         print("share")
@@ -99,38 +100,44 @@ struct CustomModalView: View {
                             .foregroundColor(.black)
                     }
                     .padding(.top, UIScreen.main.bounds.height * 0.008)
-                    Button {
-                        print("practice")
+                    NavigationLink {
+                        SlideView(deck: deck)
                     } label: {
                         customButton(text: "Practice This Deck", assetName: "square.and.pencil", corners: [.bottomLeft, .bottomRight])
                             .foregroundColor(.black)
                     }
-                    Button {
-                        print("add new card")
+                    NavigationLink {
+                        NewCardView()
                     } label: {
                         customButton(text: "Add New Card To This Deck", assetName: "plus.square.on.square", corners: [.topLeft, .topRight])
                             .foregroundColor(.black)
                     }
                     .padding(.top, UIScreen.main.bounds.height * 0.015)
-                    Button {
-                        print("see all cards")
+                    NavigationLink {
+                        DeckView(deck: deck)
                     } label: {
                         customButton(text: "See All Cards", assetName: "square.grid.2x2")
                             .foregroundColor(.black)
                     }
-                    Button {
-                        print("edit")
+                    NavigationLink {
+                        EditDeckView(deck: deck, isNewDeck: false)
                     } label: {
                         customButton(text: "Edit Deck Information", assetName: "square.and.pencil")
                             .foregroundColor(.black)
                     }
                     Button {
-                        print("delete")
+                        isPresented = true
                     } label: {
                         customButton(text: "Delete Deck", assetName: "trash", corners: [.bottomLeft, .bottomRight])
                             .foregroundColor(.black)
                     }
-                    
+                    .alert(isPresented: $isPresented) {
+                        return Alert(title: Text("Are you sure you want to delete this deck?"), primaryButton: Alert.Button.destructive(Text("Delete")) {
+                            cloudKitManager.deleteDeck(deck: deck.myrecord)
+                                    }, secondaryButton: Alert.Button.default(Text("Cancel")) {
+                                        print("canceled")
+                                    })
+                    }
                 }
                 .frame(maxHeight: .infinity)
                 .padding(.bottom, 35)
@@ -141,6 +148,16 @@ struct CustomModalView: View {
         .background(Color.white)
         .clipShape(CustomCorner(corners: [.topLeft, .topRight], radius: 20))
         .animation(isDragging ? nil : .easeInOut(duration: 0.45))
+        .onAppear {
+            CloudKitManager.shared.fetchDeck(deckID: deck.id) { Result in
+                switch Result {
+                case .success:
+                    print("sucesso")
+                case .failure:
+                    print("nao deu")
+                }
+            }
+        }
     }
     
     @State private var prevDragTranslation = CGSize.zero
@@ -173,22 +190,6 @@ struct CustomModalView: View {
             }
     }
 }
-
-
-struct Menu: View {
-    var body: some View {
-        ZStack {
-            Color.blue
-            VStack {
-                Text("aaa")
-            }
-        }
-    }
-}
-
-
-
-
 
 struct CustomModalView_Previews: PreviewProvider {
     static var previews: some View {
