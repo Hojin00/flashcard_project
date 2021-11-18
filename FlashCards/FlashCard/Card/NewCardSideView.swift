@@ -13,17 +13,17 @@ struct NewCardSideView: View {
     
     var side: Side
     var deck: Deck
-    
+    @State private var auxFlashCard: FlashCard
     
     var body: some View {
         VStack {
             if side == .front {
                 Text("Front Side")
-                frontSideSaveView()
+                frontSideSaveView(deck:deck, flashCard: auxFlashCard)
                 
             } else {
                 Text("Back Side")
-                backSideSaveView()
+                backSideSaveView(deck:deck, flashCard: auxFlashCard)
             }
             
         }
@@ -41,6 +41,9 @@ struct frontSideSaveView: View{
     @State private var text: String = ""
     @State private var sliderValue: Double = 0
     @State private var isDeleted: Bool = false
+    
+    var deck: Deck
+    var flashCard: FlashCard
     
     var body: some View{
         HStack {
@@ -145,7 +148,8 @@ struct backSideSaveView: View{
     @State private var title: String = ""
     @State private var text: String = ""
     @State private var sliderValue: Double = 0
-    
+    var deck: Deck
+    var flashCard: FlashCard
     var body: some View{
         HStack {
             Text("Title")
