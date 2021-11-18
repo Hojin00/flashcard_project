@@ -17,7 +17,7 @@ struct HomeView: View {
     var body: some View {
         
         GeometryReader { geometry in
-            LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]), startPoint: .bottom, endPoint: .top)
+            LinearGradient(gradient: Gradient(colors: [Color("homeGradientGray1"), Color("homeGradientGray2")]), startPoint: .bottom, endPoint: .top)
                 .frame(width: geometry.size.width * 1.5, height: geometry.size.height)
                 .background(Color.blue)
                 .clipShape(Circle())
