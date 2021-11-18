@@ -121,7 +121,7 @@ struct CardPreview: View {
     let screenSize: CGSize = UIScreen.main.bounds.size
     var cardType: CardType
     var flashcard: FlashCard?
-    var deck: Deck
+    var deck: Deck?
     var body: some View {
         ZStack {
             
@@ -149,7 +149,7 @@ struct CardPreview: View {
                 
                 
             } else if cardType == .practiceCard {
-                NavigationLink(destination: SlideView(deck: deck)){
+                NavigationLink(destination: SlideView(deck: deck!)){
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(.white)
@@ -190,7 +190,7 @@ struct CardPreview: View {
                                 .padding(.bottom, screenSize.width * 0.04)
                                 .padding(.top, screenSize.width * -0.04)
                         }
-                        Text("\(deck.title ?? "Deck title here if to big ooooooooo")")
+                        Text("\(deck!.title ?? "Deck title here if to big ooooooooo")")
                             .fixedSize(horizontal: false, vertical: true)
                             .lineLimit(2)
                             .padding(.vertical, screenSize.width * 0.01)
