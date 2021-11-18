@@ -8,6 +8,10 @@
 import SwiftUI
 import CloudKit
 struct CardViewSlide: View {
+    @State private var sliderValue: Double = 0
+    let screenSize: CGSize = UIScreen.main.bounds.size
+
+    
     @State private var translation: CGSize = .zero
     @State private var swipeStatus: EasyHard = .none
     
@@ -83,13 +87,28 @@ struct CardViewSlide: View {
                         
                         
                         VStack{
-                            
+                            HStack {
+                                Button {
+                                    
+                                } label: {
+                                    Image(systemName: "play")
+                                        .frame(width: 30, height: 30, alignment: .center)
+                                }
+                                Slider(value: $sliderValue)
+                                    .frame(width: 150, height: 30, alignment: .center)
+                                    .padding(.horizontal)
+                                Text("00:30")
+                                    .font(.caption)
+                                    .foregroundColor(Color.black)
+                            }
+                            .background(Color.green)
+                            .cornerRadius(5)
                         }
 
                         HStack{
 
                             Button(){
-
+                                    
                             }label: {
                                 RoundedRectangle(cornerRadius: 10)
                                     .frame(width: 100, height: 40)

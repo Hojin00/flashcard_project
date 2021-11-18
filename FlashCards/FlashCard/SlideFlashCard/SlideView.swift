@@ -90,9 +90,7 @@ struct SlideView: View {
                             //                            }
    
                         }
-                        if flashcards.isEmpty {
-                            Text("cards over")
-                        }
+                        
  
                     }
                     .offset(x:geometry.size.width / 2 - 150)

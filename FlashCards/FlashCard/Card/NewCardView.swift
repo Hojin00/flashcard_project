@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct NewCardView: View {
+    var deck:Deck
     
     let screenSize: CGSize = UIScreen.main.bounds.size
     
@@ -28,12 +30,12 @@ struct NewCardView: View {
                     Spacer()
                 }
                 CardView {
-                    NewCardSideView(side: .front)
+                    NewCardSideView(side: .front, deck: deck)
                         .onDisappear {
                             isFlipped.toggle()
                         }
                 } back: {
-                    NewCardSideView(side: .back)
+                    NewCardSideView(side: .back, deck: deck)
                         .onDisappear {
                             isFlipped.toggle()
                         }
@@ -71,6 +73,6 @@ struct NewCardView: View {
 
 struct NewCardView_Previews: PreviewProvider {
     static var previews: some View {
-        NewCardView()
+        NewCardView(deck: Deck.init(record: CKRecord.init(recordType: "Deck")))
     }
 }
