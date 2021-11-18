@@ -80,6 +80,11 @@ struct CardViewSlide: View {
                         VStack{
                             Text(card.frontSideText ?? "um pudim feliz")
                         }
+                        
+                        
+                        VStack{
+                            
+                        }
 
                         HStack{
 

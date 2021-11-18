@@ -58,6 +58,7 @@ struct SlideView: View {
     
     var body: some View {
         print(flashcards.count)
+        
         return VStack(alignment: .trailing) {
             GeometryReader { geometry in
                 
@@ -80,8 +81,8 @@ struct SlideView: View {
                                     flashcards.removeAll { $0 == card }
                                 })
                                     .animation(.spring())
-                                    .frame(width: 350, height: 600)
-                                    .offset(x: geometry.size.width / 4 - 55, y: self.getCardOffset(geometry, id: card.id.recordName))
+                                    .frame(width: 300, height: 500)
+                                    .offset( y: self.getCardOffset(geometry, id: card.id.recordName) + 30)
                             
                             
                             //                            } back: {
@@ -89,11 +90,15 @@ struct SlideView: View {
                             //                            }
    
                         }
+                        if flashcards.isEmpty {
+                            Text("cards over")
+                        }
  
                     }
-                    
+                    .offset(x:geometry.size.width / 2 - 150)
                     //.padding()
                     //Spacer()
+                    
                 }
             }
             

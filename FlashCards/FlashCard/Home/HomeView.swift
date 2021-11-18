@@ -17,7 +17,7 @@ struct HomeView: View {
     var body: some View {
         
         GeometryReader { geometry in
-            LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]), startPoint: .bottom, endPoint: .top)
+            LinearGradient(gradient: Gradient(colors: [Color(hue: 0.0, saturation: 0.0, brightness: 0.906), Color(red: 0.8901960784313725, green: 0.8901960784313725, blue: 0.9019607843137255)]), startPoint: .bottom, endPoint: .top)
                 .frame(width: geometry.size.width * 1.5, height: geometry.size.height)
                 .background(Color.blue)
                 .clipShape(Circle())
@@ -38,8 +38,9 @@ struct HomeView: View {
                         Picker("Sort by", selection: $sortKey) {
                             ForEach(0..<options.count) {
                                 Text(self.options[$0])
-                                    .foregroundColor(.black)
+                                   
                             }
+                            
                         }
                         .onChange(of: sortKey, perform: { newValue in
                             
@@ -142,7 +143,7 @@ struct HomeView: View {
                         Button("See all"){
                             print("Print tudo")
                         }
-                        .foregroundColor(Color.red)
+                        //.foregroundColor(Color.red)
                         .padding(.trailing)
                     }
                     .padding(.leading)
