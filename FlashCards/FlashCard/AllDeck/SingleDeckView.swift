@@ -12,9 +12,43 @@ struct SingleDeckView: View {
     @EnvironmentObject private var cloudkitManager: CloudKitManager
     let deck: Deck
     var flashcards: [FlashCard] = []
-    var topCardColor: Color = Color.white
-    var middleCardColor: Color = Color.white
-    var bottomCardColor: Color = Color.white
+    @State var selectedTheme: Int = 0
+    var themeColor: Color {
+        switch selectedTheme {
+        case 0:
+            return Color("greenColor")
+            
+        case 1:
+            return Color("blueColor")
+            
+        case 2:
+            return Color("redColor")
+            
+        case 3:
+            return Color("yellowColor")
+            
+        default:
+            return Color("greenColor")
+        }
+    }
+    var lightThemeColor: Color {
+        switch selectedTheme {
+        case 0:
+            return Color("lightGreenColor")
+            
+        case 1:
+            return Color("lightBlueColor")
+            
+        case 2:
+            return Color("lightRedColor")
+            
+        case 3:
+            return Color("lightYellowColor")
+            
+        default:
+            return Color("lightGreenColor")
+        }
+    }
     
     init(deck: Deck) {
         self.deck = deck
@@ -44,19 +78,27 @@ struct SingleDeckView: View {
             NavigationLink(destination: EditDeckView(deck: deck, isNewDeck: false)) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(bottomCardColor)
+                        .foregroundColor(lightThemeColor)
                         .frame(width: UIScreen.main.bounds.width * 0.270, height: UIScreen.main.bounds.height * 0.2)
                         .shadow(radius: 10)
                     RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(middleCardColor)
+                        .foregroundColor(lightThemeColor)
                         .frame(width: UIScreen.main.bounds.width * 0.285, height: UIScreen.main.bounds.height * 0.2)
                         .padding(.bottom, UIScreen.main.bounds.height * 0.015)
                         .shadow(radius: 10)
                     RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(topCardColor)
+                        .foregroundColor(.white)
                         .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.height * 0.2)
-                        .padding(.bottom, UIScreen.main.bounds.height * 0.030)
                         .shadow(radius: 10)
+                        .padding(.bottom, UIScreen.main.bounds.height * 0.030)
+                    VStack {
+                        Rectangle()
+                            .frame(width: UIScreen.main.bounds.width * 0.30, height: UIScreen.main.bounds.height * 0.015)
+                            .clipShape(CustomCorner(corners: [.topLeft, .topRight], radius: 50))
+                            .foregroundColor(themeColor)
+                            .padding(.top, UIScreen.main.bounds.height * 0.005)
+                        Spacer()
+                    }
                     VStack {
                         Spacer()
                         HStack {
@@ -67,6 +109,7 @@ struct SingleDeckView: View {
                             Image(systemName: "alarm")
                                 .padding(.trailing, UIScreen.main.bounds.size.width * 0.08)
                         }
+                        .padding(.top)
                         Spacer()
                             .font(.title)
                         Text("\(deck.title ?? "No title")")
