@@ -162,9 +162,7 @@ struct HomeView: View {
                     ScrollView(.horizontal) {
                         HStack(alignment: .center){
                             VStack(){
-                                Button {
-                                    print("new card")
-                                } label: {
+                                NavigationLink(destination: NewCardView()) {
                                     ZStack {
                                         Image("buttonNewCard")
                                         HStack {
@@ -182,26 +180,7 @@ struct HomeView: View {
                                         }
                                     }
                                 }
-                                /*NavigationLink(destination: EditDeckView(deck: nil, isNewDeck: true)) {
-                                        ZStack {
-                                            Image("buttonNewDeck")
-                                                .frame(width: 23, height: 24)
-                                            HStack(alignment: .center, spacing: 0.0) {
-                                                Text("New \n Deck")
-                                                    .font(.system(size: 16.0))
-                                                    .fontWeight(.bold)
-                                                    .lineLimit(2)
-                                                    .foregroundColor(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
-                                                Image(systemName:"plus")
-                                                    .resizable()
-                                                    .foregroundColor(Color.black)
-                                                    .scaledToFit()
-                                                    .frame(width: 25, height: 25)
-                                            }
-                                            .offset(x: /*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/, y:  -10)*/
-                                Button {
-                                    print("new deck")
-                                } label : {
+                                NavigationLink(destination: EditDeckView(deck: nil, isNewDeck: true)) {
                                     ZStack {
                                         Image("buttonNewDeck")
                                             .frame(width: 23, height: 24)

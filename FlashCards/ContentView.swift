@@ -16,6 +16,7 @@ struct ContentView: View {
         NavigationView{
             HomeView()
                 .navigationBarHidden(true)
+                .navigationBarBackButtonHidden(true)
                 //.edgesIgnoringSafeArea([.top ,.bottom])
         }
         
