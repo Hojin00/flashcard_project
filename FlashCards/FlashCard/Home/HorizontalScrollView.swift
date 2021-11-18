@@ -14,9 +14,44 @@ struct HorizontalScrollView: View {
     let screenSize: CGSize
     let width: CGFloat
     let paddingX:CGFloat
-    var topCardColor: Color = Color.white
-    var middleCardColor: Color = Color.white
-    var bottomCardColor: Color = Color.white
+    
+    @State var selectedTheme: Int = 0
+    var themeColor: Color {
+        switch selectedTheme {
+        case 0:
+            return Color("greenColor")
+            
+        case 1:
+            return Color("blueColor")
+            
+        case 2:
+            return Color("redColor")
+            
+        case 3:
+            return Color("yellowColor")
+            
+        default:
+            return Color("greenColor")
+        }
+    }
+    var lightThemeColor: Color {
+        switch selectedTheme {
+        case 0:
+            return Color("lightGreenColor")
+            
+        case 1:
+            return Color("lightBlueColor")
+            
+        case 2:
+            return Color("lightRedColor")
+            
+        case 3:
+            return Color("lightYellowColor")
+            
+        default:
+            return Color("lightGreenColor")
+        }
+    }
     
     var body: some View {
             GeometryReader { reader in
@@ -31,19 +66,27 @@ struct HorizontalScrollView: View {
                 NavigationLink(destination: DeckView(deck: deck)) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(bottomCardColor)
+                            .foregroundColor(lightThemeColor)
                             .frame(width: UIScreen.main.bounds.width * 0.570, height: UIScreen.main.bounds.height * 0.4)
                             .shadow(radius: 15)
                         RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(middleCardColor)
+                            .foregroundColor(lightThemeColor)
                             .frame(width: UIScreen.main.bounds.width * 0.600, height: UIScreen.main.bounds.height * 0.4)
                             .padding(.bottom, UIScreen.main.bounds.height * 0.025)
                             .shadow(radius: 15)
                         RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(topCardColor)
+                            .foregroundColor(.white)
                             .frame(width: UIScreen.main.bounds.width * 0.620, height: UIScreen.main.bounds.height * 0.4)
                             .padding(.bottom, UIScreen.main.bounds.height * 0.050)
                             .shadow(radius: 15)
+                        VStack {
+                            Rectangle()
+                                .frame(width: UIScreen.main.bounds.width * 0.63, height: UIScreen.main.bounds.height * 0.03)
+                                .clipShape(CustomCorner(corners: [.topLeft, .topRight], radius: 50))
+                                .foregroundColor(themeColor)
+//                                .padding(.top, UIScreen.main.bounds.height * 0.01)
+                            Spacer()
+                        }
                         VStack {
                             Spacer()
                             HStack {

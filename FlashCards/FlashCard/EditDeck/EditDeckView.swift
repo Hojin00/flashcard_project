@@ -92,7 +92,7 @@ struct EditDeckView: View {
                                 .frame(width: UIScreen.main.bounds.width * 0.92, height: UIScreen.main.bounds.height * 0.025)
                                 .clipShape(CustomCorner(corners: [.topLeft, .topRight], radius: 50))
                                 .foregroundColor(themeColor)
-                                .padding(.top, UIScreen.main.bounds.height * 0.04)
+                                .padding(.top, UIScreen.main.bounds.height * 0.03)
                             Spacer()
                         }
                         VStack {
@@ -125,8 +125,11 @@ struct EditDeckView: View {
                                 VStack {
                                     Text("Alarm date")
                                         .fontWeight(.bold)
-                                    Text("and time")
-                                        .fontWeight(.bold)
+                                    HStack {
+                                        Text(" and time")
+                                            .fontWeight(.bold)
+                                        Spacer()
+                                    }
                                 }
                                 Spacer()
                                 DatePicker("", selection: $currentDate)
@@ -136,13 +139,14 @@ struct EditDeckView: View {
                                 Text("Repeat")
                                     .fontWeight(.bold)
                                     .padding(.leading)
-                                Spacer()
+//                                Spacer()
                                 WeekdayPickerView(selectedDays: $selectedDays)
                             }
                             .padding()
                             HStack {
                                 Text("End repeat")
                                     .fontWeight(.bold)
+                                    .padding(.trailing, UIScreen.main.bounds.width * 0.01)
                                 Spacer()
                                 DatePicker("", selection: $currentDate)
                             }
@@ -176,6 +180,7 @@ struct EditDeckView: View {
                             .font(.title)
                     }
                 }
+                Spacer()
             }
         }
     }
