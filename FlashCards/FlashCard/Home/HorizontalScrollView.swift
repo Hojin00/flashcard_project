@@ -67,21 +67,21 @@ struct HorizontalScrollView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundColor(lightThemeColor)
-                            .frame(width: UIScreen.main.bounds.width * 0.570, height: UIScreen.main.bounds.height * 0.4)
+                            .frame(width: UIScreen.main.bounds.width * 0.500, height: UIScreen.main.bounds.height * 0.4)
                             .shadow(radius: 15)
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundColor(lightThemeColor)
-                            .frame(width: UIScreen.main.bounds.width * 0.600, height: UIScreen.main.bounds.height * 0.4)
+                            .frame(width: UIScreen.main.bounds.width * 0.530, height: UIScreen.main.bounds.height * 0.4)
                             .padding(.bottom, UIScreen.main.bounds.height * 0.025)
                             .shadow(radius: 15)
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundColor(.white)
-                            .frame(width: UIScreen.main.bounds.width * 0.620, height: UIScreen.main.bounds.height * 0.4)
+                            .frame(width: UIScreen.main.bounds.width * 0.550, height: UIScreen.main.bounds.height * 0.4)
                             .padding(.bottom, UIScreen.main.bounds.height * 0.050)
                             .shadow(radius: 15)
                         VStack {
                             Rectangle()
-                                .frame(width: UIScreen.main.bounds.width * 0.63, height: UIScreen.main.bounds.height * 0.03)
+                                .frame(width: UIScreen.main.bounds.width * 0.56, height: UIScreen.main.bounds.height * 0.03)
                                 .clipShape(CustomCorner(corners: [.topLeft, .topRight], radius: 50))
                                 .foregroundColor(themeColor)
 //                                .padding(.top, UIScreen.main.bounds.height * 0.01)
@@ -117,7 +117,7 @@ struct HorizontalScrollView: View {
                             }
                             Spacer()
                         }
-                        .padding(.bottom, UIScreen.main.bounds.height * 0.030)
+                        .padding(.bottom, UIScreen.main.bounds.height * 0.020)
                         .foregroundColor(Color.black)
                     }
                 }
@@ -132,7 +132,7 @@ struct HorizontalScrollView: View {
                         Spacer()
                     }
                 }
-                .frame(width: UIScreen.main.bounds.width * 0.55, height: UIScreen.main.bounds.height * 0.30)
+                .frame(width: UIScreen.main.bounds.width * 0.45, height: UIScreen.main.bounds.height * 0.30)
             }
             .scaleEffect(percentage)
         }
