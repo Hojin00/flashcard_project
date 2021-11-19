@@ -11,9 +11,10 @@ struct CardViewSlide: View {
     @State private var translation: CGSize = .zero
     @State private var swipeStatus: EasyHard = .none
     
-    private var card: FlashCard
-    private var onRemove: (FlashCard) -> Void
-    
+//    private var card: FlashCard
+//    private var onRemove: (FlashCard) -> Void
+    private var card: CardDemo
+    private var onRemove: (CardDemo) -> Void
     var currentCard: Int
     var totalCard: Int
     
@@ -23,7 +24,8 @@ struct CardViewSlide: View {
         case easy, hard, none
     }
     
-    init(card: FlashCard,totalCard: Int, currentCard: Int , onRemove: @escaping (FlashCard) -> Void) {
+    init(card: CardDemo,totalCard: Int, currentCard: Int , onRemove: @escaping (CardDemo) -> Void) {
+        
         self.card = card
         self.onRemove = onRemove
         self.totalCard = totalCard
@@ -55,30 +57,31 @@ struct CardViewSlide: View {
                     //                        .clipped()
                     VStack {
                         HStack{
-                            Text("\(currentCard)/\(totalCard)")
-                                .font(.caption)
-
-                            Spacer()
                             Text("High")
                                 .font(.caption)
 
+                            Spacer()
+                            
+                            Text("\(currentCard)/\(totalCard)")
+                                .font(.caption)
+
                         }
-                        .padding([.leading, .bottom, .trailing])
+                        .padding([.top, .leading, .bottom, .trailing])
                         VStack(alignment: .center) {
-                            Text(card.title ?? "Pudim")
+                            Text(card.title)
                                 .font(.title)
                                 .bold()
                                 .foregroundColor(.gray)
                         }
                         VStack{
-                            Image("OPudim")
+                            Image(card.image)
                                 .resizable()
                                 .scaledToFill()
                                 .cornerRadius(10)
                                 .frame(width: 200, height: 200)
                         }
                         VStack{
-                            Text(card.frontSideText ?? "um pudim feliz")
+                            Text(card.description)
                         }
 
                         HStack{
@@ -180,7 +183,7 @@ struct CardViewSlide: View {
 // 7
 struct CardViewSlide_Previews: PreviewProvider {
     static var previews: some View {
-        CardViewSlide(card: FlashCard.init(record: CKRecord(recordType: "")), totalCard: 0, currentCard: 0, onRemove: { _ in})
+        CardViewSlide(card: CardDemo.init(id: 1, title: "Heart", image: "Heart", description: "What is it function on the body"), totalCard: 0, currentCard: 0, onRemove: { _ in})
             .frame(height: 400)
             .padding()
     }
