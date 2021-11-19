@@ -65,52 +65,48 @@ struct SlideView: View {
     var body: some View {
         
         
-        GeometryReader { geometry in
-            // 5
-            LinearGradient(gradient: Gradient(colors: [Color("homeGradientGray1"), Color("homeGradientGray2")]), startPoint: .bottom, endPoint: .top)
-                .frame(width: geometry.size.width * 1.5, height: geometry.size.height)
-                .background(Color.blue)
-                .clipShape(Circle())
-                .offset(x: -geometry.size.width / 4, y: -geometry.size.height / 2)
-            VStack {
-                
-                
-                // 6
-                ZStack {
+        ZStack {
+             Image("BackgroudSlide")
+                .resizable()
+                .scaledToFit()
+                .offset(x: 0, y: 200)
+            GeometryReader { geometry in
+                // 5
+                LinearGradient(gradient: Gradient(colors: [Color("homeGradientGray1"), Color("homeGradientGray2")]), startPoint: .bottom, endPoint: .top)
+                    .frame(width: geometry.size.width * 1.5, height: geometry.size.height)
+                    .background(Color.blue)
+                    .clipShape(Circle())
+                    .offset(x: -geometry.size.width / 4, y: -geometry.size.height / 2)
+                VStack {
                     
-                    //                        HStack(alignment: .center) {
-                    //                            Text("Cards are Over!")
-                    //                                .offset(x: 100, y: 100)
-                    //                        }
-                    // 7
-                    ForEach(flashcardsMockDemo) { card in
-                        CardViewSlide(card: card,totalCard: totalCards, currentCard:  totalCards - flashcardsMockDemo.firstIndex(of: card)!
-                                      , onRemove: { card in
-                            flashcardsMockDemo.removeAll { $0 == card }
-                        })
-                            .animation(.spring())
-                            .frame(width: 300, height: 800)
-                            .offset(x: geometry.size.width / 2 - 150, y: self.getCardOffset(geometry, id: card.id))
-                    }
-                    if flashcardsMockDemo.count == 0 {
-                        HStack(alignment: .center) {
-                            Text("Cards are Over!")
-                                .font(.body)
-                                
-                                .fontWeight(.black)
-                                .offset(x: geometry.size.width / 4 + 20  , y: geometry.size.height / 2)
+                    
+                    // 6
+                    ZStack {
+                     
+                        ForEach(flashcardsMockDemo) { card in
+                            CardViewSlide(card: card,totalCard: totalCards, currentCard:  totalCards - flashcardsMockDemo.firstIndex(of: card)!
+                                          , onRemove: { card in
+                                flashcardsMockDemo.removeAll { $0 == card }
+                            })
+                                .animation(.spring())
+                                .frame(width: 300, height: 500)
+                                .offset(x: geometry.size.width / 2 - 150, y: self.getCardOffset(geometry, id: card.id))
                         }
-                        Spacer()
+                        if flashcardsMockDemo.count == 0 {
+                            HStack(alignment: .center) {
+                                Text("Cards are Over!")
+                                    .font(.body)
+                                    
+                                    .fontWeight(.black)
+                                    .offset(x: geometry.size.width / 4 + 20  , y: geometry.size.height / 2)
+                            }
+                            Spacer()
+                        }
+                        
                     }
-//                    HStack {
-//                        Spacer()
-//                        Image("bgreview")
-//                            .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.height * 0.1)
-//                        Spacer()
-//                    }
+                    Spacer()
+                    
                 }
-                Spacer()
-                
             }
         }
         
