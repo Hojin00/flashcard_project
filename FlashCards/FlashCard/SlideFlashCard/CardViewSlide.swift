@@ -89,9 +89,9 @@ struct CardViewSlide: View {
                             Button(){
 
                             }label: {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .frame(width: 100, height: 40)
-                                    .foregroundColor(Color(hue: 0.293, saturation: 0.792, brightness: 0.891))
+//                                RoundedRectangle(cornerRadius: 10)
+//                                    .frame(width: 100, height: 40)
+//                                    .foregroundColor(Color(hue: 0.293, saturation: 0.792, brightness: 0.891))
                             }
 //                            Circle()
 //                                .foregroundColor(Color.red)
@@ -183,7 +183,7 @@ struct CardViewSlide: View {
 // 7
 struct CardViewSlide_Previews: PreviewProvider {
     static var previews: some View {
-        CardViewSlide(card: CardDemo.init(id: 1, title: "Heart", image: "Heart", description: "What is it function on the body"), totalCard: 0, currentCard: 0, onRemove: { _ in})
+        CardViewSlide(card: CardDemo.init(id: 1, title: "Heart", image: "Heart", description: "What is its function on the body"), totalCard: 0, currentCard: 0, onRemove: { _ in})
             .frame(height: 400)
             .padding()
     }

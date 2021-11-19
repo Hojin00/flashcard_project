@@ -89,7 +89,7 @@ struct SlideView: View {
                             flashcardsMockDemo.removeAll { $0 == card }
                         })
                             .animation(.spring())
-                            .frame(width: 300, height: 500)
+                            .frame(width: 300, height: 800)
                             .offset(x: geometry.size.width / 2 - 150, y: self.getCardOffset(geometry, id: card.id))
                     }
                     if flashcardsMockDemo.count == 0 {
@@ -102,8 +102,15 @@ struct SlideView: View {
                         }
                         Spacer()
                     }
+//                    HStack {
+//                        Spacer()
+//                        Image("bgreview")
+//                            .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.height * 0.1)
+//                        Spacer()
+//                    }
                 }
                 Spacer()
+                
             }
         }
         
