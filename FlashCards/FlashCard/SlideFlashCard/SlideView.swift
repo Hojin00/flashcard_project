@@ -98,6 +98,7 @@ struct SlideView: View {
                                     .font(.body)
                                     
                                     .fontWeight(.black)
+                                    .padding(.leading)
                                     .offset(x: geometry.size.width / 4 + 20  , y: geometry.size.height / 2)
                             }
                             Spacer()
