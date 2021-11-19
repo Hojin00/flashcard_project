@@ -162,7 +162,7 @@ struct HomeView: View {
                     ScrollView(.horizontal) {
                         HStack(alignment: .center){
                             VStack(){
-                                NavigationLink(destination: NewCardView()) {
+                                NavigationLink(destination: NewCardView().navigationBarBackButtonHidden(true).offset(x: 0, y: -50)) {
                                     ZStack {
                                         Image("buttonNewCard")
                                         HStack {
@@ -180,7 +180,7 @@ struct HomeView: View {
                                         }
                                     }
                                 }
-                                NavigationLink(destination: EditDeckView(deck: nil, isNewDeck: true).navigationBarBackButtonHidden(true)) {
+                                NavigationLink(destination: EditDeckView(deck: nil, isNewDeck: true).navigationBarBackButtonHidden(true).offset(x: 0, y: -50)) {
                                     ZStack {
                                         Image("buttonNewDeck")
                                             .frame(width: 23, height: 24)

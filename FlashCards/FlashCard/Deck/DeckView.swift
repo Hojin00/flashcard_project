@@ -62,11 +62,14 @@ struct DeckView: View {
                                         
                                         if n+1 < cloudkitManager.allFlashCards.count {
                                             CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
+                                                .padding(.horizontal)
                                             CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n+1], deck: deck)
+                                                .padding(.horizontal)
                                             
                                         } else {
                                             
                                             CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
+                                                .padding(.horizontal)
                                             DeckEmptyView(width: screenSize.width * 0.35, height: screenSize.width * 0.26)
                                                 .padding(.horizontal)
                                         }

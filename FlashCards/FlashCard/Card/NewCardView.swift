@@ -51,9 +51,7 @@ struct NewCardView: View {
                         .padding(.horizontal, screenSize.width * 0.03)
                         .foregroundColor(.gray)
                 }
-                Button {
-                    print("click")
-                } label: {
+                NavigationLink(destination: EditDeckView(deck: nil, isNewDeck: true).navigationBarBackButtonHidden(true).offset(x: 0, y: -50)) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 50)
                             .foregroundColor(Color.gray)

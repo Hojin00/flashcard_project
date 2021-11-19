@@ -12,7 +12,8 @@ struct EditDeckView: View {
     
     @State var text: String = ""
     @State var isAlarmOn: Bool = true
-    @State var currentDate = Date()
+    @State var date1 = Date()
+    @State var date2 = Date()
     @State var selectedPriority: Int = 0
     @State var selectedDays: [Bool] = [false, false, false, false, false, false, false]
     @State var selectedTheme: Int = 0
@@ -43,7 +44,7 @@ struct EditDeckView: View {
             self.deck = deck
             self.text = deck.title ?? "No title"
             if let reminderDate = deck.reminderDate {
-                self.currentDate = reminderDate
+                self.date1 = reminderDate
                 self.isAlarmOn = true
             } else {
                 self.isAlarmOn = false
@@ -132,7 +133,7 @@ struct EditDeckView: View {
                                     }
                                 }
                                 Spacer()
-                                DatePicker("", selection: $currentDate)
+                                DatePicker("", selection: $date1)
                             }
                             .padding()
                             HStack {
@@ -148,7 +149,7 @@ struct EditDeckView: View {
                                     .fontWeight(.bold)
                                     .padding(.trailing, UIScreen.main.bounds.width * 0.01)
                                 Spacer()
-                                DatePicker("", selection: $currentDate)
+                                DatePicker("", selection: $date2)
                             }
                             .padding()
                             Divider()
@@ -180,7 +181,7 @@ struct EditDeckView: View {
                             .font(.title)
                     }
                 }
-                Spacer()
+                .offset(x: 0, y: 15)
             }
         }
     }

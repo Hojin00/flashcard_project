@@ -133,7 +133,25 @@ struct HorizontalScrollView: View {
                     }
                 }
                 .frame(width: UIScreen.main.bounds.width * 0.45, height: UIScreen.main.bounds.height * 0.30)
-            }
+            }.onAppear(perform: {
+                let color = deck.themeColor!
+                switch color {
+                case "greenTheme":
+                    selectedTheme = 0
+                    
+                case "blueTheme":
+                    selectedTheme = 1
+                    
+                case "redTheme":
+                    selectedTheme = 2
+                    
+                case "yellowTheme":
+                    selectedTheme = 3
+                    
+                default:
+                    selectedTheme = 0
+                }
+            })
             .scaleEffect(percentage)
         }
         .frame(width: width)

@@ -113,6 +113,9 @@ struct SingleDeckView: View {
                         Spacer()
                             .font(.title)
                         Text("\(deck.title ?? "No title")")
+                            .frame(width: 100, height: 10 )
+                            .fixedSize(horizontal: false, vertical: true)
+                            .lineLimit(3)
                         Spacer()
                         Text("Remembered")
                             .font(.caption)
@@ -147,6 +150,24 @@ struct SingleDeckView: View {
                 }
             }
             .frame(width: UIScreen.main.bounds.width * 0.23, height: UIScreen.main.bounds.height * 0.15)
+        }.onAppear {
+            let color = deck.themeColor!
+            switch color {
+            case "greenTheme":
+                selectedTheme = 0
+                
+            case "blueTheme":
+                selectedTheme = 1
+                
+            case "redTheme":
+                selectedTheme = 2
+                
+            case "yellowTheme":
+                selectedTheme = 3
+                
+            default:
+                selectedTheme = 0
+            }
         }
     }
 }
