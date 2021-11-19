@@ -26,18 +26,17 @@ struct DeckView: View {
         ZStack {
             
             
-            Circle()
-            //.ignoresSafeArea()
-                .frame(width: screenSize.width * 1.4, height: screenSize.width * 1.4)
-                .padding(.top, screenSize.width * -1.3)
-                .foregroundColor(.gray)
-                .opacity(0.5)
+            LinearGradient(gradient: Gradient(colors: [Color("homeGradientGray1"), Color("homeGradientGray2")]), startPoint: .bottom, endPoint: .top)
+                .frame(width: screenSize.width * 1.5, height: screenSize.height)
+                .background(Color.blue)
+                .clipShape(Circle())
+                .offset(x: -screenSize.width / 4 + 100, y: -screenSize.height / 2)
             VStack {
                 HStack {
                     Text("Deck Cards")
                         .font(.title).bold()
                         .padding(.top, screenSize.width * 0.07)
-                        .padding(.leading, screenSize.width * 0.2)
+                        .padding(.leading, screenSize.width * 0.3)
                     Spacer()
                 }
                 if !didLoadCards {
