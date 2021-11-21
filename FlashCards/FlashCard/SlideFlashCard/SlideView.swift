@@ -9,31 +9,23 @@ import SwiftUI
 import AVFoundation
 import CloudKit
 
-
-
-struct CardDemo: Hashable, CustomStringConvertible, Identifiable {
-    var id:Int
-    let title: String
-    let image: String
-    let description: String
-    //    var description: String {
-    //        return "\(title), id: \(id)"
-    //    }
-}
-
 struct SlideView: View {
     
     
-    @State var flashcardsMockDemo:[CardDemo] = [CardDemo.init(id: 1, title: "Heart", image: "Heart", description: "What is it function on the body"), CardDemo.init(id: 2, title: "Brain", image: "Brain", description: "Where is the frontal lobe?"), CardDemo.init(id: 3, title: "Eye", image: "Eye", description: "How does the cornea work?"), CardDemo.init(id: 4, title: "Ribs", image: "Bones", description: "How many ribs do we have?")]
     
     // @EnvironmentObject private var cloudkitManager: CloudKitManager
     @State private var flashcards:[FlashCard] = []
-    @State private var totalCards:Int = 4
+    @State private var totalCards:Int = 0
     /// List of users EXEMPLO TROCAR DEPOIS POR FLASH CARD
     var deck: Deck
     init(deck: Deck){
         self.deck = deck
     }
+    
+    //    init(flashcards: [FlashCard]){
+    //        self._flashcards = State.init(initialValue: flashcards)
+    //    }
+    
     /// Return the CardViews width for the given offset in the array
     /// - Parameters:
     ///   - geometry: The geometry proxy of the parent
@@ -52,61 +44,82 @@ struct SlideView: View {
     /// - Parameters:
     ///   - geometry: The geometry proxy of the parent
     ///   - id: The ID of the current user
-    //       private func getCardOffset(_ geometry: GeometryProxy, id: String) -> CGFloat {
-    //           guard let index = flashcards.firstIndex(where: {$0.id.recordName == id}) else {return 0}
-    //           print(id, index)
-    //           return  CGFloat((flashcards).count - index) * -20
-    //       }
-    
-    private func getCardOffset(_ geometry: GeometryProxy, id: Int) -> CGFloat {
-        return  CGFloat(flashcardsMockDemo.count - 1 - id) * -10
+    private func getCardOffset(_ geometry: GeometryProxy, id: String) -> CGFloat {
+        guard let index = flashcards.firstIndex(where: {$0.id.recordName == id}) else {return 0}
+        print(id, index)
+        return  CGFloat((flashcards).count - index) * -10
     }
     
     var body: some View {
         
-        
-        ZStack {
-             Image("BackgroudSlide")
+        ZStack(alignment: .trailing) {
+            Image("BackgroudSlide")
                 .resizable()
                 .scaledToFit()
                 .offset(x: 0, y: 200)
             GeometryReader { geometry in
-                // 5
+                
                 LinearGradient(gradient: Gradient(colors: [Color("homeGradientGray1"), Color("homeGradientGray2")]), startPoint: .bottom, endPoint: .top)
                     .frame(width: geometry.size.width * 1.5, height: geometry.size.height)
                     .background(Color.blue)
                     .clipShape(Circle())
                     .offset(x: -geometry.size.width / 4, y: -geometry.size.height / 2)
-                VStack {
+                
+                
+                
+                VStack(alignment: .center) {
                     
-                    
-                    // 6
                     ZStack {
-                     
-                        ForEach(flashcardsMockDemo) { card in
-                            CardViewSlide(card: card,totalCard: totalCards, currentCard:  totalCards - flashcardsMockDemo.firstIndex(of: card)!
-                                          , onRemove: { card in
-                                flashcardsMockDemo.removeAll { $0 == card }
+                        
+                        ForEach(flashcards) { card in
+                            
+                            
+                            CardViewSlide(card: card,totalCard: totalCards, currentCard: totalCards - flashcards.firstIndex(of: card)!, onRemove: { card in
+                                flashcards.removeAll { $0 == card }
                             })
                                 .animation(.spring())
                                 .frame(width: 300, height: 500)
-                                .offset(x: geometry.size.width / 2 - 150, y: self.getCardOffset(geometry, id: card.id))
-                        }
-                        if flashcardsMockDemo.count == 0 {
-                            HStack(alignment: .center) {
-                                Text("Cards are Over!")
-                                    .font(.body)
+                                .offset(x: geometry.size.width / 2 - 150, y: self.getCardOffset(geometry, id: card.id.recordName))
+                            
+                            
+                            if flashcards.count == 0 {
+                                HStack(alignment: .center) {
+                                    Text("Cards are Over!")
+                                        .font(.body)
                                     
-                                    .fontWeight(.black)
-                                    .padding(.leading)
-                                    .offset(x: geometry.size.width / 4 + 20  , y: geometry.size.height / 2)
+                                        .fontWeight(.black)
+                                        .padding(.leading)
+                                        .offset(x: geometry.size.width / 4 + 20  , y: geometry.size.height / 2)
+                                }
+                                
                             }
-                            Spacer()
+                            
                         }
-                        
                     }
-                    Spacer()
                     
+                }
+                
+                .onAppear() {
+                    CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID, completionOnly: true) { Result in
+                        switch Result {
+                        case .success(let cards):
+                            var uniqueCards: Set<FlashCard> = []
+                            self.flashcards = cards.filter({ card in
+                                if uniqueCards.contains(card){
+                                    return false
+                                }else {
+                                    uniqueCards.insert(card)
+                                    return true
+                                }
+                            })
+                            self.totalCards = self.flashcards.count
+                            print("Uhul da slide")
+                            break
+                        default:
+                            print("failed")
+                            break
+                        }
+                    }
                 }
             }
         }

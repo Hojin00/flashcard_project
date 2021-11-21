@@ -11,10 +11,9 @@ struct CardViewSlide: View {
     @State private var translation: CGSize = .zero
     @State private var swipeStatus: EasyHard = .none
     
-//    private var card: FlashCard
-//    private var onRemove: (FlashCard) -> Void
-    private var card: CardDemo
-    private var onRemove: (CardDemo) -> Void
+    private var card: FlashCard
+    private var onRemove: (FlashCard) -> Void
+    
     var currentCard: Int
     var totalCard: Int
     
@@ -24,7 +23,7 @@ struct CardViewSlide: View {
         case easy, hard, none
     }
     
-    init(card: CardDemo,totalCard: Int, currentCard: Int , onRemove: @escaping (CardDemo) -> Void) {
+    init(card: FlashCard,totalCard: Int, currentCard: Int , onRemove: @escaping (FlashCard) -> Void) {
         
         self.card = card
         self.onRemove = onRemove
@@ -46,7 +45,7 @@ struct CardViewSlide: View {
     var body: some View {
 
          GeometryReader { geometry in
-             VStack {
+            VStack {
                 ZStack(alignment: self.swipeStatus == .easy ? .topLeading : .topTrailing) {
                     
                     
@@ -57,46 +56,57 @@ struct CardViewSlide: View {
                     //                        .clipped()
                     VStack {
                         HStack{
-                            Text("High")
+                            Text("\(currentCard)/\(totalCard)")
                                 .font(.caption)
 
                             Spacer()
-                            
-                            Text("\(currentCard)/\(totalCard)")
+                            Text("High")
                                 .font(.caption)
 
                         }
                         .padding([.top, .leading, .bottom, .trailing])
                         VStack(alignment: .center) {
-                            Text(card.title)
+                            Text("Heart")
                                 .font(.title)
                                 .bold()
                                 .foregroundColor(.gray)
                         }
                         VStack{
-                            Image(card.image)
+                            Image("Heart")
                                 .resizable()
                                 .scaledToFill()
                                 .cornerRadius(10)
                                 .frame(width: 200, height: 200)
                         }
                         VStack{
-                            Text(card.description)
+                            Text("What is it function on the body")
                         }
-                        .padding(.vertical)
 
                         HStack{
 
                             Button(){
 
                             }label: {
-//                                RoundedRectangle(cornerRadius: 10)
-//                                    .frame(width: 100, height: 40)
-//                                    .foregroundColor(Color(hue: 0.293, saturation: 0.792, brightness: 0.891))
+                                RoundedRectangle(cornerRadius: 10)
+                                    .frame(width: 100, height: 40)
+                                    .foregroundColor(Color(hue: 0.293, saturation: 0.792, brightness: 0.891))
                             }
-
+//                            Circle()
+//                                .foregroundColor(Color.red)
+//
+//                                .frame(width: 130, height: 130)
+//                                .background(Color.blue)
+//                                .clipShape(Circle())
+//                                .offset(x: -170, y: 60)
+//
+//                            Circle()
+//                                .foregroundColor(Color.green)
+//                                .frame(width: 130, height: 130)
+//                                .background(Color.blue)
+//                                .clipShape(Circle())
+//                                .offset(x: 170, y: 60)
                         }
-                        Spacer()
+//                        LinearGradient(gradient: Gradient(colors: [Color.init(#colorLiteral(red: 0.1764705926, green: 1, blue: 0.5607843399, alpha: 1)), Color.init(#colorLiteral(red: 0.9601020217, green: 0.9646142125, blue: 0.9777105451, alpha: 0))]), startPoint: .bottom, endPoint: .top)
                     }
                     if self.swipeStatus == .easy {
                         Text("EASY")
@@ -128,13 +138,12 @@ struct CardViewSlide: View {
                             .rotationEffect(Angle.degrees(45))
                     }
 
-                   
+                    
                 }
                      
                 
             }
             .padding(.bottom)
-            .frame( height: 500)
             .background(Color.white)
             .cornerRadius(10)
             .shadow(radius: 5)
@@ -172,8 +181,8 @@ struct CardViewSlide: View {
 // 7
 struct CardViewSlide_Previews: PreviewProvider {
     static var previews: some View {
-        CardViewSlide(card: CardDemo.init(id: 1, title: "Heart", image: "Heart", description: "What is its function on the body"), totalCard: 0, currentCard: 0, onRemove: { _ in})
-            .frame(height: 600)
+        CardViewSlide(card: FlashCard.init(record: CKRecord(recordType: "")), totalCard: 0, currentCard: 0, onRemove: { _ in})
+            .frame(height: 400)
             .padding()
     }
 }
