@@ -115,6 +115,7 @@ struct CardPreview: View {
         ZStack {
             if cardType == .newCard {
                 
+
                 NavigationLink(destination: NewCardView(deck: deck)) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
@@ -132,7 +133,6 @@ struct CardPreview: View {
                                 .foregroundColor(.black)
                         }
                     }
-                    
                 }
                 
                 
@@ -214,7 +214,7 @@ struct CardPreview: View {
                     .padding(.all, screenSize.width * 0.01)
                 VStack {
                     VStack {
-                        Text("\(flashcard?.title ?? "Deck title here if to big ooooooooo")")
+                        Text("\(flashcard?.frontSideTitle ?? "Deck title here if to big ooooooooo")")
                             .fixedSize(horizontal: false, vertical: true)
                             .lineLimit(2)
                             .padding(.top, screenSize.width * 0.02)

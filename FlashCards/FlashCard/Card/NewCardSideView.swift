@@ -12,18 +12,24 @@ import CloudKit
 struct NewCardSideView: View {
     
     var side: Side
-    var deck: Deck
-    @State private var auxFlashCard: FlashCard
+    
+    @Binding var frontSideTitle: String
+    @Binding var frontSideText: String
+    @Binding var frontSideAudio: CKAsset?
+    @Binding var backSideTitle: String
+    @Binding var backSideText: String
+    @Binding var backSideAudio: CKAsset?
+//    @State private var auxFlashCard: FlashCard
     
     var body: some View {
         VStack {
             if side == .front {
                 Text("Front Side")
-                frontSideSaveView(deck:deck, flashCard: auxFlashCard)
+                frontSideSaveView(recordAudio: $frontSideAudio, title: $frontSideTitle, text: $frontSideText)
                 
             } else {
                 Text("Back Side")
-                backSideSaveView(deck:deck, flashCard: auxFlashCard)
+                backSideSaveView(recordAudio: $backSideAudio, title: $backSideTitle, text: $backSideText)
             }
             
         }
@@ -34,16 +40,16 @@ struct NewCardSideView: View {
 struct frontSideSaveView: View{
     @ObservedObject var audioRecorder: AudioRecorder = AudioRecorder()
     
-    @State var recordAudio: CKAsset?
     @State var recordAudioURL: [URL] = []
     let screenSize: CGSize = UIScreen.main.bounds.size
-    @State private var title: String = ""
-    @State private var text: String = ""
+    @Binding var recordAudio: CKAsset?
+    @Binding var title: String
+    @Binding var text: String
     @State private var sliderValue: Double = 0
     @State private var isDeleted: Bool = false
     
-    var deck: Deck
-    var flashCard: FlashCard
+    
+//    var flashCard: FlashCard
     
     var body: some View{
         HStack {
@@ -141,15 +147,16 @@ struct frontSideSaveView: View{
 struct backSideSaveView: View{
     @ObservedObject var audioRecorder: AudioRecorder = AudioRecorder()
     
-    @State var recordAudio: CKAsset?
+    
     @State var recordAudioURL: [URL] = []
     @State private var isDeleted: Bool = false
     let screenSize: CGSize = UIScreen.main.bounds.size
-    @State private var title: String = ""
-    @State private var text: String = ""
+    @Binding var recordAudio: CKAsset?
+    @Binding var title: String
+    @Binding var text: String
     @State private var sliderValue: Double = 0
-    var deck: Deck
-    var flashCard: FlashCard
+    
+//    var flashCard: FlashCard
     var body: some View{
         HStack {
             Text("Title")
@@ -245,8 +252,3 @@ enum Side {
     case front, back
 }
 
-struct NewCardSideView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewCardSideView(side: .front, deck: Deck.init(record: CKRecord.init(recordType: "Deck")))
-    }
-}

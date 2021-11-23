@@ -60,26 +60,26 @@ struct AudioButtonView: View {
 //                    guard let auxColor1 = Color.blue.toURL() else { return }
 //                    let tes = CKAsset.init(fileURL: auxColor1)
                     
-                    let auxFlashCard = FlashCard.init(myrecord: auxRecord, title: "title1000", frontSideText: "frontText", frontSideImage: nil, backSideText: "backText", backSideImage: nil, category: "category", frontSideAudio: recordAudio, backSideAudio: nil, hard: "difficult".lowercased())
-                    
-                    let auxFlashCard2 = FlashCard.init(myrecord: CKRecord.init(recordType: "FlashCard"), title: "title2000", frontSideText: "frontText", frontSideImage: nil, backSideText: "backText", backSideImage: nil, category: "category", frontSideAudio: recordAudio, backSideAudio: nil, hard: "difficult")
-                    
-                    let auxFlashCard3 = FlashCard.init(myrecord: CKRecord.init(recordType: "FlashCard"), title: "title3000", frontSideText: "frontText", frontSideImage: nil, backSideText: "backText", backSideImage: nil, category: "category", frontSideAudio: recordAudio, backSideAudio: nil, hard: "difficult")
-                    
-                    
-                    
-                    
-                    CloudKitManager.shared.createFlashCard(flashCard: auxFlashCard.myrecord)
-                    CloudKitManager.shared.createFlashCard(flashCard: auxFlashCard2.myrecord)
-                    CloudKitManager.shared.createFlashCard(flashCard: auxFlashCard3.myrecord)
-                    
-                    FlashCardReferenceList.append(CKRecord.Reference.init(record: auxFlashCard.myrecord, action: .none))
-                    FlashCardReferenceList.append(CKRecord.Reference.init(record: auxFlashCard2.myrecord, action: .none))
-                    FlashCardReferenceList.append(CKRecord.Reference.init(record: auxFlashCard3.myrecord, action: .none))
-                    
-                    auxDeck = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
-                    
-                    CloudKitManager.shared.createDeck(deck: auxDeck!.myrecord)
+//                    let auxFlashCard = FlashCard.init(myrecord: auxRecord, title: "title1000", frontSideText: "frontText", frontSideImage: nil, backSideText: "backText", backSideImage: nil, category: "category", frontSideAudio: recordAudio, backSideAudio: nil, hard: "difficult".lowercased())
+//                    
+//                    let auxFlashCard2 = FlashCard.init(myrecord: CKRecord.init(recordType: "FlashCard"), title: "title2000", frontSideText: "frontText", frontSideImage: nil, backSideText: "backText", backSideImage: nil, category: "category", frontSideAudio: recordAudio, backSideAudio: nil, hard: "difficult")
+//                    
+//                    let auxFlashCard3 = FlashCard.init(myrecord: CKRecord.init(recordType: "FlashCard"), title: "title3000", frontSideText: "frontText", frontSideImage: nil, backSideText: "backText", backSideImage: nil, category: "category", frontSideAudio: recordAudio, backSideAudio: nil, hard: "difficult")
+//                    
+//                    
+//                    
+//                    
+//                    CloudKitManager.shared.createFlashCard(flashCard: auxFlashCard.myrecord)
+//                    CloudKitManager.shared.createFlashCard(flashCard: auxFlashCard2.myrecord)
+//                    CloudKitManager.shared.createFlashCard(flashCard: auxFlashCard3.myrecord)
+//                    
+//                    FlashCardReferenceList.append(CKRecord.Reference.init(record: auxFlashCard.myrecord, action: .none))
+//                    FlashCardReferenceList.append(CKRecord.Reference.init(record: auxFlashCard2.myrecord, action: .none))
+//                    FlashCardReferenceList.append(CKRecord.Reference.init(record: auxFlashCard3.myrecord, action: .none))
+//                    
+//                    auxDeck = Deck.init(myrecord: CKRecord.init(recordType: "Deck"), flashcards: FlashCardReferenceList, title: "1234", category: "deck category", reminderDate: Date(), lastView: Date(), hardFlashcards: 1, importance: 0, themeColor: "white")
+//                    
+//                    CloudKitManager.shared.createDeck(deck: auxDeck!.myrecord)
                 }
                 
                 NavigationLink(destination: DeckView(deck: auxDeck ?? Deck.init(record: CKRecord.init(recordType: "Deck")))) {

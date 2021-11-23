@@ -12,7 +12,8 @@ import CloudKit
 struct FlashCard: Hashable, Identifiable {
     let id: CKRecord.ID
     var myrecord: CKRecord
-    var title: String?
+    var frontSideTitle: String?
+    var backSideTitle: String?
     var frontSideText: String?
     var frontSideImage: CKAsset?
     var backSideText: String?
@@ -22,10 +23,18 @@ struct FlashCard: Hashable, Identifiable {
     var backSideAudio: CKAsset?
     var hard: String?
     
-    init(myrecord: CKRecord, title: String?, frontSideText: String?, frontSideImage: CKAsset?, backSideText: String?, backSideImage: CKAsset?, category: String?, frontSideAudio: CKAsset?, backSideAudio: CKAsset?, hard: String?) {
+    private init(){
+        let newFlashCard = CKRecord.init(recordType: "FlashCard")
+        
+        myrecord = newFlashCard
+        id = newFlashCard.recordID
+    }
+    
+    init(myrecord: CKRecord, frontSideTitle: String?, backSideTitle: String?, frontSideText: String?, frontSideImage: CKAsset?, backSideText: String?, backSideImage: CKAsset?, category: String?, frontSideAudio: CKAsset?, backSideAudio: CKAsset?, hard: String?) {
         self.id = myrecord.recordID
         self.myrecord = myrecord
-        self.title = title
+        self.frontSideTitle = frontSideTitle
+        self.backSideTitle = backSideTitle
         self.frontSideText = frontSideText
         self.backSideText = backSideText
         self.frontSideImage = frontSideImage
@@ -36,7 +45,8 @@ struct FlashCard: Hashable, Identifiable {
         self.hard = hard
         
         
-        myrecord["title"] = title
+        myrecord["frontSideTitle"] = frontSideTitle
+        myrecord["backSideTitle"] = backSideTitle
         myrecord["frontSideText"] = frontSideText
         myrecord["backSideText"] = backSideText
         myrecord["frontSideImage"] = frontSideImage
@@ -51,7 +61,8 @@ struct FlashCard: Hashable, Identifiable {
     init(record: CKRecord) {
         self.id = record.recordID
         self.myrecord = record
-        self.title = record["title"]
+        self.frontSideTitle = record["frontSideTitle"]
+        self.backSideTitle = record["backSideTitle"]
         self.frontSideText = record["frontSideText"]
         self.backSideText = record["backSideText"]
         self.frontSideImage = record["frontSideImage"]
@@ -60,6 +71,10 @@ struct FlashCard: Hashable, Identifiable {
         self.frontSideAudio = record["frontSideAudio"]
         self.backSideAudio = record["backSideAudio"]
         self.hard = myrecord["hard"]
+    }
+    
+    static func createEmptyFlashCard() -> FlashCard{
+        return FlashCard.init()
     }
     
     func hash(into hasher: inout Hasher) {

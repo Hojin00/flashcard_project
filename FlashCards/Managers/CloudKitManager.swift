@@ -110,13 +110,15 @@ class CloudKitManager: ObservableObject {
         self.publicDB.fetch(withRecordID: flashCard.myrecord.recordID) { updateRecord, error in
             if error == nil {
                 guard let auxUpdateRecord = updateRecord else {return}
+                auxUpdateRecord.setValue(flashCard.frontSideTitle, forKey: "frontSideTitle")
+                auxUpdateRecord.setValue(flashCard.backSideTitle, forKey: "backSideTitle")
                 auxUpdateRecord.setValue(flashCard.frontSideText, forKey: "frontSideText")
                 auxUpdateRecord.setValue(flashCard.backSideText, forKey: "backSideText")
-                auxUpdateRecord.setValue(flashCard.frontSideImage, forKey: "frontSideImage")
-                auxUpdateRecord.setValue(flashCard.backSideImage, forKey: "backSideImage")
+//                auxUpdateRecord.setValue(flashCard.frontSideImage, forKey: "frontSideImage")
+//                auxUpdateRecord.setValue(flashCard.backSideImage, forKey: "backSideImage")
                 auxUpdateRecord.setValue(flashCard.frontSideAudio, forKey: "frontSideAudio")
                 auxUpdateRecord.setValue(flashCard.backSideAudio, forKey: "backSideAudio")
-                auxUpdateRecord.setValue(flashCard.category, forKey: "category")
+//                auxUpdateRecord.setValue(flashCard.category, forKey: "category")
 
                 self.publicDB.save(auxUpdateRecord) { (savedRecord, error) in
 

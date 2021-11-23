@@ -69,7 +69,7 @@ struct CardViewSlide: View {
                         }
                         .padding([.leading, .bottom, .trailing])
                         VStack(alignment: .center) {
-                            Text(card.title ?? "Pudim")
+                            Text(card.frontSideTitle ?? "Pudim")
                                 .font(.title)
                                 .bold()
                                 .foregroundColor(.gray)

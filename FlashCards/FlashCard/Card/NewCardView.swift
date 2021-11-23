@@ -12,8 +12,16 @@ struct NewCardView: View {
     var deck:Deck
     
     let screenSize: CGSize = UIScreen.main.bounds.size
+    @State var newFlashCard: FlashCard?
     
     @State var isFlipped = false
+    
+    @State var frontSideTitle: String = ""
+    @State var frontSideText: String = ""
+    @State var frontSideAudio: CKAsset?
+    @State var backSideTitle: String = ""
+    @State var backSideText: String = ""
+    @State var backSideAudio: CKAsset?
 
     var body: some View {
         ZStack {
@@ -30,12 +38,12 @@ struct NewCardView: View {
                     Spacer()
                 }
                 CardView {
-                    NewCardSideView(side: .front, deck: deck)
+                    NewCardSideView(side: .front, frontSideTitle: $frontSideTitle, frontSideText: $frontSideText, frontSideAudio: $frontSideAudio, backSideTitle: $backSideTitle, backSideText: $backSideText, backSideAudio: $backSideAudio)
                         .onDisappear {
                             isFlipped.toggle()
                         }
                 } back: {
-                    NewCardSideView(side: .back, deck: deck)
+                    NewCardSideView(side: .back, frontSideTitle: $frontSideTitle, frontSideText: $frontSideText, frontSideAudio: $frontSideAudio, backSideTitle: $backSideTitle, backSideText: $backSideText, backSideAudio: $backSideAudio)
                         .onDisappear {
                             isFlipped.toggle()
                         }
@@ -54,6 +62,19 @@ struct NewCardView: View {
                         .foregroundColor(.gray)
                 }
                 Button {
+                    guard var newFlashCard = newFlashCard else {
+                        return
+                    }
+
+                    newFlashCard.frontSideTitle = frontSideTitle
+                    newFlashCard.frontSideText = frontSideText
+                    newFlashCard.frontSideAudio = frontSideAudio
+                    newFlashCard.backSideTitle = backSideTitle
+                    newFlashCard.backSideText = backSideText
+                    newFlashCard.backSideAudio = backSideAudio
+                    
+                    
+                    CloudKitManager.shared.updateFlashCard(flashCard: newFlashCard)
                     print("click")
                 } label: {
                     ZStack {
@@ -67,12 +88,14 @@ struct NewCardView: View {
                 }
             }
             .frame(width: screenSize.width, height: screenSize.height)
+        }.onAppear {
+            newFlashCard = FlashCard.createEmptyFlashCard()
         }
     }
 }
-
-struct NewCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewCardView(deck: Deck.init(record: CKRecord.init(recordType: "Deck")))
-    }
-}
+//
+//struct NewCardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NewCardView(deck: Deck.init(record: CKRecord.init(recordType: "Deck")), newFlashCard: FlashCard.init(record: CKRecord.init(recordType: "FlashCard")))
+//    }
+//}
