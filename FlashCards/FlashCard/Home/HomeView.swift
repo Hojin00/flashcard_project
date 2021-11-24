@@ -147,7 +147,7 @@ struct HomeView: View {
                         .padding(.trailing)
                     }
                     .padding(.leading)
-                    ScrollView(.horizontal) {
+                    ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .center){
                             VStack(){
                                 Button {

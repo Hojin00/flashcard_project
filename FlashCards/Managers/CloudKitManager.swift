@@ -221,6 +221,11 @@ class CloudKitManager: ObservableObject {
                 auxUpdateRecord.setValue(deck.title, forKey: "title")
                 auxUpdateRecord.setValue(deck.category, forKey: "category")
                 auxUpdateRecord.setValue(deck.reminderDate, forKey: "reminderDate")
+                auxUpdateRecord.setValue(deck.lastView, forKey: "lastView")
+                auxUpdateRecord.setValue(deck.hardFlashcards, forKey: "hardFlashcards")
+                auxUpdateRecord.setValue(deck.importance, forKey: "importance")
+                auxUpdateRecord.setValue(deck.themeColor, forKey: "themeColor")
+                
 
                 self.publicDB.save(auxUpdateRecord) { (savedRecord, error) in
 

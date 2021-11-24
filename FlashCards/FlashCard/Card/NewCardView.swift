@@ -9,13 +9,15 @@ import SwiftUI
 import CloudKit
 
 struct NewCardView: View {
-    var deck:Deck
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var deck:Deck?
     
     let screenSize: CGSize = UIScreen.main.bounds.size
     @State var newFlashCard: FlashCard?
     
     @State var isFlipped = false
-    
+    @State var auxNewFCReference: CKRecord.Reference?
     @State var frontSideTitle: String = ""
     @State var frontSideText: String = ""
     @State var frontSideAudio: CKAsset?
@@ -75,7 +77,29 @@ struct NewCardView: View {
                     
                     
                     CloudKitManager.shared.updateFlashCard(flashCard: newFlashCard)
+                    
+                    guard var deck = deck else {
+                        print("deck")
+                        return
+                    }
+                    
+                    auxNewFCReference = CKRecord.Reference.init(recordID: newFlashCard.id, action: .none)
+                    
+                    guard let auxNewFCReference = auxNewFCReference else {
+                        print("auxnewRefere")
+                        return
+                    }
+
+
+                    
+                    
+                    deck.flashcards?.append(auxNewFCReference)
+                    
+                    CloudKitManager.shared.updateDeck(deck: deck)
+                    
                     print("click")
+                    self.presentationMode.wrappedValue.dismiss()
+                    
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 50)
@@ -90,6 +114,7 @@ struct NewCardView: View {
             .frame(width: screenSize.width, height: screenSize.height)
         }.onAppear {
             newFlashCard = FlashCard.createEmptyFlashCard()
+            
         }
     }
 }

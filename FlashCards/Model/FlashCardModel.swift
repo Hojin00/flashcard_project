@@ -28,6 +28,8 @@ struct FlashCard: Hashable, Identifiable {
         
         myrecord = newFlashCard
         id = newFlashCard.recordID
+        
+        CloudKitManager.shared.createFlashCard(flashCard: self.myrecord)
     }
     
     init(myrecord: CKRecord, frontSideTitle: String?, backSideTitle: String?, frontSideText: String?, frontSideImage: CKAsset?, backSideText: String?, backSideImage: CKAsset?, category: String?, frontSideAudio: CKAsset?, backSideAudio: CKAsset?, hard: String?) {

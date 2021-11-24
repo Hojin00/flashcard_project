@@ -50,23 +50,29 @@ struct DeckView: View {
                             CardPreview(cardType: .informationCard, deck: deck)
                         }
                         //ForEach(0..<cloudkitManager.allFlashCards.count) { n in
-                        ForEach(0..<cloudkitManager.allFlashCards.count) { n in
-                            
-                            HStack(alignment: .center) {
-                                if n % 2 != 0 {
-                                    if n+1 < cloudkitManager.allFlashCards.count {
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n+1], deck: deck)
-                                        //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
-                                        //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n+1])
-                                    } else {
-                                        //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
-                                        CardPreview(cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
-                                        DeckEmptyView(width: screenSize.width * 0.35, height: screenSize.width * 0.26)
+                        if didLoadCards {
+                            ForEach(0..<cloudkitManager.allFlashCards.count) { n in
+                                
+                                HStack(alignment: .center) {
+                                    
+                                    if n % 2 == 0 {
+                                        if n+1 < cloudkitManager.allFlashCards.count {
+                                            Text("cima\(n)")
+                                            CardPreview(num: n, cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
+                                            CardPreview(num: n, cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n+1], deck: deck)
+                                            //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
+                                            //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n+1])
+                                        } else {
+                                            //                                        CardPreview(cardType: .normalCard, flashcard: flashcards[n])
+                                            Text("baixo\(n)")
+                                            CardPreview(num: n, cardType: .normalCard, flashcard: cloudkitManager.allFlashCards[n], deck: deck)
+                                            DeckEmptyView(width: screenSize.width * 0.35, height: screenSize.width * 0.26)
+                                        }
                                     }
+                                
                                 }
+                                .padding(.bottom, screenSize.width * 0.01)
                             }
-                            .padding(.bottom, screenSize.width * 0.01)
                         }
                     }
                 }
@@ -76,6 +82,7 @@ struct DeckView: View {
         .frame(width: screenSize.width, height: screenSize.height)
         .onAppear() {
             //            guard !didLoadCards else{ return }
+            
             CloudKitManager.shared.fetchDeck(deckID: deck.myrecord.recordID) { Result in
                 switch Result {
                 case .success:
@@ -108,6 +115,7 @@ struct DeckEmptyView: View {
 struct CardPreview: View {
     @State private var presentAlert = false
     let screenSize: CGSize = UIScreen.main.bounds.size
+    var num: int
     var cardType: CardType
     var flashcard: FlashCard?
     var deck: Deck
@@ -200,7 +208,7 @@ struct CardPreview: View {
                             StandardButton()
                         }
                         .padding(.leading, screenSize.width * -0.06)
-                        Text("120 cards")
+                        Text("\(deck.flashcards?.count ?? 0)")
                             .font(.caption)
                     }
                     .padding()
@@ -214,7 +222,7 @@ struct CardPreview: View {
                     .padding(.all, screenSize.width * 0.01)
                 VStack {
                     VStack {
-                        Text("\(flashcard?.frontSideTitle ?? "Deck title here if to big ooooooooo")")
+                        Text("\(num)")
                             .fixedSize(horizontal: false, vertical: true)
                             .lineLimit(2)
                             .padding(.top, screenSize.width * 0.02)
