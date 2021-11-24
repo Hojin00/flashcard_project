@@ -10,6 +10,8 @@ struct HomeView: View {
     @State var selection = 0
     @State var sortKey = 0
     
+    @State var showModal: Bool = false
+    
     var options = ["None", "Alphabet", "Biggest", "Hardest", "Importance", "Last Seen", "Last Updated" ]
     let dispatchSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
     
