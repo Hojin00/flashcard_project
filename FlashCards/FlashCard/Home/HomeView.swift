@@ -4,7 +4,7 @@ import AVFoundation
 
 struct HomeView: View {
     @EnvironmentObject private var cloudkitManager: CloudKitManager
-    
+    @EnvironmentObject private var helper: Helper
     @State private var offset = CGFloat.zero
     @State private var scrollOffset: CGFloat = 0
     @State var selection = 0
@@ -24,115 +24,128 @@ struct HomeView: View {
                 .background(Color.blue)
                 .clipShape(Circle())
                 .offset(x: -geometry.size.width / 4, y: -geometry.size.height / 3)
-            
-            VStack {
-                VStack{
-                    HStack{
-                        Text("Your FlashCards Decks")
-                            .font(.title)
-                            .bold()
-                            .padding(.leading)
-                        Spacer()
-                    }
-                    
-                    HStack {
-                        Text("Sort by: ")
-                        Picker("Sort by", selection: $sortKey) {
-                            ForEach(0..<options.count) {
-                                Text(self.options[$0])
-                                    .foregroundColor(.black)
-                            }
+            ZStack{
+                VStack {
+                    VStack{
+                        HStack{
+                            Text("Your FlashCards Decks")
+                                .font(.title)
+                                .bold()
+                                .padding(.leading)
+                            Spacer()
                         }
-                        .onChange(of: sortKey, perform: { newValue in
-                            
-                            
-                            switch sortKey {
-                            case 1:
-                                selection = 1
-                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.alphabet) { Result in
-                                    switch Result {
-                                    case .success:
-                                        print("success alphabet")
-                                        
-                                    case .failure:
-                                        print("no last seen")
-                                        
-                                    }
+                        
+                        HStack {
+                            Text("Sort by: ")
+                            Picker("Sort by", selection: $sortKey) {
+                                ForEach(0..<options.count) {
+                                    Text(self.options[$0])
+                                        .foregroundColor(.black)
                                 }
-                                
-                            case 2:
-                                selection = 2
-                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.hadest) { Result in
-                                    switch Result {
-                                    case .success:
-                                        print("success biggest")
-                                        
-                                    case .failure:
-                                        print("no last seen")
-                                        
-                                    }
-                                }
-
-                            case 3:
-                                selection = 3
-                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.hardest) { Result in
-                                    
-                                    switch Result {
-                                    case .success:
-                                        print("success hardest")
-                                        
-                                    case .failure:
-                                        print("no last seen")
-                                        
-                                    }
-                                }
-                                
-                            case 4:
-                                selection = 4
-                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.importance) { Result in
-                                    
-                                    switch Result {
-                                    case .success:
-                                        print("success importance")
-                                        
-                                    case .failure:
-                                        print("no last seen")
-                                        
-                                    }
-                                }
-                                
-                            case 5:
-                                selection = 5
-                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.lastSeen) { Result in
-                                    
-                                    switch Result {
-                                    case .success:
-                                        print("success last seen")
-                                        
-                                    case .failure:
-                                        print("no last seen")
-                                        
-                                    }
-                                }
-                                
-                            case 6:
-                                selection = 6
-                                CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.lastUpdated) { Result in
-                                    
-                                    switch Result {
-                                    case .success:
-                                        print("success last updated")
-                                        
-                                    case .failure:
-                                        print("no last seen")
-                                        
-                                    }
-                                }
-                                
-                            default:
-                                print("no sortTypes")
                             }
-                            /*
+                            .onChange(of: sortKey, perform: { newValue in
+                                
+                                
+                                switch sortKey {
+                                case 1:
+                                    selection = 1
+                                    CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.alphabet) { Result in
+                                        switch Result {
+                                        case .success:
+                                            print("success alphabet")
+                                            
+                                        case .failure:
+                                            print("no last seen")
+                                            
+                                        }
+                                    }
+                                    
+                                case 2:
+                                    selection = 2
+                                    CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.hadest) { Result in
+                                        switch Result {
+                                        case .success:
+                                            print("success biggest")
+                                            
+                                        case .failure:
+                                            print("no last seen")
+                                            
+                                        }
+                                    }
+
+                                case 3:
+                                    selection = 3
+                                    CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.hardest) { Result in
+                                        
+                                        switch Result {
+                                        case .success:
+                                            print("success hardest")
+                                            
+                                        case .failure:
+                                            print("no last seen")
+                                            
+                                        }
+                                    }
+                                    
+                                case 4:
+                                    selection = 4
+                                    CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.importance) { Result in
+                                        
+                                        switch Result {
+                                        case .success:
+                                            print("success importance")
+                                            
+                                        case .failure:
+                                            print("no last seen")
+                                            
+                                        }
+                                    }
+                                    
+                                case 5:
+                                    selection = 5
+                                    CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.lastSeen) { Result in
+                                        
+                                        switch Result {
+                                        case .success:
+                                            print("success last seen")
+                                            
+                                        case .failure:
+                                            print("no last seen")
+                                            
+                                        }
+                                    }
+                                    
+                                case 6:
+                                    selection = 6
+                                    CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.lastUpdated) { Result in
+                                        
+                                        switch Result {
+                                        case .success:
+                                            print("success last updated")
+                                            
+                                        case .failure:
+                                            print("no last seen")
+                                            
+                                        }
+                                    }
+                                    
+                                default:
+                                    print("no sortTypes")
+                                }
+                                /*
+                                })
+                                .padding(.horizontal, 3)
+                                .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color(hue: 1.0, saturation: 0.012, brightness: 0.869)/*@END_MENU_TOKEN@*/)
+                                .foregroundColor(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
+                                .font(.headline)
+                                .cornerRadius(5)
+                                .pickerStyle(MenuPickerStyle())
+                                
+                                Spacer()
+                                NavigationLink(destination: AllDecksView(decks: cloudkitManager.allDecks)) {
+                                    Text("See all")
+                                        .foregroundColor(.black)
+                                */
                             })
                             .padding(.horizontal, 3)
                             .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color(hue: 1.0, saturation: 0.012, brightness: 0.869)/*@END_MENU_TOKEN@*/)
@@ -142,212 +155,206 @@ struct HomeView: View {
                             .pickerStyle(MenuPickerStyle())
                             
                             Spacer()
-                            NavigationLink(destination: AllDecksView(decks: cloudkitManager.allDecks)) {
-                                Text("See all")
-                                    .foregroundColor(.black)
-                            */
-                        })
-                        .padding(.horizontal, 3)
-                        .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color(hue: 1.0, saturation: 0.012, brightness: 0.869)/*@END_MENU_TOKEN@*/)
-                        .foregroundColor(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
-                        .font(.headline)
-                        .cornerRadius(5)
-                        .pickerStyle(MenuPickerStyle())
-                        
-                        Spacer()
-                        Button("See all"){
-                            print("Print tudo")
-                        }
-                        .padding(.trailing)
-                    }
-                    .padding(.leading)
-                    ScrollView(.horizontal) {
-                        HStack(alignment: .center){
-                            VStack(){
-                                NavigationLink(destination: NewCardView()) {
-                                    ZStack {
-                                        Image("buttonNewCard")
-                                        HStack {
-                                            Image(systemName:"plus")
-                                                .resizable()
-                                                .foregroundColor(Color.black)
-                                                .scaledToFit()
-                                                .frame(width: 25, height: 25)
-
-                                            Text("New \n Card")
-                                                .font(.system(size: 16.0))
-                                                .fontWeight(.bold)
-                                                .lineLimit(2)
-                                                .foregroundColor(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
-                                        }
-                                    }
-                                }
-                                NavigationLink(destination: EditDeckView(deck: nil, isNewDeck: true)) {
-                                    ZStack {
-                                        Image("buttonNewDeck")
-                                            .frame(width: 23, height: 24)
-
-                                        HStack(alignment: .center, spacing: 0.0) {
-                                            Text("New \n Deck")
-                                                .font(.system(size: 16.0))
-                                                .fontWeight(.bold)
-                                                .lineLimit(2)
-                                                .foregroundColor(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
-
-                                            Image(systemName:"plus")
-                                                .resizable()
-                                                .foregroundColor(Color.black)
-                                                .scaledToFit()
-                                                .frame(width: 25, height: 25)
-
-                                        }
-                                        .offset(x: /*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/, y:  -10)
-                                    }
-
-                                }
-                                .padding(UIScreen.main.bounds.size.height * 0.038)
-
+                            Button("See all"){
+                                print("Print tudo")
                             }
+                            .padding(.trailing)
+                        }
+                        .padding(.leading)
+                        ScrollView(.horizontal) {
+                            HStack(alignment: .center){
+                                VStack(){
+                                    NavigationLink(destination: NewCardView()) {
+                                        ZStack {
+                                            Image("buttonNewCard")
+                                            HStack {
+                                                Image(systemName:"plus")
+                                                    .resizable()
+                                                    .foregroundColor(Color.black)
+                                                    .scaledToFit()
+                                                    .frame(width: 25, height: 25)
 
-                            LazyHStack{
-                                
-                                ForEach(cloudkitManager.allDecks){ i in
-                                    EmptyView()
-                                    
-                                    if cloudkitManager.allDecks.last == i {
-                                        SingleDeckView(deck: i)
-                                        .frame(width: UIScreen.main.bounds.width * 0.35, height: UIScreen.main.bounds.height * 0.25)
-                                        .onAppear {
-                                            switch selection {
-                                            case 0:
-                                                cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.none) { Result in
-                                                    switch Result {
-                                                    case .success:
-                                                        print("111count:",cloudkitManager.allDecks.count)
-                                                        print("111success")
-
-                                                    case .failure:
-                                                        print("fail")
-
-                                                    }
-                                                }
-                                            case 1:
-                                                cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.alphabet) { Result in
-                                                    switch Result {
-                                                    case .success:
-                                                        print("111count:",cloudkitManager.allDecks.count)
-                                                        print("111success")
-
-                                                    case .failure:
-                                                        print("fail")
-
-                                                    }
-                                                }
-                                            case 2:
-                                                cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.hadest) { Result in
-                                                    switch Result {
-                                                    case .success(_):
-                                                        print("111count:",cloudkitManager.allDecks.count)
-                                                        print("111success")
-
-                                                    case .failure:
-                                                        print("fail")
-
-                                                    }
-                                                }
-                                            case 3:
-                                                cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.hardest) { Result in
-                                                    switch Result {
-                                                    case .success(_):
-                                                        print("111count:",cloudkitManager.allDecks.count)
-                                                        print("111success")
-
-                                                    case .failure:
-                                                        print("fail")
-
-                                                    }
-                                                }
-                                            case 4:
-                                                cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.importance) { Result in
-                                                    switch Result {
-                                                    case .success(_):
-                                                        print("111count:",cloudkitManager.allDecks.count)
-                                                        print("111success")
-
-                                                    case .failure:
-                                                        print("fail")
-
-                                                    }
-                                                }
-                                            case 5:
-                                                cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.lastSeen) { Result in
-                                                    switch Result {
-                                                    case .success(_):
-                                                        print("111count:",cloudkitManager.allDecks.count)
-                                                        print("111success")
-
-                                                    case .failure:
-                                                        print("fail")
-
-                                                    }
-                                                }
-                                            case 6:
-                                                cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.lastUpdated) { Result in
-                                                    switch Result {
-                                                    case .success(_):
-                                                        print("111count:",cloudkitManager.allDecks.count)
-                                                        print("111success")
-
-                                                    case .failure:
-                                                        print("fail")
-
-                                                    }
-                                                }
-                                            default:
-                                                print("no next cursor")
+                                                Text("New \n Card")
+                                                    .font(.system(size: 16.0))
+                                                    .fontWeight(.bold)
+                                                    .lineLimit(2)
+                                                    .foregroundColor(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
                                             }
-                                            
                                         }
                                     }
-                                    else {
-                                        SingleDeckView(deck: i)
-                                        .frame(width: UIScreen.main.bounds.width * 0.35, height: UIScreen.main.bounds.height * 0.25)
+                                    NavigationLink(destination: EditDeckView(deck: nil, isNewDeck: true)) {
+                                        ZStack {
+                                            Image("buttonNewDeck")
+                                                .frame(width: 23, height: 24)
+
+                                            HStack(alignment: .center, spacing: 0.0) {
+                                                Text("New \n Deck")
+                                                    .font(.system(size: 16.0))
+                                                    .fontWeight(.bold)
+                                                    .lineLimit(2)
+                                                    .foregroundColor(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
+
+                                                Image(systemName:"plus")
+                                                    .resizable()
+                                                    .foregroundColor(Color.black)
+                                                    .scaledToFit()
+                                                    .frame(width: 25, height: 25)
+
+                                            }
+                                            .offset(x: /*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/, y:  -10)
+                                        }
+
+                                    }
+                                    .padding(UIScreen.main.bounds.size.height * 0.038)
+
+                                }
+
+                                LazyHStack{
+                                    
+                                    ForEach(cloudkitManager.allDecks){ i in
+                                        EmptyView()
                                         
-//                                        EmptyView()
+                                        if cloudkitManager.allDecks.last == i {
+                                
+                                            SingleDeckView(deck: i)
+                                            .frame(width: UIScreen.main.bounds.width * 0.35, height: UIScreen.main.bounds.height * 0.25)
+                                            .onAppear {
+                                                switch selection {
+                                                case 0:
+                                                    cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.none) { Result in
+                                                        switch Result {
+                                                        case .success:
+                                                            print("111count:",cloudkitManager.allDecks.count)
+                                                            print("111success")
+
+                                                        case .failure:
+                                                            print("fail")
+
+                                                        }
+                                                    }
+                                                case 1:
+                                                    cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.alphabet) { Result in
+                                                        switch Result {
+                                                        case .success:
+                                                            print("111count:",cloudkitManager.allDecks.count)
+                                                            print("111success")
+
+                                                        case .failure:
+                                                            print("fail")
+
+                                                        }
+                                                    }
+                                                case 2:
+                                                    cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.hadest) { Result in
+                                                        switch Result {
+                                                        case .success(_):
+                                                            print("111count:",cloudkitManager.allDecks.count)
+                                                            print("111success")
+
+                                                        case .failure:
+                                                            print("fail")
+
+                                                        }
+                                                    }
+                                                case 3:
+                                                    cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.hardest) { Result in
+                                                        switch Result {
+                                                        case .success(_):
+                                                            print("111count:",cloudkitManager.allDecks.count)
+                                                            print("111success")
+
+                                                        case .failure:
+                                                            print("fail")
+
+                                                        }
+                                                    }
+                                                case 4:
+                                                    cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.importance) { Result in
+                                                        switch Result {
+                                                        case .success(_):
+                                                            print("111count:",cloudkitManager.allDecks.count)
+                                                            print("111success")
+
+                                                        case .failure:
+                                                            print("fail")
+
+                                                        }
+                                                    }
+                                                case 5:
+                                                    cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.lastSeen) { Result in
+                                                        switch Result {
+                                                        case .success(_):
+                                                            print("111count:",cloudkitManager.allDecks.count)
+                                                            print("111success")
+
+                                                        case .failure:
+                                                            print("fail")
+
+                                                        }
+                                                    }
+                                                case 6:
+                                                    cloudkitManager.fetchNextDeckSortBy(sortType: SortBy.lastUpdated) { Result in
+                                                        switch Result {
+                                                        case .success(_):
+                                                            print("111count:",cloudkitManager.allDecks.count)
+                                                            print("111success")
+
+                                                        case .failure:
+                                                            print("fail")
+
+                                                        }
+                                                    }
+                                                default:
+                                                    print("no next cursor")
+                                                }
+                                                
+                                            }
+                                        }
+                                        else {
+                                            SingleDeckView(deck: i)
+                                            .frame(width: UIScreen.main.bounds.width * 0.35, height: UIScreen.main.bounds.height * 0.25)
+                                            
+    //                                        EmptyView()
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
-                Divider()
-                    .frame(height: 10)
-                VStack{
-                    GeometryReader{ reader in
-                        deckCarousel(reader: reader)
+                    Divider()
+                        .frame(height: 10)
+                    VStack{
+                        GeometryReader{ reader in
+                            deckCarousel(reader: reader)
+                        }
+                        .frame( maxWidth: .infinity,  maxHeight: .infinity)
+                        
                     }
-                    .frame( maxWidth: .infinity,  maxHeight: .infinity)
+                    .onAppear() {
+                        CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.importanceAlphabet) { Result in
+                            
+                            switch Result {
+                            case .success:
+                                print("success importanceAlphabet")
+                                
+                            case .failure:
+                                print("no last seen")
+                                
+                            }
+            //                dispatchSemaphore.signal()
+                        }
+                    }
+                    
                     
                 }
-                .onAppear() {
-                    CloudKitManager.shared.fetchDeckSortBy(sortType: SortBy.importanceAlphabet) { Result in
-                        
-                        switch Result {
-                        case .success:
-                            print("success importanceAlphabet")
-                            
-                        case .failure:
-                            print("no last seen")
-                            
-                        }
-        //                dispatchSemaphore.signal()
-                    }
+                
+                if helper.showModal == true {
+                
+                    CustomModalView(deck: helper.deck)
                 }
             }
         }
         .onAppear() {
-            
-            
 //            cloudkitManager.fetchDeckSortBy(sortType: SortBy.none) { Result in
 //                switch Result {
 //                case .success(_):

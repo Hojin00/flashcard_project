@@ -98,8 +98,8 @@ struct HorizontalScrollView: View {
     }
 }
 
-struct HorizontalScrollView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
-}
+//struct HorizontalScrollView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView()
+//    }
+//}

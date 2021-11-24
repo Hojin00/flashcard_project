@@ -10,20 +10,21 @@ import CloudKit
 
 struct SingleDeckView: View {
     @EnvironmentObject private var cloudkitManager: CloudKitManager
-    @Binding var showModal: Bool
+    @EnvironmentObject private var helper: Helper
+//    @State var showModal: Bool
     let deck: Deck
     var flashcards: [FlashCard] = []
     var topCardColor: Color = Color.white
     var middleCardColor: Color = Color.white
     var bottomCardColor: Color = Color.white
     
-//    init(deck: Deck) {
-//        self.deck = deck
-//        //self.flashcards = getFlashcards()
-//        //        self.topCardColor = flashcards[0].frontSideColor as! Color
-//        //        self.middleCardColor = flashcards[1].frontSideColor as! Color
-//        //        self.bottomCardColor = flashcards[2].frontSideColor as! Color
-//    }
+    init(deck: Deck) {
+        self.deck = deck
+        //self.flashcards = getFlashcards()
+        //        self.topCardColor = flashcards[0].frontSideColor as! Color
+        //        self.middleCardColor = flashcards[1].frontSideColor as! Color
+        //        self.bottomCardColor = flashcards[2].frontSideColor as! Color
+    }
     
 //    func getFlashcards() -> [FlashCard] {
 //        var list: [FlashCard] = []
@@ -97,7 +98,7 @@ struct SingleDeckView: View {
                 Spacer()
                 HStack {
                     Button {
-                        showModal.toggle()
+                        helper.changeModalStatus(deck: deck)
                     } label: {
                         StandardButton()
                     }
@@ -105,7 +106,7 @@ struct SingleDeckView: View {
                 }
             }
             .frame(width: UIScreen.main.bounds.width * 0.23, height: UIScreen.main.bounds.height * 0.15)
-            CustomModalView(isShowing: $showModal, deck: deck)
+
         }
     }
 }

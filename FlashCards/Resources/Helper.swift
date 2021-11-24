@@ -8,6 +8,18 @@
 import Foundation
 import SwiftUI
 
+class Helper: ObservableObject {
+    
+    static let shared: Helper = Helper()
+    
+    @Published var deck: Deck?
+    @Published var showModal: Bool = false
+
+    func changeModalStatus(deck: Deck?) {
+        showModal.toggle()
+        self.deck = deck
+    }
+}
 
 enum SortBy: String {
 

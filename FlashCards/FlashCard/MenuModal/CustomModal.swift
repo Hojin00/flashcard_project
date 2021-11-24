@@ -11,7 +11,8 @@ import CloudKit
 struct CustomModalView: View {
     
     @EnvironmentObject private var cloudKitManager: CloudKitManager
-    @Binding var isShowing: Bool
+    @EnvironmentObject private var helper: Helper
+//    @State var isShowing: Bool
     @State private var isDragging = false
     @State var isPresented = false
     
@@ -38,12 +39,12 @@ struct CustomModalView: View {
     var body: some View {
         
         ZStack(alignment: .bottom) {
-            if isShowing {
+            if helper.showModal {
                 Color.black
                     .ignoresSafeArea()
                     .opacity(0.3)
                     .onTapGesture {
-                        isShowing = false
+                        helper.showModal.toggle()
                     }
                 mainView
                 .transition(.move(edge: .bottom))
@@ -85,7 +86,7 @@ struct CustomModalView: View {
                             .padding(.trailing, UIScreen.main.bounds.width * 0.07)
                             VStack {
                                 Button {
-                                    isShowing = false
+                                    helper.showModal.toggle()
                                 } label: {
                                     ZStack {
                                         Circle()
@@ -182,7 +183,8 @@ struct CustomModalView: View {
                         Spacer()
                         VStack {
                             Button {
-                                isShowing = false
+                                helper.showModal.toggle()
+                                
                             } label: {
                                 ZStack {
                                     Circle()
@@ -275,17 +277,17 @@ struct CustomModalView: View {
                     currentHeight = maxHeight
                 } else if currentHeight < minHeight {
                     currentHeight = maxHeight
-                    isShowing = false
+                    helper.showModal.toggle()
                 }
             }
     }
 }
 
-struct CustomModalView_Previews: PreviewProvider {
-    static var previews: some View {
-        //TestView()
-        CustomModalView(isShowing: .constant(true), card: FlashCard(myrecord: CKRecord.init(recordType: "card"), title: "card title", frontSideText: nil, frontSideImage: nil, backSideText: nil, backSideImage: nil, category: nil, frontSideAudio: nil, backSideAudio: nil, hard: nil))
-        //CustomModalView(isShowing: .constant(true), deck: Deck.init(record: CKRecord.init(recordType: "Deck")))
-        
-    }
-}
+//struct CustomModalView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        //TestView()
+//        CustomModalView(isShowing: .constant(true), card: FlashCard(myrecord: CKRecord.init(recordType: "card"), title: "card title", frontSideText: nil, frontSideImage: nil, backSideText: nil, backSideImage: nil, category: nil, frontSideAudio: nil, backSideAudio: nil, hard: nil))
+//        //CustomModalView(isShowing: .constant(true), deck: Deck.init(record: CKRecord.init(recordType: "Deck")))
+//        
+//    }
+//}

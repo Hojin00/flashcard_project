@@ -12,11 +12,13 @@ import SafariServices
 struct FlashCardsApp: App {
     @State var sharing = "com.FlashCard"
     @StateObject private var cloudkitManager: CloudKitManager = CloudKitManager.shared
+    @StateObject private var helper: Helper = Helper.shared
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(cloudkitManager)
+                .environmentObject(helper)
             
         }
     }
